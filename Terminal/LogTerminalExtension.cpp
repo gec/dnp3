@@ -77,7 +77,7 @@ void LogTerminalExtension::_BindToTerminal(ITerminal* apTerminal)
 	// run
 	////////////////////////
 
-	cmd.mName = "log";
+	cmd.mName = "log run";
 	cmd.mHandler = boost::bind(&LogTerminalExtension::HandleRunLog, this, _1);
 	cmd.mUsage = "log run";
 	cmd.mDesc = "Continuously outputs log entries as they occur.";
@@ -94,14 +94,18 @@ void LogTerminalExtension::_BindToTerminal(ITerminal* apTerminal)
 	cmd.mHandler = boost::bind(&LogTerminalExtension::HandleSetFilterOrLevel, this, _1, false);
 	cmd.mUsage = "filter " + usage + "\r\n";
 	cmd.mUsage += levels;
-	cmd.mDesc = "Set the log filters indivdually, more than one filter can be set at a time (Ex: wev). If no devices are specified, all devices are affected.";
+	cmd.mDesc  = "Set the log filters indivdually, more than one filter can be set\n";
+	cmd.mDesc += "at a time (ex. wev).  If no devices are specified, all devices are\n";
+	cmd.mDesc += "affected.";
 	apTerminal->BindCommand(cmd, "filter");
 
 	cmd.mName = "level";
 	cmd.mHandler = boost::bind(&LogTerminalExtension::HandleSetFilterOrLevel, this, _1, true);
 	cmd.mUsage = "level " + usage + "\r\n";
 	cmd.mUsage += levels;
-	cmd.mDesc = "Set log level, all \"higher\" filters are also set (Ex: \"set level w\" is equivilant to \"set filter wev\"). If no devices are specified, all devices are affected.";
+	cmd.mDesc  = "Set log level, all \"higher\" filters are also set (Ex: \"set level w\"\n";
+	cmd.mDesc += "is equivilant to \"set filter wev\"). If no devices are specified,\n";
+	cmd.mDesc += "all devices are affected.";
 	apTerminal->BindCommand(cmd, "level");
 
 	cmd.mName = "logcol";

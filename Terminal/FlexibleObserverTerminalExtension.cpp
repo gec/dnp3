@@ -80,19 +80,7 @@ void FlexibleObserverTerminalExtension::_BindToTerminal(ITerminal* apTerminal)
 	cmd.mHandler = boost::bind(&FlexibleObserverTerminalExtension::HandleShow, this, _1, true, false);
 	apTerminal->BindCommand(cmd, "show");
 
-	cmd.mName = "update";
-	cmd.mUsage = "update run";
-	cmd.mDesc = "Continuously displays data updates until <enter> is pressed";
-	cmd.mHandler = boost::bind(&FlexibleObserverTerminalExtension::HandleRunUpdates, this, _1);
-	apTerminal->BindCommand(cmd, "update run");
-
-	cmd.mName = "update";
-	cmd.mUsage = "update";
-	cmd.mDesc = "Displays cached data updates";
-	cmd.mHandler = boost::bind(&FlexibleObserverTerminalExtension::HandleShowUpdates, this, _1);
-	apTerminal->BindCommand(cmd, "update");
-
-	cmd.mName = "show stats";
+	cmd.mName = "show set";
 	cmd.mUsage = "show set <all|bi|ai|c|cs|ss> <index|start> <stop>";
 	cmd.mDesc = "Sets a range to displayed with the show command";
 	cmd.mHandler = boost::bind(&FlexibleObserverTerminalExtension::HandleSetShow, this, _1);
@@ -103,6 +91,18 @@ void FlexibleObserverTerminalExtension::_BindToTerminal(ITerminal* apTerminal)
 	cmd.mDesc = "Displays number and types of measurement in data observer";
 	cmd.mHandler = boost::bind(&FlexibleObserverTerminalExtension::HandleShowStats, this, _1);
 	apTerminal->BindCommand(cmd, "show stats");
+
+	cmd.mName = "update";
+	cmd.mUsage = "update";
+	cmd.mDesc = "Displays cached data updates";
+	cmd.mHandler = boost::bind(&FlexibleObserverTerminalExtension::HandleShowUpdates, this, _1);
+	apTerminal->BindCommand(cmd, "update");
+
+	cmd.mName = "update run";
+	cmd.mUsage = "update run";
+	cmd.mDesc = "Continuously displays data updates until <enter> is pressed";
+	cmd.mHandler = boost::bind(&FlexibleObserverTerminalExtension::HandleRunUpdates, this, _1);
+	apTerminal->BindCommand(cmd, "update run");
 }
 
 template <class T>

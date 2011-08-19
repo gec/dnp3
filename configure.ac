@@ -69,6 +69,9 @@ AC_CHECK_HEADERS([sys/wait.h]	,,AC_MSG_ERROR(missing header))
 AC_CHECK_HEADERS([syslog.h]	,,AC_MSG_ERROR(missing header))
 AC_CHECK_HEADERS([unistd.h]	,,AC_MSG_ERROR(missing header))
 
+dnl Java Native Interface
+AC_CHECK_HEADERS([jni.h]	,,AC_MSG_ERROR(missing header))
+
 AC_CHECK_LIB([c],	[atexit]		,,AC_MSG_ERROR(missing library))
 AC_CHECK_LIB([pthread],	[pthread_join]		,,AC_MSG_ERROR(missing library))
 
@@ -78,6 +81,11 @@ AC_PROG_GREP
 AC_PROG_INSTALL
 AC_PROG_MKDIR_P
 AC_PROG_SED
+
+AX_PKG_SWIG(1.3.17, [], [ AC_MSG_ERROR([SWIG is required to build.]) ])
+AX_SWIG_ENABLE_CXX
+AX_SWIG_MULTI_MODULE_SUPPORT
+dnl AX_SWIG_PYTHON
 
 LT_INIT
 dnl AX_LIBTOOLIZE_CFLAGS(CFLAGS)

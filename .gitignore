@@ -14,8 +14,8 @@
 /ConfigurationBuilder/*.cs
 /ConfigurationBuilder/*.xsx
 /TestSet/*.xml
-/DNP3Java/JavaDNP3.*
 /DNP3Java/jar
+/DNP3Java/JavaDNP3_wrap.*
 *.log
 /*/Linux_i686
 TestAPL/TestSingle.tiny.xml
@@ -23,6 +23,7 @@ TestSingle.tiny.xml
 /doc
 /coverage-*
 /lcov
+/org
 *~
 *.o
 *.lo
@@ -33,6 +34,7 @@ TestSingle.tiny.xml
 *.so
 *.gcno
 *.gcda
+.*.swp
 
 dnp3test
 testset

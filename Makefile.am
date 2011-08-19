@@ -8,12 +8,13 @@ ACLOCAL_AMFLAGS = -I config/autotools/m4
 AM_CXXFLAGS = $(BOOST_CPPFLAGS) -DBOOST_TEST_DYN_LINK -DBOOST_ASIO_ENABLE_CANCELIO -DBOOST_REGEX_NO_LIB
 AM_LDFLAGS = $(BOOST_LDFLAGS) $(BOOST_DATE_TIME_LIB) $(BOOST_THREAD_LIB) $(BOOST_PROGRAM_OPTIONS_LIB) $(BOOST_SYSTEM_LIB) $(BOOST_UNIT_TEST_FRAMEWORK_LIB)
 
-lib_LTLIBRARIES = libopendnp3_apl.la libopendnp3_dnp3.la
+lib_LTLIBRARIES = libopendnp3_apl.la libopendnp3_dnp3.la libopendnp3_java.la
 
 libopendnp3_apl_la_LDFLAGS = -version-info 0:0:0
 libopendnp3_apl_la_SOURCES = \
 	APL/ASIOSerialHelpers.cpp \
 	APL/AsyncLayerInterfaces.cpp \
+	APL/AsyncResult.cpp \
 	APL/AsyncTaskBase.cpp \
 	APL/AsyncTaskContinuous.cpp \
 	APL/AsyncTaskGroup.cpp \
@@ -155,6 +156,9 @@ libopendnp3_dnp3_la_SOURCES = \
 	DNP3/VtoRouterSettings.cpp \
 	DNP3/VtoTransmitTask.cpp \
 	DNP3/VtoWriter.cpp
+
+libopendnp3_java_la_LDFLAGS = -version-info 0:0:0
+libopendnp3_java_la_SOURCES = DNP3Java/JavaDNP3.i
 
 nobase_pkginclude_HEADERS= \
 	version.hpp \

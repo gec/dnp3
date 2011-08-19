@@ -117,7 +117,10 @@ void ControlResponseTE :: _BindToTerminal(ITerminal* apTerminal)
 
 	cmd.mName = "response";
 	cmd.mUsage = "response [bo|st|all] [all|#] [code]";
-	cmd.mDesc = "Sets the response code we will use to respond to the incoming commands.\nYou can use return code name or index: SUCCESS, TIMEOUT, NO_SELECT, FORMAT_ERROR, NOT_SUPPORTED, ALREADY_ACTIVE, HARDWARE_ERROR, LOCAL, TOO_MANY_OPS, NOT_AUTHORIZED.";
+	cmd.mDesc  = "Sets the response code we will use to respond to the incoming commands.\n";
+	cmd.mDesc += "You can use return code name or index: SUCCESS, TIMEOUT, NO_SELECT,\n";
+	cmd.mDesc += "FORMAT_ERROR, NOT_SUPPORTED, ALREADY_ACTIVE, HARDWARE_ERROR, LOCAL,\n";
+	cmd.mDesc += "TOO_MANY_OPS, NOT_AUTHORIZED.";
 	cmd.mHandler = boost::bind(&ControlResponseTE::HandleSetResponse, this, _1);
 	apTerminal->BindCommand(cmd, cmd.mName);
 }
