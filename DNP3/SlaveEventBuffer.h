@@ -242,16 +242,16 @@ protected:
 private:
 
 	/**
-	 * A buffer for binary events that require ordering based on the time
-	 * of occurrence.
+	 * A buffer for binary events that require ordering based on the
+	 * time of occurrence.
 	 */
 	TimeOrderedEventBuffer<BinaryEvent> mBinaryEvents;
 
 	/**
-	 * A buffer for analog events where a single event is needed per point
-	 * and previous events for that point can be overridden.
+	 * A buffer for analog events that require ordering based on the
+	 * time of occurrence.
 	 */
-	SingleEventBuffer<AnalogEvent> mAnalogEvents;
+	TimeOrderedEventBuffer<AnalogEvent> mAnalogEvents;
 
 	/**
 	 * A buffer for counter events where a single event is needed per
@@ -260,8 +260,8 @@ private:
 	SingleEventBuffer<CounterEvent> mCounterEvents;
 
 	/**
-	 * A buffer for VTO data where the queue-style (FCFS) insertion order
-	 * is important.
+	 * A buffer for VTO data where the queue-style (FCFS) insertion
+	 * order is important.
 	 */
 	InsertionOrderedEventBuffer<VtoEvent> mVtoEvents;
 

@@ -59,20 +59,26 @@ BOOST_AUTO_TEST_CASE(AnalogInsertion)
 
 	SlaveEventBuffer b(cfg);
 
-	PushEvents(b, NUM_EVENT, NUM_INDICES); //push lots of events but only
+	/* Fill the entire buffer with events, but do not overflow */
+	PushEvents(b, NUM_INDICES, NUM_INDICES);
 	BOOST_REQUIRE_FALSE(b.IsOverflow());
+	BOOST_REQUIRE_EQUAL(b.NumType(BT_ANALOG), NUM_INDICES);
+
+	/* Overflow the event buffer */
+	PushEvents(b, NUM_EVENT, NUM_INDICES);
+	BOOST_REQUIRE(b.IsOverflow());
 	BOOST_REQUIRE_EQUAL(b.NumType(BT_ANALOG), NUM_INDICES);
 
 	b.Select(BT_ANALOG, PC_CLASS_1); //select all the events
 	BOOST_REQUIRE_EQUAL(b.NumType(BT_ANALOG), NUM_INDICES);
 	PushEvents(b, NUM_EVENT, NUM_INDICES);
-	BOOST_REQUIRE_FALSE(b.IsOverflow());
+	BOOST_REQUIRE(b.IsOverflow());
 	BOOST_REQUIRE_EQUAL(b.NumType(BT_ANALOG), 2 * NUM_INDICES);
 
 	//now deselect
 	b.Deselect();
-	BOOST_REQUIRE_EQUAL(b.NumType(BT_ANALOG), NUM_INDICES);
-	BOOST_REQUIRE_FALSE(b.IsOverflow()); //still shouldn't be
+	BOOST_REQUIRE_EQUAL(b.NumType(BT_ANALOG), 2 * NUM_INDICES);
+	BOOST_REQUIRE(b.IsOverflow());
 }
 
 BOOST_AUTO_TEST_CASE(OverflowAnalog)
