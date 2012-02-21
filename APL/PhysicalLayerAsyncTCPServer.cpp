@@ -40,11 +40,7 @@ PhysicalLayerAsyncTCPServer::PhysicalLayerAsyncTCPServer(Logger* apLogger, boost
 	mLocalEndpoint(ip::tcp::v4(), aPort),
 	mAcceptor(*apIOService)
 {
-	//set the endpoint's address
-	boost::system::error_code ec;
-	ip::address_v4 addr = ip::address_v4::from_string(arEndpoint, ec);
-	if(ec) throw ArgumentException(LOCATION, "endpoint: " + arEndpoint + " is invalid ");
-	mLocalEndpoint.address(addr);
+	mLocalEndpoint.address( ResolveAddress(arEndpoint) );
 }
 
 /* Implement the actions */

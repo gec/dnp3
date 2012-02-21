@@ -69,9 +69,6 @@ AC_CHECK_HEADERS([sys/wait.h]	,,AC_MSG_ERROR(missing header))
 AC_CHECK_HEADERS([syslog.h]	,,AC_MSG_ERROR(missing header))
 AC_CHECK_HEADERS([unistd.h]	,,AC_MSG_ERROR(missing header))
 
-dnl Java Native Interface
-dnl AC_CHECK_HEADERS([jni.h]	,,AC_MSG_ERROR(missing header))
-
 AC_CHECK_LIB([c],	[atexit]		,,AC_MSG_ERROR(missing library))
 AC_CHECK_LIB([pthread],	[pthread_join]		,,AC_MSG_ERROR(missing library))
 
@@ -82,10 +79,37 @@ AC_PROG_INSTALL
 AC_PROG_MKDIR_P
 AC_PROG_SED
 
-dnl AX_PKG_SWIG(1.3.17, [], [ AC_MSG_ERROR([SWIG is required to build.]) ])
-dnl AX_SWIG_ENABLE_CXX
-dnl AX_SWIG_MULTI_MODULE_SUPPORT
-dnl AX_SWIG_PYTHON
+AC_ARG_WITH([java],
+  [AS_HELP_STRING([--with-java@<:@=ARG@:>@],
+    [use the Java JDK from a standard location (ARG=yes),
+     from the specified location (ARG=<path>),
+     or disable it (ARG=no)
+     @<:@ARG=yes@:>@ ])],
+    [
+    if test "$withval" = "no"; then
+        want_java="no"
+    elif test "$withval" = "yes"; then
+        want_java="yes"
+        ac_java_path=""
+    else
+        want_java="yes"
+        ac_java_path="$withval"
+    fi
+    ],
+    [want_java="no"])
+if test "$want_java" = yes; then
+  dnl Add the Java JDK include path to the CPPFLAGS
+  if test "x$ac_java_path" != "x"; then
+    CPPFLAGS="$CPPFLAGS -I$ac_java_path"
+  fi
+  dnl Now see if the jni.h file can even be found
+  AC_CHECK_HEADERS([jni.h]	,,AC_MSG_ERROR(missing header))
+  dnl Setup all other dependencies
+  AX_PKG_SWIG(1.3.17, [], [ AC_MSG_ERROR([SWIG is required to build.]) ])
+  AX_SWIG_ENABLE_CXX
+  AX_SWIG_MULTI_MODULE_SUPPORT
+fi
+AM_CONDITIONAL(JAVA, [test "$want_java" = yes])
 
 LT_INIT
 dnl AX_LIBTOOLIZE_CFLAGS(CFLAGS)
@@ -123,6 +147,7 @@ Install path (prefix):      ${prefix}
 Boost libraries:            ${BOOSTLIBDIR}
 
 CXX:                        ${CXX}
+CPPFLAGS:                   ${CPPFLAGS}
 CXXFLAGS:                   ${CXXFLAGS}
 LDFLAGS:                    ${LDFLAGS}
 LIBS:                       ${LIBS}

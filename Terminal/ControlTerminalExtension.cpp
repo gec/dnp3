@@ -64,7 +64,7 @@ retcode ControlTerminalExtension::HandleIssueST(std::vector<std::string>& arArgs
 	if(arArgs[1].find('.') == std::string::npos) {
 		int iValue;
 		if(!Parsing::Get(arArgs[1], iValue)) return BAD_ARGUMENTS;
-		st.SetValue(static_cast<int32_t>(iValue));
+		st.SetValue(static_cast<boost::int32_t>(iValue));
 	}
 	else {
 		double dValue;
@@ -94,7 +94,7 @@ retcode ControlTerminalExtension::HandleIssueBO(std::vector<std::string>& arArgs
 	if(arArgs.size() < 2) return BAD_ARGUMENTS;
 
 	BinaryOutput b; b.mOnTimeMS = 100; b.mOffTimeMS = 100; b.mCount = 1;
-	uint32_t index;
+	boost::uint32_t index;
 	if(!Parsing::Get(arArgs[0], index)) return BAD_ARGUMENTS;
 
 	b.mRawCode = static_cast<boost::uint8_t>(ParseControlCode(arArgs[1]));

@@ -130,16 +130,22 @@ IINField ResponseContext::Configure(const APDU& arRequest)
 		/* Handle all of the objects that have a Group/Variation tuple */
 		switch (MACRO_DNP_RADIX(hdr->GetGroup(), hdr->GetVariation())) {
 			// static objects, all variations
-		case(MACRO_DNP_RADIX(1, 0)):
+		case(MACRO_DNP_RADIX(1, 0)):	// Binary Input - unknown
+		case(MACRO_DNP_RADIX(1, 1)):	// Binary Input - packed format
+		case(MACRO_DNP_RADIX(1, 2)):	// Binary Input - with flags
 			this->AddIntegrity(mStaticBinaries, mpRspTypes->mpStaticBinary);
 			break;
 		case(MACRO_DNP_RADIX(10, 0)):
 			this->AddIntegrity(mStaticControls, mpRspTypes->mpStaticControlStatus);
 			break;
-		case(MACRO_DNP_RADIX(20, 0)):
+		case(MACRO_DNP_RADIX(20, 0)):	// Counter Input - unknown
+		case(MACRO_DNP_RADIX(20, 1)):	// Counter Input - 32-bit w/ flag
+		case(MACRO_DNP_RADIX(20, 5)):	// Counter Input - 32-bit w/o flag
 			this->AddIntegrity(mStaticCounters, mpRspTypes->mpStaticCounter);
 			break;
-		case(MACRO_DNP_RADIX(30, 0)):
+		case(MACRO_DNP_RADIX(30, 0)):	// Analog Input - unknown
+		case(MACRO_DNP_RADIX(30, 1)):	// Analog Input - 32-bit w/ flag
+		case(MACRO_DNP_RADIX(30, 3)):	// Analog Input - 32-bit w/o flag
 			this->AddIntegrity(mStaticAnalogs, mpRspTypes->mpStaticAnalog);
 			break;
 		case(MACRO_DNP_RADIX(40, 0)):

@@ -16,6 +16,7 @@
 /TestSet/*.xml
 /DNP3Java/jar
 /DNP3Java/JavaDNP3_wrap.*
+/src
 *.log
 /*/Linux_i686
 TestAPL/TestSingle.tiny.xml
@@ -35,6 +36,7 @@ TestSingle.tiny.xml
 *.gcno
 *.gcda
 .*.swp
+*.map
 
 dnp3test
 testset

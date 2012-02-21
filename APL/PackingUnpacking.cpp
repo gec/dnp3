@@ -41,7 +41,7 @@ now uses an intermediate buffer that the compiler word aligns. */
 float SingleFloat::Read(const boost::uint8_t* apStart)
 {
 #ifdef ARM
-	uint8_t buff[sizeof(float)];
+	boost::uint8_t buff[sizeof(float)];
 	memcpy(buff, apStart, sizeof(float));
 	return Float<float>::NaiveRead(buff);
 #else
@@ -52,7 +52,7 @@ float SingleFloat::Read(const boost::uint8_t* apStart)
 void SingleFloat::Write(boost::uint8_t* apStart, float aValue)
 {
 #ifdef ARM
-	uint8_t buff[sizeof(float)];
+	boost::uint8_t buff[sizeof(float)];
 	Float<float>::NaiveWrite(buff, aValue);
 	memcpy(apStart, buff, sizeof(float));
 #else
@@ -63,7 +63,7 @@ void SingleFloat::Write(boost::uint8_t* apStart, float aValue)
 double DoubleFloat::Read(const boost::uint8_t* apStart)
 {
 #ifdef ARM
-	uint8_t buff[sizeof(double)];
+	boost::uint8_t buff[sizeof(double)];
 	memcpy(buff, apStart, sizeof(double));
 	return FlipWord32(Float<double>::NaiveRead(buff));
 #else
@@ -74,7 +74,7 @@ double DoubleFloat::Read(const boost::uint8_t* apStart)
 void DoubleFloat::Write(boost::uint8_t* apStart, double aValue)
 {
 #ifdef ARM
-	uint8_t buff[sizeof(double)];
+	boost::uint8_t buff[sizeof(double)];
 	Float<double>::NaiveWrite(buff, FlipWord32(aValue));
 	memcpy(apStart, buff, sizeof(double));
 #else
@@ -87,7 +87,7 @@ double DoubleFloat::FlipWord32(double aValue)
 {
 	volatile double x = aValue;
 	volatile boost::uint8_t* p = reinterpret_cast<volatile boost::uint8_t*>(&x);
-	uint32_t tmp = p[0];
+	boost::uint32_t tmp = p[0];
 	p[0] = p[1];
 	p[1] = tmp;
 	return x;

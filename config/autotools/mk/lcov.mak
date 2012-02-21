@@ -3,7 +3,7 @@ lcov-reset:
 	@find . -iname "*.gcda" -exec rm {} \;
 	@lcov --directory . --zerocounters
 
-clean-local:
+clean-lcov:
 	@find . -iname "*.gcno" -exec rm {} \;
 
 if LCOV

@@ -49,9 +49,9 @@ BOOST_AUTO_TEST_CASE(TestSimpleSend)
 	// Ubuntu and windows use different ephemeral port ranges...
 
 #ifdef WIN32
-	uint32_t port = 50000;
+	boost::uint32_t port = 50000;
 #else
-	uint32_t port = 30000;
+	boost::uint32_t port = 30000;
 #endif
 
 	// turned down the number of pairs for arm b/c of how long it takes to run.

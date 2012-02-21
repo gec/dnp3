@@ -34,19 +34,11 @@ using namespace std;
 namespace apl
 {
 
-PhysicalLayerAsyncTCPClient::PhysicalLayerAsyncTCPClient(
-    Logger* apLogger,
-    boost::asio::io_service* apIOService,
-    const std::string& arAddress,
-    boost::uint16_t aPort) :
+PhysicalLayerAsyncTCPClient::PhysicalLayerAsyncTCPClient(Logger* apLogger, boost::asio::io_service* apIOService, const std::string& arAddress, boost::uint16_t aPort) :
 	PhysicalLayerAsyncBaseTCP(apLogger, apIOService),
 	mRemoteEndpoint(ip::tcp::v4(), aPort)
 {
-	//set the endpoint's address
-	boost::system::error_code ec;
-	ip::address_v4 addr = ip::address_v4::from_string(arAddress, ec);
-	if(ec) throw ArgumentException(LOCATION, "endpoint: " + arAddress + " is invalid ");
-	mRemoteEndpoint.address(addr);
+	mRemoteEndpoint.address( ResolveAddress(arAddress) );
 }
 
 /* Implement the actions */

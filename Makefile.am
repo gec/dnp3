@@ -6,9 +6,9 @@
 ACLOCAL_AMFLAGS = -I config/autotools/m4
 
 AM_CXXFLAGS = $(BOOST_CPPFLAGS) -DBOOST_TEST_DYN_LINK -DBOOST_ASIO_ENABLE_CANCELIO -DBOOST_REGEX_NO_LIB
-AM_LDFLAGS = $(BOOST_LDFLAGS) $(BOOST_DATE_TIME_LIB) $(BOOST_THREAD_LIB) $(BOOST_PROGRAM_OPTIONS_LIB) $(BOOST_SYSTEM_LIB) $(BOOST_UNIT_TEST_FRAMEWORK_LIB)
+AM_LDFLAGS = $(BOOST_LDFLAGS)
 
-lib_LTLIBRARIES = libopendnp3_apl.la libopendnp3_dnp3.la libopendnp3_java.la
+lib_LTLIBRARIES = libopendnp3_apl.la libopendnp3_dnp3.la
 
 libopendnp3_apl_la_LDFLAGS = -version-info 0:0:0
 libopendnp3_apl_la_SOURCES = \
@@ -85,7 +85,6 @@ libopendnp3_apl_la_SOURCES = \
 	APL/Util.cpp
 
 libopendnp3_dnp3_la_LDFLAGS = -version-info 0:0:0
-libopendnp3_dnp3_la_LIBADD = libopendnp3_apl.la
 libopendnp3_dnp3_la_SOURCES = \
 	DNP3/AlwaysOpeningVtoRouter.cpp \
 	DNP3/APDUConstants.cpp \
@@ -157,8 +156,18 @@ libopendnp3_dnp3_la_SOURCES = \
 	DNP3/VtoTransmitTask.cpp \
 	DNP3/VtoWriter.cpp
 
+if JAVA
+lib_LTLIBRARIES += libopendnp3_java.la
 libopendnp3_java_la_LDFLAGS = -version-info 0:0:0
-libopendnp3_java_la_SOURCES = DNP3Java/JavaDNP3.i
+libopendnp3_java_la_SOURCES = DNP3Java/JavaDNP3.cpp
+DNP3Java/JavaDNP3.cpp: DNP3Java/JavaDNP3.i
+	mkdir -p $(top_srcdir)/src/main/java/org/totalgrid/reef/protocol/dnp3
+	swig -c++ -java \
+		-package org.totalgrid.reef.protocol.dnp3 \
+		-I$(top_srcdir) -I$(top_srcdir)/APL -I$(top_srcdir)/DNP3 \
+		-outdir $(top_srcdir)/src/main/java/org/totalgrid/reef/protocol/dnp3 \
+		-o $@ $^
+endif
 
 nobase_pkginclude_HEADERS= \
 	version.hpp \
@@ -372,7 +381,7 @@ nobase_pkginclude_HEADERS= \
 
 bin_PROGRAMS = testset
 
-testset_LDADD = libopendnp3_apl.la libopendnp3_dnp3.la
+testset_LDADD = libopendnp3_apl.la libopendnp3_dnp3.la $(BOOST_DATE_TIME_LIB) $(BOOST_THREAD_LIB) $(BOOST_PROGRAM_OPTIONS_LIB) $(BOOST_SYSTEM_LIB) $(BOOST_UNIT_TEST_FRAMEWORK_LIB)
 testset_CFLAGS = -Itinyxml
 testset_SOURCES = \
 	APLXML/PhysicalLayerManagerXML.cpp \
@@ -406,7 +415,7 @@ testset_SOURCES = \
 
 noinst_PROGRAMS = dnp3test
 
-dnp3test_LDADD = libopendnp3_apl.la libopendnp3_dnp3.la
+dnp3test_LDADD = libopendnp3_apl.la libopendnp3_dnp3.la $(BOOST_DATE_TIME_LIB) $(BOOST_THREAD_LIB) $(BOOST_PROGRAM_OPTIONS_LIB) $(BOOST_SYSTEM_LIB) $(BOOST_UNIT_TEST_FRAMEWORK_LIB)
 dnp3test_SOURCES = \
 	APLTestTools/AsyncPhysTestObject.cpp \
 	APLTestTools/AsyncTestObjectASIO.cpp \
@@ -423,6 +432,8 @@ dnp3test_SOURCES = \
 	APLTestTools/MockResponseAcceptor.cpp \
 	APLTestTools/MockTimerSource.cpp \
 	APLTestTools/MockUpperLayer.cpp \
+	APLTestTools/PhysicalLayerWrapper.cpp \
+	APLTestTools/WrappedTcpPipe.cpp \
 	DNP3Test/AppLayerTest.cpp \
 	DNP3Test/ComparingDataObserver.cpp \
 	DNP3Test/DNPHelpers.cpp \
@@ -494,6 +505,11 @@ docs-pdf:
 
 include config/autotools/mk/doxygen.mak
 include config/autotools/mk/lcov.mak
+
+clean-java:
+	-rm -rf DNP3Java/JavaDNP3.cpp DNP3Java/JavaDNP3.h $(top_srcdir)/src
+
+clean-local: clean-java clean-lcov
 
 .PHONY : astyle docs docs-html docs-pdf lcov lcov-report lcov-reset doxygen-run doxygen-doc $(DX_PS_GOAL) $(DX_PDF_GOAL)
 

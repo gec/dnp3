@@ -40,8 +40,8 @@ VtoIntegrationTestBase::VtoIntegrationTestBase(
 	LogTester(),
 	Loggable(mpTestLogger),
 	mpMainLogger(mLog.GetLogger(level, "main")),
-	mpLtf(aLogToFile ? new LogToFile(&mLog, "integration.log", true) : NULL),	
-	testObj(),	
+	mpLtf(aLogToFile ? new LogToFile(&mLog, "integration.log", true) : NULL),
+	testObj(),
 	timerSource(testObj.GetService()),
 	vtoClient(mLog.GetLogger(level, "local-tcp-client"), testObj.GetService(), "127.0.0.1", port + 20),
 	vtoServer(mLog.GetLogger(level, "loopback-tcp-server"), testObj.GetService(), "0.0.0.0", port + 10),
@@ -51,7 +51,7 @@ VtoIntegrationTestBase::VtoIntegrationTestBase(
 
 	if(aImmediateOutput) mLog.AddLogSubscriber(LogToStdio::Inst());
 
-	{		
+	{
 	manager.AddPhysicalLayer("dnp-tcp-server", PhysLayerSettings(), &tcpPipe.server);
 	SlaveStackConfig config;
 	config.app.NumRetry = 3;
@@ -59,7 +59,7 @@ VtoIntegrationTestBase::VtoIntegrationTestBase(
 	manager.AddSlave("dnp-tcp-server", "slave", level, &cmdAcceptor, config);
 	}
 
-	{		
+	{
 	manager.AddPhysicalLayer("dnp-tcp-client", PhysLayerSettings(), &tcpPipe.client);
 	MasterStackConfig config;
 	config.app.NumRetry = 3;
@@ -73,9 +73,9 @@ VtoIntegrationTestBase::VtoIntegrationTestBase(
 	std::string clientSideOfStack = clientOnSlave ? "slave" : "master";
 	std::string serverSideOfStack = clientOnSlave ? "master" : "slave";
 
-	manager.AddTCPClient("vto-tcp-client", PhysLayerSettings(), "127.0.0.1", port + 10);
+	manager.AddTCPClient("vto-tcp-client", PhysLayerSettings(), "localhost", port + 10);
 	manager.StartVtoRouter("vto-tcp-client", clientSideOfStack, VtoRouterSettings(88, false, false, 1000));
-	manager.AddTCPServer("vto-tcp-server", PhysLayerSettings(), "127.0.0.1", port + 20);
+	manager.AddTCPServer("vto-tcp-server", PhysLayerSettings(), "localhost", port + 20);
 	manager.StartVtoRouter("vto-tcp-server", serverSideOfStack, VtoRouterSettings(88, true, false, 1000));
 }
 

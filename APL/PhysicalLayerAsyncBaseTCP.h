@@ -20,6 +20,7 @@
 #define __PHYSICAL_LAYER_ASYNC_BASE_TCP_H_
 
 #include "PhysicalLayerAsyncASIO.h"
+#include <boost/asio.hpp>
 #include <boost/asio/ip/tcp.hpp>
 #include <memory>
 
@@ -45,6 +46,8 @@ public:
 protected:
 	boost::asio::ip::tcp::socket mSocket;
 	void CloseSocket();
+
+	boost::asio::ip::address ResolveAddress(const std::string& arEndpoint);
 
 private:
 	void ShutdownSocket();

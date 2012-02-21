@@ -256,16 +256,18 @@ required if you choose to build those options.
 
 Requirements:
 
-  - astyle v2.01 or later           (required if running 'make astyle')
+  - astyle v2.01 or later           (required if 'make astyle')
   - boost v1.42 or later            (required)
     * boost::date_time              (required)
     * boost::program_options        (required)
     * boost::system                 (required)
     * boost::thread                 (required)
     * Boost Unit Test Framework     (required)
-  - docbook v0.6.14 or later        (required if running 'make docs')
-  - lcov                            (required if running 'make lcov')
+  - docbook v0.6.14 or later        (required if 'make docs')
+  - lcov                            (required if 'make lcov')
   - libtool                         (required)
+  - swig v1.3.17 or later           (required if 'configure --with-java')
+  - Java JDK with JNI support       (required if 'configure --with-java')
 
 To start, first reinitialize autotools to be compatible with the version
 running on your system:
@@ -343,4 +345,14 @@ conforms to the style guidelines used for the project:
   make astyle
 
 Please run this utility before submitting any patches to the project.
+
+If you want to build the Java/Swig bindings for the OpenDNP3 library,
+make sure that your system has both swig and a valid JDK installed.
+Enable the build tree to create the Java library:
+
+  autoreconf -f -i
+  ./configure --with-java=/path/to/jdk/include
+  make
+
+The Java source files are created in the 'src' directory structure.
 
