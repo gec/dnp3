@@ -268,6 +268,7 @@ Requirements:
   - libtool                         (required)
   - swig v1.3.17 or later           (required if 'configure --with-java')
   - Java JDK with JNI support       (required if 'configure --with-java')
+  - Python 2.6 or later             (required if 'configure --with-python')
 
 To start, first reinitialize autotools to be compatible with the version
 running on your system:
@@ -346,13 +347,24 @@ conforms to the style guidelines used for the project:
 
 Please run this utility before submitting any patches to the project.
 
-If you want to build the Java/Swig bindings for the OpenDNP3 library,
-make sure that your system has both swig and a valid JDK installed.
-Enable the build tree to create the Java library:
+If you want to build the Java bindings for the OpenDNP3 library, make
+sure that your system has both swig and a valid JDK installed.  Enable
+the build tree to create the Java library:
 
   autoreconf -f -i
   ./configure --with-java=/path/to/jdk/include
   make
 
 The Java source files are created in the 'src' directory structure.
+
+If you want to build the Python bindings for the OpenDNP3 library, make
+sure that your system has both swig and a valid Python interpreter
+installed.  Enable the build tree to create the Python library:
+
+  autoreconf -f -i
+  ./configure --with-python
+  make
+
+The Python library is called pyopendnp3.  The Python class and shared
+library are installed to the 'opendnp3' package directory.
 

@@ -79,6 +79,8 @@ AC_PROG_INSTALL
 AC_PROG_MKDIR_P
 AC_PROG_SED
 
+want_swig="no"
+
 AC_ARG_WITH([java],
   [AS_HELP_STRING([--with-java@<:@=ARG@:>@],
     [use the Java JDK from a standard location (ARG=yes),
@@ -98,18 +100,53 @@ AC_ARG_WITH([java],
     ],
     [want_java="no"])
 if test "$want_java" = yes; then
-  dnl Add the Java JDK include path to the CPPFLAGS
+  want_swig="yes"
   if test "x$ac_java_path" != "x"; then
     CPPFLAGS="$CPPFLAGS -I$ac_java_path"
   fi
-  dnl Now see if the jni.h file can even be found
   AC_CHECK_HEADERS([jni.h]	,,AC_MSG_ERROR(missing header))
-  dnl Setup all other dependencies
-  AX_PKG_SWIG(1.3.17, [], [ AC_MSG_ERROR([SWIG is required to build.]) ])
+fi
+AM_CONDITIONAL(WANT_JAVA, [test "$want_java" = yes])
+
+AC_ARG_WITH([python],
+  [AS_HELP_STRING([--with-python@<:@=ARG@:>@],
+    [use the Python headers from a standard location (ARG=yes),
+     from the specified location (ARG=<path>),
+     or disable it (ARG=no)
+     @<:@ARG=yes@:>@ ])],
+    [
+    if test "$withval" = "no"; then
+        want_python="no"
+    elif test "$withval" = "yes"; then
+        want_python="yes"
+        ac_python_path=""
+    else
+        want_python="yes"
+        ac_python_path="$withval"
+    fi
+    ],
+    [want_python="no"])
+if test "$want_python" = yes; then
+  want_swig="yes"
+  AM_PATH_PYTHON([2.6],,AC_MSG_ERROR(Python 2.6 or later not found))
+  AC_CHECK_LIB([python$PYTHON_VERSION], [PyObject_Malloc]  ,,AC_MSG_ERROR(missing library))
+  AC_CHECK_LIB([python$PYTHON_VERSION], [PyExc_ValueError] ,,AC_MSG_ERROR(missing library))
+  AC_CHECK_LIB([python$PYTHON_VERSION], [_Py_NoneStruct]   ,,AC_MSG_ERROR(missing library))
+  if test "x$ac_python_path" != "x"; then
+    CPPFLAGS="$CPPFLAGS -I$ac_python_path"
+  fi
+fi
+AM_CONDITIONAL(WANT_PYTHON, [test "$want_python" = yes])
+
+if test "$want_swig" = yes; then
+  AX_PKG_SWIG(1.3.21, [], [ AC_MSG_ERROR([SWIG is required to build.]) ])
   AX_SWIG_ENABLE_CXX
   AX_SWIG_MULTI_MODULE_SUPPORT
+  if test "$want_python" = yes; then
+    SWIG_PYTHON
+  fi
 fi
-AM_CONDITIONAL(JAVA, [test "$want_java" = yes])
+AM_CONDITIONAL(SWIG_ENABLED, [test "$want_swig" = yes])
 
 LT_INIT
 dnl AX_LIBTOOLIZE_CFLAGS(CFLAGS)
@@ -152,7 +189,10 @@ CXXFLAGS:                   ${CXXFLAGS}
 LDFLAGS:                    ${LDFLAGS}
 LIBS:                       ${LIBS}
 
+java support:               ${want_java}
 lcov support:               ${ac_lcov_enabled}
+python support:             ${want_python}
+
 shared libraries:           ${enable_shared}
 static libraries:           ${enable_static}
 -----------------------------------------------------
