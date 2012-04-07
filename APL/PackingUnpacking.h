@@ -232,7 +232,7 @@ public:
 
 private:
 
-#ifdef ARM
+#if defined(ARM) || defined(__arm__) || defined(__thumb__) || defined(__TARGET_ARCH_ARM) || defined(__TARGET_ARCH_THUMB)
 	static double FlipWord32(double aValue);
 #endif
 };

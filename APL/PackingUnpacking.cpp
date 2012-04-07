@@ -40,7 +40,7 @@ const boost::uint8_t UInt8::Min = std::numeric_limits<boost::uint8_t>::min();
 now uses an intermediate buffer that the compiler word aligns. */
 float SingleFloat::Read(const boost::uint8_t* apStart)
 {
-#ifdef ARM
+#if defined(ARM) || defined(__arm__) || defined(__thumb__) || defined(__TARGET_ARCH_ARM) || defined(__TARGET_ARCH_THUMB)
 	boost::uint8_t buff[sizeof(float)];
 	memcpy(buff, apStart, sizeof(float));
 	return Float<float>::NaiveRead(buff);
@@ -51,7 +51,7 @@ float SingleFloat::Read(const boost::uint8_t* apStart)
 
 void SingleFloat::Write(boost::uint8_t* apStart, float aValue)
 {
-#ifdef ARM
+#if defined(ARM) || defined(__arm__) || defined(__thumb__) || defined(__TARGET_ARCH_ARM) || defined(__TARGET_ARCH_THUMB)
 	boost::uint8_t buff[sizeof(float)];
 	Float<float>::NaiveWrite(buff, aValue);
 	memcpy(apStart, buff, sizeof(float));
@@ -62,7 +62,7 @@ void SingleFloat::Write(boost::uint8_t* apStart, float aValue)
 
 double DoubleFloat::Read(const boost::uint8_t* apStart)
 {
-#ifdef ARM
+#if defined(ARM) || defined(__arm__) || defined(__thumb__) || defined(__TARGET_ARCH_ARM) || defined(__TARGET_ARCH_THUMB)
 	boost::uint8_t buff[sizeof(double)];
 	memcpy(buff, apStart, sizeof(double));
 	return FlipWord32(Float<double>::NaiveRead(buff));
@@ -73,7 +73,7 @@ double DoubleFloat::Read(const boost::uint8_t* apStart)
 
 void DoubleFloat::Write(boost::uint8_t* apStart, double aValue)
 {
-#ifdef ARM
+#if defined(ARM) || defined(__arm__) || defined(__thumb__) || defined(__TARGET_ARCH_ARM) || defined(__TARGET_ARCH_THUMB)
 	boost::uint8_t buff[sizeof(double)];
 	Float<double>::NaiveWrite(buff, FlipWord32(aValue));
 	memcpy(apStart, buff, sizeof(double));
@@ -82,7 +82,7 @@ void DoubleFloat::Write(boost::uint8_t* apStart, double aValue)
 #endif
 }
 
-#ifdef ARM
+#if defined(ARM) || defined(__arm__) || defined(__thumb__) || defined(__TARGET_ARCH_ARM) || defined(__TARGET_ARCH_THUMB)
 double DoubleFloat::FlipWord32(double aValue)
 {
 	volatile double x = aValue;

@@ -42,6 +42,8 @@ TestSingle.tiny.xml
 .*.swp
 *.map
 
+demo-master-cpp
+demo-slave-cpp
 dnp3test
 testset
 

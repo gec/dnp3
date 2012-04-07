@@ -431,7 +431,7 @@ testset_SOURCES = \
 	tinyxml/tinyxmlerror.cpp \
 	tinyxml/tinyxmlparser.cpp
 
-noinst_PROGRAMS = dnp3test
+noinst_PROGRAMS = dnp3test demo-master-cpp demo-slave-cpp
 
 dnp3test_LDADD = libopendnp3.la $(TEST_BOOST_LIBS)
 dnp3test_SOURCES = \
@@ -501,6 +501,16 @@ dnp3test_SOURCES = \
 	DNP3Test/TransportStackPair.cpp \
 	DNP3Test/TransportTestObject.cpp \
 	DNP3Test/VtoIntegrationTestBase.cpp
+
+demo_master_cpp_LDADD = libopendnp3.la
+demo_master_cpp_SOURCES = \
+	demos/master-cpp/DemoMain.cpp \
+	demos/master-cpp/MasterDemo.cpp
+
+demo_slave_cpp_LDADD = libopendnp3.la
+demo_slave_cpp_SOURCES = \
+	demos/slave-cpp/DemoMain.cpp \
+	demos/slave-cpp/SlaveDemo.cpp
 
 ASTYLE=astyle --options=config/astyle.cfg
 

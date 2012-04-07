@@ -99,8 +99,8 @@ void ClearScreen()
 
 double SafeCastInt64ToDouble(boost::int64_t aInput)
 {
+#if defined(ARM) || defined(__arm__) || defined(__thumb__) || defined(__TARGET_ARCH_ARM) || defined(__TARGET_ARCH_THUMB)
 	// fix for arm compiler bug
-#ifdef ARM
 	long upper =  (aInput & 0xFFFFFFFF00000000LL) >> 32;
 	unsigned long lower = (aInput & 0x00000000FFFFFFFFLL);
 
