@@ -1,4 +1,5 @@
 *.iml
+opendnp3.jar
 JavaDNP3.h
 JavaDNP3.cpp
 .idea
@@ -20,6 +21,7 @@ JavaDNP3.cpp
 /TestSet/*.xml
 /DNP3Java/jar
 /DNP3Java/JavaDNP3_wrap.*
+/java
 /src
 *.log
 /*/Linux_i686

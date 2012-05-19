@@ -6,7 +6,7 @@ srcdir="`cd $srcdir; pwd`"
 AC_CONFIG_AUX_DIR([build-aux])
 AC_CONFIG_MACRO_DIR([config/autotools/m4])
 
-AM_INIT_AUTOMAKE([subdir-objects])
+AM_INIT_AUTOMAKE([subdir-objects -Wno-portability])
 
 AC_PREFIX_DEFAULT([/usr])
 
@@ -105,6 +105,7 @@ if test "$want_java" = yes; then
     CPPFLAGS="$CPPFLAGS -I$ac_java_path"
   fi
   AC_CHECK_HEADERS([jni.h]	,,AC_MSG_ERROR(missing header))
+  AM_PROG_GCJ
 fi
 AM_CONDITIONAL(WANT_JAVA, [test "$want_java" = yes])
 

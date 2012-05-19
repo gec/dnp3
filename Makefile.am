@@ -11,6 +11,9 @@ TEST_BOOST_LIBS  = $(CORE_BOOST_LIBS) $(BOOST_UNIT_TEST_FRAMEWORK_LIB)
 AM_CXXFLAGS = $(BOOST_CPPFLAGS) -DBOOST_TEST_DYN_LINK -DBOOST_ASIO_ENABLE_CANCELIO -DBOOST_REGEX_NO_LIB
 AM_LDFLAGS  = $(BOOST_LDFLAGS)
 
+# Dummy placeholder to allow for expansion later
+BUILT_SOURCES =
+
 lib_LTLIBRARIES = libopendnp3.la
 
 libopendnp3_la_LDFLAGS = -version-info 0:0:0
@@ -159,13 +162,109 @@ libopendnp3_la_SOURCES = \
 
 if WANT_JAVA
 libopendnp3_la_SOURCES += DNP3Java/JavaDNP3.cpp
+
+JAVA_DIR=$(top_srcdir)/java
+JAVA_PACKAGE_DIR=org/totalgrid/reef/protocol/dnp3
+JAVA_SOURCE_DIR=$(JAVA_DIR)/src
+JAVA_CLASS_DIR=$(JAVA_DIR)/bin
+
 DNP3Java/JavaDNP3.cpp: DNP3Java/JavaDNP3.i
-	mkdir -p $(top_srcdir)/src/main/java/org/totalgrid/reef/protocol/dnp3
+	-@mkdir -p $(JAVA_SOURCE_DIR)/$(JAVA_PACKAGE_DIR)
 	swig -c++ -java \
 		-package org.totalgrid.reef.protocol.dnp3 \
 		-I$(top_srcdir) -I$(top_srcdir)/APL -I$(top_srcdir)/DNP3 \
-		-outdir $(top_srcdir)/src/main/java/org/totalgrid/reef/protocol/dnp3 \
+		-outdir $(JAVA_SOURCE_DIR)/$(JAVA_PACKAGE_DIR) \
 		-o DNP3Java/JavaDNP3.cpp $^
+
+JAVA_SRC_FILES =
+JAVA_SRC_FILES += $(JAVA_SOURCE_DIR)/$(JAVA_PACKAGE_DIR)/Analog.java
+JAVA_SRC_FILES += $(JAVA_SOURCE_DIR)/$(JAVA_PACKAGE_DIR)/AnalogQuality.java
+JAVA_SRC_FILES += $(JAVA_SOURCE_DIR)/$(JAVA_PACKAGE_DIR)/AppConfig.java
+JAVA_SRC_FILES += $(JAVA_SOURCE_DIR)/$(JAVA_PACKAGE_DIR)/Binary.java
+JAVA_SRC_FILES += $(JAVA_SOURCE_DIR)/$(JAVA_PACKAGE_DIR)/BinaryOutput.java
+JAVA_SRC_FILES += $(JAVA_SOURCE_DIR)/$(JAVA_PACKAGE_DIR)/BinaryQuality.java
+JAVA_SRC_FILES += $(JAVA_SOURCE_DIR)/$(JAVA_PACKAGE_DIR)/BoolDataPoint.java
+JAVA_SRC_FILES += $(JAVA_SOURCE_DIR)/$(JAVA_PACKAGE_DIR)/ClassMask.java
+JAVA_SRC_FILES += $(JAVA_SOURCE_DIR)/$(JAVA_PACKAGE_DIR)/CommandModes.java
+JAVA_SRC_FILES += $(JAVA_SOURCE_DIR)/$(JAVA_PACKAGE_DIR)/CommandRequest.java
+JAVA_SRC_FILES += $(JAVA_SOURCE_DIR)/$(JAVA_PACKAGE_DIR)/CommandResponse.java
+JAVA_SRC_FILES += $(JAVA_SOURCE_DIR)/$(JAVA_PACKAGE_DIR)/CommandStatus.java
+JAVA_SRC_FILES += $(JAVA_SOURCE_DIR)/$(JAVA_PACKAGE_DIR)/CommandTypes.java
+JAVA_SRC_FILES += $(JAVA_SOURCE_DIR)/$(JAVA_PACKAGE_DIR)/ControlCode.java
+JAVA_SRC_FILES += $(JAVA_SOURCE_DIR)/$(JAVA_PACKAGE_DIR)/ControlQuality.java
+JAVA_SRC_FILES += $(JAVA_SOURCE_DIR)/$(JAVA_PACKAGE_DIR)/ControlRecord.java
+JAVA_SRC_FILES += $(JAVA_SOURCE_DIR)/$(JAVA_PACKAGE_DIR)/ControlStatus.java
+JAVA_SRC_FILES += $(JAVA_SOURCE_DIR)/$(JAVA_PACKAGE_DIR)/Counter.java
+JAVA_SRC_FILES += $(JAVA_SOURCE_DIR)/$(JAVA_PACKAGE_DIR)/CounterQuality.java
+JAVA_SRC_FILES += $(JAVA_SOURCE_DIR)/$(JAVA_PACKAGE_DIR)/DataPoint.java
+JAVA_SRC_FILES += $(JAVA_SOURCE_DIR)/$(JAVA_PACKAGE_DIR)/DataTypes.java
+JAVA_SRC_FILES += $(JAVA_SOURCE_DIR)/$(JAVA_PACKAGE_DIR)/DeadbandPointRecord.java
+JAVA_SRC_FILES += $(JAVA_SOURCE_DIR)/$(JAVA_PACKAGE_DIR)/DeviceTemplate.java
+JAVA_SRC_FILES += $(JAVA_SOURCE_DIR)/$(JAVA_PACKAGE_DIR)/DoublePoint.java
+JAVA_SRC_FILES += $(JAVA_SOURCE_DIR)/$(JAVA_PACKAGE_DIR)/EventMaxConfig.java
+JAVA_SRC_FILES += $(JAVA_SOURCE_DIR)/$(JAVA_PACKAGE_DIR)/EventPointRecord.java
+JAVA_SRC_FILES += $(JAVA_SOURCE_DIR)/$(JAVA_PACKAGE_DIR)/ExceptionScan.java
+JAVA_SRC_FILES += $(JAVA_SOURCE_DIR)/$(JAVA_PACKAGE_DIR)/FilterAssoc.java
+JAVA_SRC_FILES += $(JAVA_SOURCE_DIR)/$(JAVA_PACKAGE_DIR)/FilterLevel.java
+JAVA_SRC_FILES += $(JAVA_SOURCE_DIR)/$(JAVA_PACKAGE_DIR)/FixedCommandHandler.java
+JAVA_SRC_FILES += $(JAVA_SOURCE_DIR)/$(JAVA_PACKAGE_DIR)/FlowType.java
+JAVA_SRC_FILES += $(JAVA_SOURCE_DIR)/$(JAVA_PACKAGE_DIR)/GrpVar.java
+JAVA_SRC_FILES += $(JAVA_SOURCE_DIR)/$(JAVA_PACKAGE_DIR)/ICommandAcceptor.java
+JAVA_SRC_FILES += $(JAVA_SOURCE_DIR)/$(JAVA_PACKAGE_DIR)/ICommandHandler.java
+JAVA_SRC_FILES += $(JAVA_SOURCE_DIR)/$(JAVA_PACKAGE_DIR)/ICommandSource.java
+JAVA_SRC_FILES += $(JAVA_SOURCE_DIR)/$(JAVA_PACKAGE_DIR)/IDataObserver.java
+JAVA_SRC_FILES += $(JAVA_SOURCE_DIR)/$(JAVA_PACKAGE_DIR)/ILogBase.java
+JAVA_SRC_FILES += $(JAVA_SOURCE_DIR)/$(JAVA_PACKAGE_DIR)/INotifier.java
+JAVA_SRC_FILES += $(JAVA_SOURCE_DIR)/$(JAVA_PACKAGE_DIR)/IPhysicalLayerObserver.java
+JAVA_SRC_FILES += $(JAVA_SOURCE_DIR)/$(JAVA_PACKAGE_DIR)/IResponseAcceptor.java
+JAVA_SRC_FILES += $(JAVA_SOURCE_DIR)/$(JAVA_PACKAGE_DIR)/IStackObserver.java
+JAVA_SRC_FILES += $(JAVA_SOURCE_DIR)/$(JAVA_PACKAGE_DIR)/ITransactable.java
+JAVA_SRC_FILES += $(JAVA_SOURCE_DIR)/$(JAVA_PACKAGE_DIR)/LinkConfig.java
+JAVA_SRC_FILES += $(JAVA_SOURCE_DIR)/$(JAVA_PACKAGE_DIR)/LogEntry.java
+JAVA_SRC_FILES += $(JAVA_SOURCE_DIR)/$(JAVA_PACKAGE_DIR)/LogTypes.java
+JAVA_SRC_FILES += $(JAVA_SOURCE_DIR)/$(JAVA_PACKAGE_DIR)/MasterConfig.java
+JAVA_SRC_FILES += $(JAVA_SOURCE_DIR)/$(JAVA_PACKAGE_DIR)/MasterStackConfig.java
+JAVA_SRC_FILES += $(JAVA_SOURCE_DIR)/$(JAVA_PACKAGE_DIR)/ParityType.java
+JAVA_SRC_FILES += $(JAVA_SOURCE_DIR)/$(JAVA_PACKAGE_DIR)/PhysLayerSettings.java
+JAVA_SRC_FILES += $(JAVA_SOURCE_DIR)/$(JAVA_PACKAGE_DIR)/PhysicalLayerState.java
+JAVA_SRC_FILES += $(JAVA_SOURCE_DIR)/$(JAVA_PACKAGE_DIR)/PointClass.java
+JAVA_SRC_FILES += $(JAVA_SOURCE_DIR)/$(JAVA_PACKAGE_DIR)/PointRecord.java
+JAVA_SRC_FILES += $(JAVA_SOURCE_DIR)/$(JAVA_PACKAGE_DIR)/SWIGTYPE_p_VtoConfig.java
+JAVA_SRC_FILES += $(JAVA_SOURCE_DIR)/$(JAVA_PACKAGE_DIR)/SWIGTYPE_p_boost__int64_t.java
+JAVA_SRC_FILES += $(JAVA_SOURCE_DIR)/$(JAVA_PACKAGE_DIR)/SWIGTYPE_p_int.java
+JAVA_SRC_FILES += $(JAVA_SOURCE_DIR)/$(JAVA_PACKAGE_DIR)/SWIGTYPE_p_std__string.java
+JAVA_SRC_FILES += $(JAVA_SOURCE_DIR)/$(JAVA_PACKAGE_DIR)/SerialSettings.java
+JAVA_SRC_FILES += $(JAVA_SOURCE_DIR)/$(JAVA_PACKAGE_DIR)/Setpoint.java
+JAVA_SRC_FILES += $(JAVA_SOURCE_DIR)/$(JAVA_PACKAGE_DIR)/SetpointEncodingType.java
+JAVA_SRC_FILES += $(JAVA_SOURCE_DIR)/$(JAVA_PACKAGE_DIR)/SetpointQuality.java
+JAVA_SRC_FILES += $(JAVA_SOURCE_DIR)/$(JAVA_PACKAGE_DIR)/SetpointStatus.java
+JAVA_SRC_FILES += $(JAVA_SOURCE_DIR)/$(JAVA_PACKAGE_DIR)/SlaveConfig.java
+JAVA_SRC_FILES += $(JAVA_SOURCE_DIR)/$(JAVA_PACKAGE_DIR)/SlaveStackConfig.java
+JAVA_SRC_FILES += $(JAVA_SOURCE_DIR)/$(JAVA_PACKAGE_DIR)/StackManager.java
+JAVA_SRC_FILES += $(JAVA_SOURCE_DIR)/$(JAVA_PACKAGE_DIR)/StackStates.java
+JAVA_SRC_FILES += $(JAVA_SOURCE_DIR)/$(JAVA_PACKAGE_DIR)/Transaction.java
+JAVA_SRC_FILES += $(JAVA_SOURCE_DIR)/$(JAVA_PACKAGE_DIR)/UnsignedPoint.java
+JAVA_SRC_FILES += $(JAVA_SOURCE_DIR)/$(JAVA_PACKAGE_DIR)/VectorOfControlRecord.java
+JAVA_SRC_FILES += $(JAVA_SOURCE_DIR)/$(JAVA_PACKAGE_DIR)/VectorOfDeadbandPointRecord.java
+JAVA_SRC_FILES += $(JAVA_SOURCE_DIR)/$(JAVA_PACKAGE_DIR)/VectorOfEventPointRecord.java
+JAVA_SRC_FILES += $(JAVA_SOURCE_DIR)/$(JAVA_PACKAGE_DIR)/VectorOfExceptionScan.java
+JAVA_SRC_FILES += $(JAVA_SOURCE_DIR)/$(JAVA_PACKAGE_DIR)/VectorOfPointRecord.java
+JAVA_SRC_FILES += $(JAVA_SOURCE_DIR)/$(JAVA_PACKAGE_DIR)/VectorOfString.java
+JAVA_SRC_FILES += $(JAVA_SOURCE_DIR)/$(JAVA_PACKAGE_DIR)/VtoQuality.java
+JAVA_SRC_FILES += $(JAVA_SOURCE_DIR)/$(JAVA_PACKAGE_DIR)/javadnp3.java
+JAVA_SRC_FILES += $(JAVA_SOURCE_DIR)/$(JAVA_PACKAGE_DIR)/javadnp3Constants.java
+JAVA_SRC_FILES += $(JAVA_SOURCE_DIR)/$(JAVA_PACKAGE_DIR)/javadnp3JNI.java
+
+opendnp3.jar: DNP3Java/JavaDNP3.cpp $(JAVA_SRC_FILES)
+	-@mkdir -p $(JAVA_CLASS_DIR)/$(JAVA_PACKAGE_DIR)
+	cd $(JAVA_SOURCE_DIR) && javac -d $(JAVA_CLASS_DIR) -cp . $(JAVA_SRC_FILES)
+	cd $(JAVA_CLASS_DIR) && jar cvf $@ org
+	mv $(JAVA_CLASS_DIR)/$@ $@
+
+BUILT_SOURCES += DNP3Java/JavaDNP3.cpp opendnp3.jar $(JAVA_SRC_FILES)
+
+opendnp3_jardir = $(datadir)/java
+opendnp3_jar_DATA = opendnp3.jar
 endif
 
 if WANT_PYTHON
@@ -185,6 +284,8 @@ DNP3Java/PythonDNP3.cpp: DNP3Java/JavaDNP3.i
 		-I$(top_srcdir) -I$(top_srcdir)/APL -I$(top_srcdir)/DNP3 \
 		-outdir $(top_srcdir) \
 		-o DNP3Java/PythonDNP3.cpp $^
+
+BUILT_SOURCES += DNP3Java/PythonDNP3.cpp
 endif
 
 nobase_pkginclude_HEADERS= \
@@ -538,7 +639,8 @@ clean-swig:
 	-rm -rf DNP3Java/JavaDNP3.cpp DNP3Java/JavaDNP3.h
 	-rm -rf DNP3Java/PythonDNP3.cpp DNP3Java/PythonDNP3.h
 	-rm -rf pyopendnp3.py pyopendnp3.pyc
-	-rm -rf $(top_srcdir)/src
+	-rm -rf $(top_srcdir)/java
+	-rm -rf opendnp3.jar
 
 clean-local: clean-swig clean-lcov
 

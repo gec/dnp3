@@ -45,10 +45,55 @@ void Terminate(int sig)
 		gpDemo->Shutdown();
 }
 
+/*
+ * Command line syntax:
+ *
+ *    ./demo-master-cpp [local-dnp3] [remote-dnp3] [remote-ip] [remote-port]
+ *
+ * Defaults:
+ *
+ *    local-dnp3     100
+ *    remote-dnp3    1
+ *    remote-ip      127.0.0.1
+ *    remote-port    4999
+ */
 int main(int argc, char* argv[])
 {
+	// Default values
+	unsigned local_dnp3  = 100;
+	unsigned remote_dnp3 = 1;
+	string   remote_ip   = "127.0.0.1";
+	unsigned remote_port = 4999;
+
+	// Parse the command line arguments using a "fall-through"
+	// switch statement.
+	if (argc > 1 && strcasecmp("help", argv[1]) == 0) {
+		cout << argv[0] << " [local-dnp3] [remote-dnp3] [remote-ip] [remote-port]" << endl;
+		return -1;
+	}
+
+	switch (argc) {
+	case 5:
+		{
+			istringstream iss(argv[4]);
+			iss >> remote_port;
+		}
+	case 4:
+		remote_ip = argv[3];
+	case 3:
+		{
+			istringstream iss(argv[2]);
+			iss >> remote_dnp3;
+		}
+	case 2:
+		{
+			istringstream iss(argv[1]);
+			iss >> local_dnp3;
+		}
+	}
+
 	// Create a log object for the stack to use and configure it
-	// with a subscriber that print alls messages to the stdout
+	// with a subscriber that print alls messages to the stdout.
 	EventLog log;
 	log.AddLogSubscriber(LogToStdio::Inst());
 
@@ -56,29 +101,32 @@ int main(int argc, char* argv[])
 	// Log statements with a lower priority will not be logged.
 	const FilterLevel LOG_LEVEL = LEV_INFO;
 
-	// create our demo application that handles commands and
+	// Create our demo application that handles commands and
 	// demonstrates how to publish data give it a loffer with a
-	// unique name and log level
+	// unique name and log level.
 	MasterDemoApp app(log.GetLogger(LOG_LEVEL, "demoapp"));
 
 	// This is the main point of interaction with the stack. The
 	// AsyncStackManager object instantiates master/slave DNP
-	// stacks, as well as their physical layers
+	// stacks, as well as their physical layers.
 	AsyncStackManager mgr(log.GetLogger(LOG_LEVEL, "dnp"));
 
-	// Connect via a TCPClient socket to a slave running on
-	// localhost port 4999.  The server will wait 3000 ms in between
-	// failed bind calls The server will *only* respond to
-	// connections on the loopback
-	mgr.AddTCPClient("tcpclient", PhysLayerSettings(LOG_LEVEL, 3000), "127.0.0.1", 4999);
+	// Connect via a TCPClient socket to a slave.  The server will
+	// wait 3000 ms in between failed bind calls.
+	mgr.AddTCPClient(
+		"tcpclient",
+		PhysLayerSettings(LOG_LEVEL, 3000),
+		remote_ip.c_str(),
+		remote_port
+	);
 
 	// The master config object for a master. The default are
 	// useable, but understanding the options are important.
 	MasterStackConfig stackConfig;
 
 	// Override the default link addressing
-	stackConfig.link.LocalAddr = 100;
-	stackConfig.link.RemoteAddr = 1;
+	stackConfig.link.LocalAddr  = local_dnp3;
+	stackConfig.link.RemoteAddr = remote_dnp3;
 
 	// Set the app instance as a callback for state change notices
 	stackConfig.master.mpObserver = &app;
@@ -101,7 +149,7 @@ int main(int argc, char* argv[])
 	SetDemo(&app);
 	signal(SIGTERM, &Terminate);
 	signal(SIGABRT, &Terminate);
-	signal(SIGINT, &Terminate);
+	signal(SIGINT,  &Terminate);
 
 	app.Run();
 
