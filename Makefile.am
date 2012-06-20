@@ -279,7 +279,7 @@ __init__.py:
 	echo "from pyopendnp3 import *" > $@
 
 DNP3Java/PythonDNP3.cpp: DNP3Java/JavaDNP3.i
-	swig -c++ -python \
+	swig -c++ -python -threads \
 		-module pyopendnp3 \
 		-I$(top_srcdir) -I$(top_srcdir)/APL -I$(top_srcdir)/DNP3 \
 		-outdir $(top_srcdir) \
