@@ -84,6 +84,7 @@ public:
 	static SlaveConfig Convert(const APLXML_DNP::SlaveConfig_t& arCfg, const APLXML_DNP::AppLayer_t& arApp);
 	static VtoConfig Convert(const APLXML_DNP::VtoPorts_t& arCfg);
 	static DeviceTemplate Convert( const APLXML_DNP::DeviceTemplate_t& arCfg, bool aStartOnline = false);
+	static CommandModes ConvertMode(const std::string& arMode);
 
 private:
 
