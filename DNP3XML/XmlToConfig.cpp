@@ -213,7 +213,7 @@ DeviceTemplate XmlToConfig::Convert(const APLXML_DNP::DeviceTemplate_t& arCfg, b
 	return t;
 }
 
-CommandModes ConvertMode(const std::string& arMode)
+CommandModes XmlToConfig::ConvertMode(const std::string& arMode)
 {
 	if(arMode == "SBO") return CM_SBO_ONLY;
 	if(arMode == "DO_ONLY") return CM_DO_ONLY;
