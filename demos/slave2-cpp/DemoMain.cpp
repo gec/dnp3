@@ -57,7 +57,6 @@ int main(int argc, char* argv[])
 	// Check command line options
 
 	cOptions options;
-	options.set_master_defaults();
 	if( options.decode( argc, argv ) != 0 )
 		return 1;
 
