@@ -57,10 +57,10 @@ int main(int argc, char* argv[])
 	// Check command line options
 
 	cOptions options;
-	options.set_master_defaults();
 	if( options.decode( argc, argv ) != 0 )
 		return 1;
 
+	try {
 
 	// Create a log object for the stack to use and configure it
 	// with a subscriber that print alls messages to the stdout
@@ -81,14 +81,25 @@ int main(int argc, char* argv[])
 	// stacks, as well as their physical layers
 	AsyncStackManager mgr(log.GetLogger(LOG_LEVEL, "dnp"));
 
-	// Add a TCPServer to the manager with the name "tcpserver".
-	// The server will wait 3000 ms in between failed bind calls.
-	mgr.AddTCPServer(
-		"tcpserver",
-		PhysLayerSettings(LOG_LEVEL, 3000),
-		options.ip,
-		options.port
-	);
+	if( ! options.flagcom ) {
+		// Add a TCPServer to the manager with the name "tcpserver".
+		// The server will wait 3000 ms in between failed bind calls.
+		mgr.AddTCPServer(
+			options.PortName,
+			PhysLayerSettings(LOG_LEVEL, 3000),
+			options.ip,
+			options.port
+			);
+	} else {
+		// Connect  to a serial COM port
+		mgr.AddSerial(
+			options.PortName,
+			PhysLayerSettings(LOG_LEVEL, 3000),
+			options.serialsets 
+			);
+
+	}
+
 
 	// The master config object for a slave. The default are
 	// useable, but understanding the options are important.
@@ -108,7 +119,8 @@ int main(int argc, char* argv[])
 	// name, log level, command acceptor, and config info This
 	// returns a thread-safe interface used for updating the slave's
 	// database.
-	IDataObserver* pDataObserver = mgr.AddSlave("tcpserver", "slave", LOG_LEVEL, app.GetCmdAcceptor(), stackConfig);
+	IDataObserver* pDataObserver = mgr.AddSlave(
+		options.PortName, "slave", LOG_LEVEL, app.GetCmdAcceptor(), stackConfig);
 
 	// Tell the app where to write opdates
 	app.SetDataObserver(pDataObserver);
@@ -122,6 +134,19 @@ int main(int argc, char* argv[])
 	app.Run();
 
 	SetDemo(NULL);
+
+
+	}
+
+	// sometime the dnp3 code will raise an exception
+	// for example if you try to connect to a non-existent COM port
+	// this catches the exception, preventing a crash,
+	// and prints out a hint as to what went wrong
+
+	catch ( Exception & e ) {
+		printf("Exception raised by DNP3 code\n%s\n",e.GetErrorString().c_str());
+	}
+
 
 	return 0;
 }

@@ -62,6 +62,7 @@ int main(int argc, char* argv[])
 	if( options.decode( argc, argv ) != 0 )
 		return 1;
 
+	try {
 
 	// Create a log object for the stack to use and configure it
 	// with a subscriber that print alls messages to the stdout.
@@ -82,14 +83,24 @@ int main(int argc, char* argv[])
 	// stacks, as well as their physical layers.
 	AsyncStackManager mgr(log.GetLogger(LOG_LEVEL, "dnp"));
 
-	// Connect via a TCPClient socket to a slave.  The server will
-	// wait 3000 ms in between failed bind calls.
-	mgr.AddTCPClient(
-		"tcpclient",
-		PhysLayerSettings(LOG_LEVEL, 3000),
-		options.ip.c_str(),
-		options.port
-	);
+	if( ! options.flagcom ) {
+		// Connect via a TCPClient socket to a slave.  The server will
+		// wait 3000 ms in between failed bind calls.
+		mgr.AddTCPClient(
+			options.PortName,
+			PhysLayerSettings(LOG_LEVEL, 3000),
+			options.ip.c_str(),
+			options.port
+			);
+	} else {
+
+		// Con nect to slave over serial COM port
+		mgr.AddSerial(
+			options.PortName,
+			PhysLayerSettings(LOG_LEVEL, 3000),
+			options.serialsets 
+			);
+	}
 
 	// The master config object for a master. The default are
 	// useable, but understanding the options are important.
@@ -108,7 +119,7 @@ int main(int argc, char* argv[])
 	// messages.
 	app.SetCommandAcceptor(
 		mgr.AddMaster(
-			"tcpclient",           // port name
+			options.PortName,      // port name
 			"master",              // stack name
 			LOG_LEVEL,             // log filter level
 			app.GetDataObserver(), // callback for data processing
@@ -125,6 +136,20 @@ int main(int argc, char* argv[])
 	app.Run();
 
 	SetDemo(NULL);
+
+	}
+
+	// sometime the dnp3 code will raise an exception
+	// for example if you try to connect to a non-existent COM port
+	// this catches the exception, preventing a crash,
+	// and prints out a hint as to what went wrong
+
+	catch ( Exception & e ) {
+		printf("Exception raised by DNP3 code\n%s\n",e.GetErrorString().c_str());
+	}
+
+
+
 
 	return 0;
 }
