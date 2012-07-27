@@ -77,7 +77,8 @@ int cOptions::decode( int argc, char* argv[] )
 			("tcp",  "communicate over tcp/ip ( default )")
 			("com", "communicate over serial com port")
 			("baud", po::value<int>(), "com - baud rate ( default 9600 )")
-			("port", po::value<string>(), "port ( e.g. 5 for COM5, or 4999 for tcp )")
+			("port", po::value<string>(), "port ( e.g. 5 for COM5, or 4999 for tcp\n"
+			"You may also enter COM5 or /dev/tty5 )")
 			("ip", po::value<string>(), "tcp - ip address (default 127.0.0.1 ( same machine ) )")
 			("remote", po::value<int>(), "dnp3 link index for partner( default 100 )")
 			("local", po::value<int>(), "dnp3 link index for this( default 1 )")
@@ -105,8 +106,17 @@ int cOptions::decode( int argc, char* argv[] )
 			// using COM serial port
 			flagcom = true;
 			PortName = "comserver";
-			if( vm.count("port") )
-				serialsets.mDevice = "COM" + vm["port"].as<string>();
+			if( vm.count("port") ) {
+				if( atoi( vm["port"].as<string>().c_str() ) > 0 ) {
+					// assume windows, user has entered N meaning use COM<N>
+					serialsets.mDevice = "COM" + vm["port"].as<string>();
+				} else {
+					// assume user entered complete port name for serial port
+					// e.g "COM4" for windows,  "/dev/tty4" for unix
+					serialsets.mDevice = vm["port"].as<string>();
+				}
+			}
+
 			if( vm.count("baud") )
 				serialsets.mBaud = vm["baud"].as<int>();
 		} else {
