@@ -87,8 +87,16 @@ int cOptions::decode( int argc, char* argv[] )
 
 		// parse command line
 		po::variables_map vm;
-		po::store(po::parse_command_line(argc, argv, desc), vm);
-		po::notify(vm);    
+		try {
+			po::store(po::parse_command_line(argc, argv, desc), vm);
+			po::notify(vm);    
+		}
+		catch ( po::unknown_option& unknown )
+		{
+			cout << "Unkown option: " << unknown.get_option_name() << endl;
+			return 1;
+		}
+
 
 		// store options changed from defaults
 
