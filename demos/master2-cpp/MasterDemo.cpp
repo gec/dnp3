@@ -68,7 +68,22 @@ void MasterDemoBase::OnDataUpdate()
 				"Received " << num_updates
 				<< " updates");
 		do {
-			LOG_BLOCK(LEV_INFO, mFDO.updates.front());
+			// check if update is a 'meter reading'
+			string raw = mFDO.updates.front();
+			string readable;
+			int p = raw.find("Analog");
+			if( p != -1 ) {
+				// parse the meter reading into more friendly format
+				int q = raw.find("-->");
+				int v = atoi(raw.substr(q+3).c_str());
+				char buf[500];
+				sprintf(buf,"Meter #%s value is %d",
+					raw.substr(p+7,1).c_str(),v);
+				LOG_BLOCK(LEV_INFO, buf);
+			} else {
+				// output the update as is
+				LOG_BLOCK(LEV_INFO, mFDO.updates.front());
+			}
 			mFDO.updates.pop_front();
 		} while ( !mFDO.updates.empty() );
 	}
