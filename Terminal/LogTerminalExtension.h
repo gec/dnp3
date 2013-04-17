@@ -1,9 +1,9 @@
 #ifndef __LOG_TERMINAL_EXTENSION_H_
 #define __LOG_TERMINAL_EXTENSION_H_
 
-#include <APL/Log.h>
-#include <APL/LogToFile.h>
-#include <APL/MetricBuffer.h>
+#include <opendnp3/APL/Log.h>
+#include <opendnp3/APL/LogToFile.h>
+#include <opendnp3/APL/MetricBuffer.h>
 
 #include "TerminalInterfaces.h"
 

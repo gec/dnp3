@@ -20,14 +20,14 @@
 #define __ADDRESS_SCANNER_H_
 
 #include <APLXML/PhysicalLayerManagerXML.h>
-#include <APL/IOServiceThread.h>
-#include <APL/TimerSourceASIO.h>
-#include <APL/IOService.h>
-#include <APL/Loggable.h>
+#include <opendnp3/APL/IOServiceThread.h>
+#include <opendnp3/APL/TimerSourceASIO.h>
+#include <opendnp3/APL/IOService.h>
+#include <opendnp3/APL/Loggable.h>
 
-#include <DNP3/LinkLayerRouter.h>
-#include <DNP3/ILinkContext.h>
-#include <DNP3/LinkFrame.h>
+#include <opendnp3/DNP3/LinkLayerRouter.h>
+#include <opendnp3/DNP3/ILinkContext.h>
+#include <opendnp3/DNP3/LinkFrame.h>
 
 namespace APLXML_MTS
 {

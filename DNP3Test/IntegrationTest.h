@@ -23,12 +23,12 @@
 #include <APLTestTools/LogTester.h>
 #include <APLTestTools/MockCommandAcceptor.h>
 #include <APLTestTools/FanoutDataObserver.h>
-#include <APL/Loggable.h>
+#include <opendnp3/APL/Loggable.h>
 
-#include <APL/FlexibleDataObserver.h>
-#include <APL/Random.h>
+#include <opendnp3/APL/FlexibleDataObserver.h>
+#include <opendnp3/APL/Random.h>
 
-#include <DNP3/AsyncStackManager.h>
+#include <opendnp3/DNP3/AsyncStackManager.h>
 
 #include "ComparingDataObserver.h"
 

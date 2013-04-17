@@ -1,7 +1,7 @@
 #include "LogTerminalExtension.h"
 
-#include <APL/Util.h>
-#include <APL/ITimerSource.h>
+#include <opendnp3/APL/Util.h>
+#include <opendnp3/APL/ITimerSource.h>
 
 #include <boost/bind.hpp>
 #include <sstream>

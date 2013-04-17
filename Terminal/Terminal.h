@@ -5,8 +5,8 @@
 #include "LineReader.h"
 #include "TerminalInterfaces.h"
 
-#include <APL/Loggable.h>
-#include <APL/Threadable.h>
+#include <opendnp3/APL/Loggable.h>
+#include <opendnp3/APL/Threadable.h>
 
 #include <map>
 #include <queue>

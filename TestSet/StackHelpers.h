@@ -19,16 +19,16 @@
 #ifndef __STACK_HELPERS_H_
 #define __STACK_HELPERS_H_
 
-#include <APL/Log.h>
-#include <APL/IOServiceThread.h>
-#include <DNP3/AsyncStackManager.h>
-#include <APL/CommandQueue.h>
-#include <APL/FlexibleDataObserver.h>
-#include <APL/QueueingFDO.h>
-#include <APL/IPhysicalLayerAsync.h>
-#include <APL/IOService.h>
-#include <APL/TimerSourceASIO.h>
-#include <APL/MultiplexingDataObserver.h>
+#include <opendnp3/APL/Log.h>
+#include <opendnp3/APL/IOServiceThread.h>
+#include <opendnp3/DNP3/AsyncStackManager.h>
+#include <opendnp3/APL/CommandQueue.h>
+#include <opendnp3/APL/FlexibleDataObserver.h>
+#include <opendnp3/APL/QueueingFDO.h>
+#include <opendnp3/APL/IPhysicalLayerAsync.h>
+#include <opendnp3/APL/IOService.h>
+#include <opendnp3/APL/TimerSourceASIO.h>
+#include <opendnp3/APL/MultiplexingDataObserver.h>
 
 #include <Terminal/Terminal.h>
 #include <Terminal/LogTerminalExtension.h>

@@ -18,10 +18,10 @@
 //
 #include "StackHelpers.h"
 
-#include <DNP3/SlaveStackConfig.h>
-#include <DNP3/MasterStackConfig.h>
-#include <APL/IPhysicalLayerAsync.h>
-#include <APL/PhysicalLayerFactory.h>
+#include <opendnp3/DNP3/SlaveStackConfig.h>
+#include <opendnp3/DNP3/MasterStackConfig.h>
+#include <opendnp3/APL/IPhysicalLayerAsync.h>
+#include <opendnp3/APL/PhysicalLayerFactory.h>
 
 #include <APLXML/PhysicalLayerXMLFactory.h>
 #include <DNP3XML/XmlToConfig.h>
@@ -38,7 +38,7 @@ namespace dnp
 
 IPhysicalLayerAsync* FGetTerminalPhys(Logger* apLogger, boost::asio::io_service* apSrv, bool aRemote, boost::uint16_t aRemotePort)
 {
-	if (aRemote) return PhysicalLayerFactory::FGetTCPServerAsync("0.0.0.0", aRemotePort, apSrv, apLogger);
+	if (aRemote) return PhysicalLayerFactory::FGetTCPv4ServerAsync("0.0.0.0", aRemotePort, apSrv, apLogger);
 	else return new PhysicalLayerIOStreamAsync(apLogger, apSrv);
 }
 

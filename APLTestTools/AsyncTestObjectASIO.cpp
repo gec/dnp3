@@ -20,9 +20,9 @@
 #include "AsyncTestObjectASIO.h"
 #include <boost/asio.hpp>
 
-#include <APL/Configure.h>
-#include <APL/Exception.h>
-#include <APL/Thread.h>
+#include <opendnp3/APL/Configure.h>
+#include <opendnp3/APL/Exception.h>
+#include <opendnp3/APL/Thread.h>
 
 namespace apl
 {

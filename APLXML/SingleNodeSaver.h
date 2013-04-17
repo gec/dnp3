@@ -24,7 +24,7 @@
 #include "INodeSaver.h"
 #include "tinybinding.h"
 
-#include <APL/Loggable.h>
+#include <opendnp3/APL/Loggable.h>
 
 namespace apl
 {

@@ -67,7 +67,7 @@ namespace DotNetMasterDemo
         {
             var sm = new StackManager();
             sm.AddLogHandler(new PrintingLogAdapter()); //this is optional
-            sm.AddTCPClient("client", FilterLevel.LEV_INFO, 5000, "127.0.0.1", 20000);
+            sm.AddTCPv4Client("client", FilterLevel.LEV_INFO, 5000, "127.0.0.1", 20000);
             var config = new MasterStackConfig();
             config.link.useConfirms = true; //setup your stack configuration here.
             var commandAcceptor = sm.AddMaster("client", "master", FilterLevel.LEV_INFO, new PrintingDataObserver(), config);

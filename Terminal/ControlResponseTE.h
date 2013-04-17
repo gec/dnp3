@@ -1,10 +1,10 @@
 #ifndef __CONTROL_RESPONSE_TERMINAL_EXTENSION_H_
 #define __CONTROL_RESPONSE_TERMINAL_EXTENSION_H_
 
-#include <APL/Lock.h>
-#include <APL/Loggable.h>
-#include <APL/DataInterfaces.h>
-#include <APL/CommandInterfaces.h>
+#include <opendnp3/APL/Lock.h>
+#include <opendnp3/APL/Loggable.h>
+#include <opendnp3/APL/DataInterfaces.h>
+#include <opendnp3/APL/CommandInterfaces.h>
 
 #include "TerminalInterfaces.h"
 

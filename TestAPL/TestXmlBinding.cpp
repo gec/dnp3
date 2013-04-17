@@ -19,8 +19,8 @@
 #include <boost/test/unit_test.hpp>
 
 
-#include <APL/Log.h>
-#include <APL/Exception.h>
+#include <opendnp3/APL/Log.h>
+#include <opendnp3/APL/Exception.h>
 #include <tinyxml/tinyxml.h>
 #include <XMLBindings/APLXML_Base.h>
 #include <APLXML/tinybinding.h>

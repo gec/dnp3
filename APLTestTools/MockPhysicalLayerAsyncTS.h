@@ -19,9 +19,9 @@
 #ifndef __MOCK_PHYSICAL_LAYER_ASYNC_TS_H_
 #define __MOCK_PHYSICAL_LAYER_ASYNC_TS_H_
 
-#include <APL/PhysicalLayerAsyncBase.h>
-#include <APL/ShiftableBuffer.h>
-#include <APL/IHandlerAsync.h>
+#include <opendnp3/APL/PhysicalLayerAsyncBase.h>
+#include <opendnp3/APL/ShiftableBuffer.h>
+#include <opendnp3/APL/IHandlerAsync.h>
 
 #include <boost/system/error_code.hpp>
 

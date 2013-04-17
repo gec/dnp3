@@ -19,7 +19,7 @@
 #ifndef __LINK_RECEIVER_TEST_H_
 #define __LINK_RECEIVER_TEST_H_
 
-#include <DNP3/LinkLayerReceiver.h>
+#include <opendnp3/DNP3/LinkLayerReceiver.h>
 #include <APLTestTools/LogTester.h>
 #include <APLTestTools/BufferHelpers.h>
 #include "MockFrameSink.h"

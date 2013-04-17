@@ -20,10 +20,10 @@
 
 #include <boost/test/unit_test.hpp>
 
-#include <DNP3/DNPCrc.h>
-#include <DNP3/LinkFrame.h>
+#include <opendnp3/DNP3/DNPCrc.h>
+#include <opendnp3/DNP3/LinkFrame.h>
 #include <APLTestTools/BufferHelpers.h>
-#include <APL/ToHex.h>
+#include <opendnp3/APL/ToHex.h>
 
 using namespace apl;
 using namespace apl::dnp;

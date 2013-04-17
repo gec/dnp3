@@ -19,20 +19,20 @@
 
 #include <boost/test/unit_test.hpp>
 
-#include <APL/DataInterfaces.h>
-#include <APL/DataTypes.h>
-#include <APL/Exception.h>
-#include <APL/Log.h>
-#include <APL/LogToStdio.h>
+#include <opendnp3/APL/DataInterfaces.h>
+#include <opendnp3/APL/DataTypes.h>
+#include <opendnp3/APL/Exception.h>
+#include <opendnp3/APL/Log.h>
+#include <opendnp3/APL/LogToStdio.h>
 
 #include <APLTestTools/BufferHelpers.h>
 #include <APLTestTools/TestHelpers.h>
 
-#include <DNP3/DNPConstants.h>
-#include <DNP3/VtoData.h>
-#include <DNP3/VtoDataInterface.h>
-#include <DNP3/VtoReader.h>
-#include <DNP3/VtoWriter.h>
+#include <opendnp3/DNP3/DNPConstants.h>
+#include <opendnp3/DNP3/VtoData.h>
+#include <opendnp3/DNP3/VtoDataInterface.h>
+#include <opendnp3/DNP3/VtoReader.h>
+#include <opendnp3/DNP3/VtoWriter.h>
 
 using namespace std;
 using namespace apl;

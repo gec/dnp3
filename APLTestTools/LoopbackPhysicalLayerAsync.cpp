@@ -21,7 +21,7 @@
 
 #include <boost/asio.hpp>
 #include <boost/bind.hpp>
-#include <APL/Logger.h>
+#include <opendnp3/APL/Logger.h>
 
 using namespace boost;
 using namespace boost::system;

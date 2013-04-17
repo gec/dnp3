@@ -20,19 +20,19 @@
 #ifndef __SLAVE_DEMO_H_
 #define __SLAVE_DEMO_H_
 
-#include <APL/Log.h>
-#include <APL/IOServiceThread.h>
-#include <APL/CommandQueue.h>
-#include <APL/FlexibleDataObserver.h>
-#include <APL/IPhysicalLayerAsync.h>
-#include <APL/IOService.h>
-#include <APL/TimerSourceASIO.h>
-#include <APL/PostingNotifierSource.h>
-#include <APL/LogToStdio.h>
-#include <APL/Loggable.h>
+#include <opendnp3/APL/Log.h>
+#include <opendnp3/APL/IOServiceThread.h>
+#include <opendnp3/APL/CommandQueue.h>
+#include <opendnp3/APL/FlexibleDataObserver.h>
+#include <opendnp3/APL/IPhysicalLayerAsync.h>
+#include <opendnp3/APL/IOService.h>
+#include <opendnp3/APL/TimerSourceASIO.h>
+#include <opendnp3/APL/PostingNotifierSource.h>
+#include <opendnp3/APL/LogToStdio.h>
+#include <opendnp3/APL/Loggable.h>
 
-#include <DNP3/SlaveStackConfig.h>
-#include <DNP3/AsyncStackManager.h>
+#include <opendnp3/DNP3/SlaveStackConfig.h>
+#include <opendnp3/DNP3/AsyncStackManager.h>
 
 namespace apl
 {

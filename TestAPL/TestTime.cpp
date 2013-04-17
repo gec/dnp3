@@ -20,17 +20,17 @@
 #include <APLTestTools/TestHelpers.h>
 #include <iostream>
 
-#include <APL/Configure.h>
-#include <APL/Types.h>
-#include <APL/TimeTypes.h>
-#include <APL/TimingTools.h>
-#include <APL/Thread.h>
-#include <APL/EventLock.h>
-#include <APL/TimeSource.h>
+#include <opendnp3/APL/Configure.h>
+#include <opendnp3/APL/Types.h>
+#include <opendnp3/APL/TimeTypes.h>
+#include <opendnp3/APL/TimingTools.h>
+#include <opendnp3/APL/Thread.h>
+#include <opendnp3/APL/EventLock.h>
+#include <opendnp3/APL/TimeSource.h>
 
 
 
-#include <APL/Util.h>
+#include <opendnp3/APL/Util.h>
 #include <boost/date_time/posix_time/ptime.hpp>
 #include <boost/date_time/posix_time/time_parsers.hpp>
 

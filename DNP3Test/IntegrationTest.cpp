@@ -21,16 +21,16 @@
 
 #include <sstream>
 
-#include <APL/PhysicalLayerFactory.h>
-#include <APL/IPhysicalLayerAsync.h>
+#include <opendnp3/APL/PhysicalLayerFactory.h>
+#include <opendnp3/APL/IPhysicalLayerAsync.h>
 
 #include <APLTestTools/AsyncTestObjectASIO.h>
 
-#include <DNP3/MasterStackConfig.h>
-#include <DNP3/SlaveStackConfig.h>
+#include <opendnp3/DNP3/MasterStackConfig.h>
+#include <opendnp3/DNP3/SlaveStackConfig.h>
 
-#include <DNP3/MasterStack.h>
-#include <DNP3/SlaveStack.h>
+#include <opendnp3/DNP3/MasterStack.h>
+#include <opendnp3/DNP3/SlaveStack.h>
 
 #include <boost/asio.hpp>
 #include <boost/foreach.hpp>
@@ -160,8 +160,8 @@ void IntegrationTest::AddStackPair(FilterLevel aLevel, size_t aNumPoints)
 	mMasterObservers.push_back(pMasterFDO);
 
 	PhysLayerSettings s(aLevel, 1000);
-	this->mManager.AddTCPClient(client, s, "127.0.0.1", port);
-	this->mManager.AddTCPServer(server, s, "127.0.0.1", port);
+	this->mManager.AddTCPv4Client(client, s, "127.0.0.1", port);
+	this->mManager.AddTCPv4Server(server, s, "127.0.0.1", port);
 
 	/*
 	 * Add a Master instance.  The code is wrapped in braces so that we can

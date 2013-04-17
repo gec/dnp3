@@ -19,10 +19,10 @@
 #ifndef __RESPONSE_LOADER_TEST_OBJECT_H_
 #define __RESPONSE_LOADER_TEST_OBJECT_H_
 
-#include <APL/Log.h>
-#include <APL/FlexibleDataObserver.h>
+#include <opendnp3/APL/Log.h>
+#include <opendnp3/APL/FlexibleDataObserver.h>
 
-#include <DNP3/VtoReader.h>
+#include <opendnp3/DNP3/VtoReader.h>
 
 namespace apl
 {

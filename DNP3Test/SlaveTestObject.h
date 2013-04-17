@@ -20,13 +20,13 @@
 #define __SLAVE_TEST_OBJECT_H_
 
 #include <APLTestTools/MockTimerSource.h>
-#include <APL/AsyncTaskScheduler.h>
+#include <opendnp3/APL/AsyncTaskScheduler.h>
 #include <APLTestTools/LogTester.h>
 #include <APLTestTools/MockCommandAcceptor.h>
-#include <DNP3/Slave.h>
-#include <DNP3/Database.h>
-#include <DNP3/DNPCommandMaster.h>
-#include <DNP3/SlaveConfig.h>
+#include <opendnp3/DNP3/Slave.h>
+#include <opendnp3/DNP3/Database.h>
+#include <opendnp3/DNP3/DNPCommandMaster.h>
+#include <opendnp3/DNP3/SlaveConfig.h>
 
 #include "MockAppLayer.h"
 

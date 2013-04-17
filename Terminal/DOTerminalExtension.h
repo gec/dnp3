@@ -3,9 +3,9 @@
 
 #include "TerminalInterfaces.h"
 
-#include <APL/DataInterfaces.h>
-#include <APL/Parsing.h>
-#include <APL/ChangeBuffer.h>
+#include <opendnp3/APL/DataInterfaces.h>
+#include <opendnp3/APL/Parsing.h>
+#include <opendnp3/APL/ChangeBuffer.h>
 
 #include <queue>
 #include <vector>

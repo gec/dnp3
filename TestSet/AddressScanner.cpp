@@ -18,7 +18,7 @@
 
 #include "AddressScanner.h"
 
-#include <APL/Logger.h>
+#include <opendnp3/APL/Logger.h>
 #include <APLXML/XMLConversion.h>
 #include <XMLBindings/APLXML_MTS.h>
 

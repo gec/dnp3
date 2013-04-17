@@ -19,7 +19,7 @@
 #ifndef __QUEUEING_STACK_OBSERVER_H_
 #define __QUEUEING_STACK_OBSERVER_H_
 
-#include <DNP3/IStackObserver.h>
+#include <opendnp3/DNP3/IStackObserver.h>
 #include <deque>
 
 namespace apl

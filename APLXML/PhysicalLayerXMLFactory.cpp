@@ -20,7 +20,7 @@
 
 #include "PhysicalLayerXMLFactory.h"
 
-#include <APL/PhysicalLayerFactory.h>
+#include <opendnp3/APL/PhysicalLayerFactory.h>
 #include <boost/numeric/conversion/converter.hpp>
 
 namespace apl
@@ -33,11 +33,17 @@ IPhysicalLayerAsyncFactory PhysicalLayerXMLFactory :: GetFactoryAsync(const APLX
 	const APLXML_Base::Serial_t* pSerial = dynamic_cast<const APLXML_Base::Serial_t*>(apCfg);
 	if(pSerial != NULL) return GetAsync(pSerial);
 
-	const APLXML_Base::TCPServer_t* pServer = dynamic_cast<const APLXML_Base::TCPServer_t*>(apCfg);
-	if(pServer != NULL) return GetAsync(pServer);
+	const APLXML_Base::TCPv4Server_t* pServerV4 = dynamic_cast<const APLXML_Base::TCPv4Server_t*>(apCfg);
+	if(pServerV4 != NULL) return GetAsync(pServerV4);
 
-	const APLXML_Base::TCPClient_t* pClient = dynamic_cast<const APLXML_Base::TCPClient_t*>(apCfg);
-	if(pClient != NULL) return GetAsync(pClient);
+	const APLXML_Base::TCPv4Client_t* pClientV4 = dynamic_cast<const APLXML_Base::TCPv4Client_t*>(apCfg);
+	if(pClientV4 != NULL) return GetAsync(pClientV4);
+
+	const APLXML_Base::TCPv6Server_t* pServerV6 = dynamic_cast<const APLXML_Base::TCPv6Server_t*>(apCfg);
+	if(pServerV6 != NULL) return GetAsync(pServerV6);
+
+	const APLXML_Base::TCPv6Client_t* pClientV6 = dynamic_cast<const APLXML_Base::TCPv6Client_t*>(apCfg);
+	if(pClientV6 != NULL) return GetAsync(pClientV6);
 
 	throw Exception(LOCATION, "Unknown PhysicalLayerDescriptor_t");
 }
@@ -48,16 +54,28 @@ IPhysicalLayerAsyncFactory PhysicalLayerXMLFactory :: GetAsync(const APLXML_Base
 	return PhysicalLayerFactory::GetSerialAsync(s);
 }
 
-IPhysicalLayerAsyncFactory PhysicalLayerXMLFactory :: GetAsync(const APLXML_Base::TCPClient_t* apCfg)
+IPhysicalLayerAsyncFactory PhysicalLayerXMLFactory :: GetAsync(const APLXML_Base::TCPv4Client_t* apCfg)
 {
 	boost::uint16_t port = boost::numeric::converter<boost::uint16_t, int>::convert(apCfg->Port);
-	return PhysicalLayerFactory::GetTCPClientAsync(apCfg->Address, port);
+	return PhysicalLayerFactory::GetTCPv4ClientAsync(apCfg->Address, port);
 }
 
-IPhysicalLayerAsyncFactory PhysicalLayerXMLFactory :: GetAsync(const APLXML_Base::TCPServer_t* apCfg)
+IPhysicalLayerAsyncFactory PhysicalLayerXMLFactory :: GetAsync(const APLXML_Base::TCPv4Server_t* apCfg)
 {
 	boost::uint16_t port = boost::numeric::converter<boost::uint16_t, int>::convert(apCfg->Port);
-	return PhysicalLayerFactory::GetTCPServerAsync(apCfg->Endpoint, port);
+	return PhysicalLayerFactory::GetTCPv4ServerAsync(apCfg->Endpoint, port);
+}
+
+IPhysicalLayerAsyncFactory PhysicalLayerXMLFactory :: GetAsync(const APLXML_Base::TCPv6Client_t* apCfg)
+{
+	boost::uint16_t port = boost::numeric::converter<boost::uint16_t, int>::convert(apCfg->Port);
+	return PhysicalLayerFactory::GetTCPv6ClientAsync(apCfg->Address, port);
+}
+
+IPhysicalLayerAsyncFactory PhysicalLayerXMLFactory :: GetAsync(const APLXML_Base::TCPv6Server_t* apCfg)
+{
+	boost::uint16_t port = boost::numeric::converter<boost::uint16_t, int>::convert(apCfg->Port);
+	return PhysicalLayerFactory::GetTCPv6ServerAsync(apCfg->Endpoint, port);
 }
 
 SerialSettings GetSerialSettings(const APLXML_Base::Serial_t* apCfg)

@@ -20,9 +20,9 @@
 #include <APLTestTools/TestHelpers.h>
 
 
-#include <APL/Types.h>
-#include <APL/Util.h>
-#include <APL/PackingUnpacking.h>
+#include <opendnp3/APL/Types.h>
+#include <opendnp3/APL/Util.h>
+#include <opendnp3/APL/PackingUnpacking.h>
 #include <APLTestTools/BufferHelpers.h>
 
 #include <memory>

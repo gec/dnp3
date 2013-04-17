@@ -19,12 +19,12 @@
 #include <boost/test/unit_test.hpp>
 #include <APLTestTools/TestHelpers.h>
 
-#include <DNP3/APDU.h>
-#include <DNP3/ObjectHeader.h>
-#include <DNP3/ObjectReadIterator.h>
+#include <opendnp3/DNP3/APDU.h>
+#include <opendnp3/DNP3/ObjectHeader.h>
+#include <opendnp3/DNP3/ObjectReadIterator.h>
 
-#include <DNP3/DNPConstants.h>
-#include <APL/DataTypes.h>
+#include <opendnp3/DNP3/DNPConstants.h>
+#include <opendnp3/APL/DataTypes.h>
 #include <APLTestTools/BufferHelpers.h>
 
 #include <queue>
@@ -85,7 +85,7 @@ BOOST_AUTO_TEST_CASE(FunctionCodeToStringNamesAreUnique)
 	};
 
 	set<string> strings;
-	for(int i = 0; i < NUM_CODES; ++i) {
+	for (size_t i = 0; i < NUM_CODES; ++i) {
 		FunctionCodes code = static_cast<FunctionCodes>(codes[i]);
 		string text = ToString(code);
 		if(strings.find(text) != strings.end()) {
@@ -130,7 +130,8 @@ BOOST_AUTO_TEST_CASE(ClassPollRequest)
 
 	bool except = false;
 	try {
-		IINField f = frag.GetIIN();
+		//IINField f = frag.GetIIN();
+		frag.GetIIN();
 	}
 	catch(Exception) {
 		except = true;
@@ -305,7 +306,8 @@ BOOST_AUTO_TEST_CASE(ClearIIN)
 	frag.Write(hs, hs.Size());
 	frag.Interpret();
 
-	AppControlField control = frag.GetControl();
+	//AppControlField control = frag.GetControl();
+	frag.GetControl();
 
 	BOOST_REQUIRE_EQUAL(frag.GetFunction(), FC_WRITE);
 

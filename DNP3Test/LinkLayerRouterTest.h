@@ -24,7 +24,7 @@
 #include <APLTestTools/MockTimerSource.h>
 #include <APLTestTools/MockPhysicalLayerAsync.h>
 
-#include <DNP3/LinkLayerRouter.h>
+#include <opendnp3/DNP3/LinkLayerRouter.h>
 
 
 namespace apl

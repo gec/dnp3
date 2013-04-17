@@ -19,15 +19,14 @@
 #ifndef __XML_TO_CONFIG_H_
 #define __XML_TO_CONFIG_H_
 
-#include <string>
+#include <opendnp3/APL/PhysLayerSettings.h>
+#include <opendnp3/DNP3/DeviceTemplate.h>
 
-
-#include <DNP3/DeviceTemplate.h>
-#include <APL/PhysLayerSettings.h>
 #include <APLXML/XMLConversion.h>
 
-#include <vector>
 #include <set>
+#include <string>
+#include <vector>
 
 namespace APLXML_DNP
 {
@@ -84,6 +83,7 @@ public:
 	static SlaveConfig Convert(const APLXML_DNP::SlaveConfig_t& arCfg, const APLXML_DNP::AppLayer_t& arApp);
 	static VtoConfig Convert(const APLXML_DNP::VtoPorts_t& arCfg);
 	static DeviceTemplate Convert( const APLXML_DNP::DeviceTemplate_t& arCfg, bool aStartOnline = false);
+	static CommandModes ConvertMode(const std::string& arMode);
 
 private:
 

@@ -19,8 +19,8 @@
 #ifndef __LOOP_BACK_PHYSICAL_LAYER_ASYNC_H_
 #define __LOOP_BACK_PHYSICAL_LAYER_ASYNC_H_
 
-#include <APL/PhysicalLayerAsyncBase.h>
-#include <APL/IHandlerAsync.h>
+#include <opendnp3/APL/PhysicalLayerAsyncBase.h>
+#include <opendnp3/APL/IHandlerAsync.h>
 
 #include <queue>
 

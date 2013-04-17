@@ -21,7 +21,7 @@
 #define __APP_LAYER_TEST_H_
 
 #include <APLTestTools/LogTester.h>
-#include <DNP3/AppLayer.h>
+#include <opendnp3/DNP3/AppLayer.h>
 #include <APLTestTools/MockLowerLayer.h>
 #include <APLTestTools/MockTimerSource.h>
 

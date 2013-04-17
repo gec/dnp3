@@ -3,10 +3,10 @@
 #include <boost/test/unit_test.hpp>
 #include <APLTestTools/TestHelpers.h>
 
-#include <APL/Lock.h>
+#include <opendnp3/APL/Lock.h>
 #include <APLTestTools/AsyncTestObjectASIO.h>
 #include <APLTestTools/LogTester.h>
-#include <APL/LowerLayerToPhysAdapter.h>
+#include <opendnp3/APL/LowerLayerToPhysAdapter.h>
 #include <APLTestTools/MockUpperLayer.h>
 
 #include <Terminal/PhysicalLayerSyncProxy.h>

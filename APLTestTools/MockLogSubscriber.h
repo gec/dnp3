@@ -19,7 +19,7 @@
 #ifndef __MOCK_LOG_SUBSCRIBER_H_
 #define __MOCK_LOG_SUBSCRIBER_H_
 
-#include <APL/LogBase.h>
+#include <opendnp3/APL/LogBase.h>
 #include <queue>
 
 namespace apl

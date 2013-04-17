@@ -20,11 +20,11 @@
 #include <APLTestTools/TestHelpers.h>
 
 #include "TransportTestObject.h"
-#include <DNP3/TransportConstants.h>
+#include <opendnp3/DNP3/TransportConstants.h>
 
-#include <APL/Util.h>
-#include <APL/ProtocolUtil.h>
-#include <APL/Exception.h>
+#include <opendnp3/APL/Util.h>
+#include <opendnp3/APL/ProtocolUtil.h>
+#include <opendnp3/APL/Exception.h>
 
 #include <boost/foreach.hpp>
 

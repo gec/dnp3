@@ -19,8 +19,8 @@
 #include "MockAppLayer.h"
 
 #include <boost/foreach.hpp>
-#include <APL/Logger.h>
-#include <APL/ToHex.h>
+#include <opendnp3/APL/Logger.h>
+#include <opendnp3/APL/ToHex.h>
 
 
 namespace apl

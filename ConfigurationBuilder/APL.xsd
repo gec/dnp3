@@ -7,6 +7,8 @@
       <xs:sequence>
         <xs:element ref="TCPServer" minOccurs="0" maxOccurs="unbounded"/>
         <xs:element ref="TCPClient" minOccurs="0" maxOccurs="unbounded"/>
+        <xs:element ref="TCPv6Server" minOccurs="0" maxOccurs="unbounded"/>
+        <xs:element ref="TCPv6Client" minOccurs="0" maxOccurs="unbounded"/>
         <xs:element ref="Serial" minOccurs="0" maxOccurs="unbounded"/>
       </xs:sequence>
     </xs:complexType>
@@ -35,6 +37,28 @@
   </xs:element>
 
   <xs:element name="TCPClient">
+    <xs:complexType>
+    <xs:complexContent>
+        <xs:extension base="PhysicalLayerDescriptor">
+      <xs:attribute name="Address" type="xs:string" use="required"/>
+      <xs:attribute name="Port" type="xs:int" use="required"/>
+      </xs:extension>
+      </xs:complexContent>
+    </xs:complexType>
+  </xs:element>
+  
+  <xs:element name="TCPv6Server">
+    <xs:complexType>
+    <xs:complexContent>
+        <xs:extension base="PhysicalLayerDescriptor">
+        <xs:attribute name="Endpoint" type="xs:string" use="required"/>
+        <xs:attribute name="Port" type="xs:int" use="required"/>
+        </xs:extension>
+      </xs:complexContent>
+    </xs:complexType>
+  </xs:element>
+
+  <xs:element name="TCPv6Client">
     <xs:complexType>
     <xs:complexContent>
         <xs:extension base="PhysicalLayerDescriptor">

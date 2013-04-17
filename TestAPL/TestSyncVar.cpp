@@ -22,9 +22,9 @@
 #include <iostream>
 #include <string>
 
-#include <APL/SyncVar.h>
-#include <APL/EventLock.h>
-#include <APL/Notifier.h>
+#include <opendnp3/APL/SyncVar.h>
+#include <opendnp3/APL/EventLock.h>
+#include <opendnp3/APL/Notifier.h>
 
 using namespace std;
 using namespace apl;

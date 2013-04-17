@@ -22,7 +22,7 @@
 #include "PhysicalLayerXMLFactory.h"
 #include "XMLConversion.h"
 
-#include <APL/Log.h>
+#include <opendnp3/APL/Log.h>
 
 namespace apl
 {
@@ -50,8 +50,10 @@ PhysicalLayerManagerXML::PhysicalLayerManagerXML(Logger* apLogger, boost::asio::
 void PhysicalLayerManagerXML :: AddList(const APLXML_Base::PhysicalLayerList_t* apList, FilterLevel aLevel)
 {
 	AddStandalones<Serial_t>(apList->SerialVector, aLevel);
-	AddStandalones<TCPClient_t>(apList->TCPClientVector, aLevel);
-	AddStandalones<TCPServer_t>(apList->TCPServerVector, aLevel);
+	AddStandalones<TCPv4Client_t>(apList->TCPv4ClientVector, aLevel);
+	AddStandalones<TCPv4Server_t>(apList->TCPv4ServerVector, aLevel);
+	AddStandalones<TCPv6Client_t>(apList->TCPv6ClientVector, aLevel);
+	AddStandalones<TCPv6Server_t>(apList->TCPv6ServerVector, aLevel);
 }
 
 // Created helper function to remove ugly loops.

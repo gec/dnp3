@@ -17,8 +17,8 @@
 
 #include <boost/test/unit_test.hpp>
 
-#include <APL/PhysLoopback.h>
-#include <APL/RandomizedBuffer.h>
+#include <opendnp3/APL/PhysLoopback.h>
+#include <opendnp3/APL/RandomizedBuffer.h>
 
 #include <APLTestTools/MockPhysicalLayerMonitor.h>
 

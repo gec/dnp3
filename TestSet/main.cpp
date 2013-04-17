@@ -27,7 +27,7 @@
 
 #include "StackHelpers.h"
 #include "AddressScanner.h"
-#include <APL/LogToStdio.h>
+#include <opendnp3/APL/LogToStdio.h>
 
 #include <DNP3XML/XML_DNP3.h>
 

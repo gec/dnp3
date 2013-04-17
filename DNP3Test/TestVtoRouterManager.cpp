@@ -17,13 +17,13 @@
 
 #include <boost/test/unit_test.hpp>
 
-#include <APL/Log.h>
-#include <APL/Exception.h>
-#include <APL/LogToStdio.h>
+#include <opendnp3/APL/Log.h>
+#include <opendnp3/APL/Exception.h>
+#include <opendnp3/APL/LogToStdio.h>
 
-#include <DNP3/VtoRouterManager.h>
-#include <DNP3/VtoRouterSettings.h>
-#include <DNP3/VtoWriter.h>
+#include <opendnp3/DNP3/VtoRouterManager.h>
+#include <opendnp3/DNP3/VtoRouterSettings.h>
+#include <opendnp3/DNP3/VtoWriter.h>
 
 #include <APLTestTools/MockTimerSource.h>
 #include <APLTestTools/MockPhysicalLayerSource.h>

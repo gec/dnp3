@@ -1,10 +1,10 @@
 #ifndef __PHYSICAL_LAYER_SYNC_PROXY_H_
 #define __PHYSICAL_LAYER_SYNC_PROXY_H_
 
-#include <APL/Lock.h>
-#include <APL/Thread.h>
-#include <APL/Threadable.h>
-#include <APL/PhysicalLayerAsyncBase.h>
+#include <opendnp3/APL/Lock.h>
+#include <opendnp3/APL/Thread.h>
+#include <opendnp3/APL/Threadable.h>
+#include <opendnp3/APL/PhysicalLayerAsyncBase.h>
 
 #include <iostream>
 #include <queue>

@@ -41,9 +41,10 @@ void XML_TestSet::Configure(APLXML_MTS::MasterTestSet_t& arMasterTest, bool aUse
 	XML_DNP3::Configure(arMasterTest.Master, aUseUnsol);
 
 	xml::XML_APL::AddSerial(arMasterTest.PhysicalLayerList, "serial", "COM1");
-	xml::XML_APL::AddTCPClient(arMasterTest.PhysicalLayerList, "tcpclient", "127.0.0.1", 20000);
-
-	xml::XML_APL::AddTCPServer(arMasterTest.PhysicalLayerList, "vtotunnel", "0.0.0.0", 20001);
+	xml::XML_APL::AddTCPv4Client(arMasterTest.PhysicalLayerList, "tcpclient", "127.0.0.1", 20000);
+	xml::XML_APL::AddTCPv4Server(arMasterTest.PhysicalLayerList, "vtotunnel", "0.0.0.0", 20001);
+	xml::XML_APL::AddTCPv6Client(arMasterTest.PhysicalLayerList, "tcpv6client", "::1", 20000);
+	xml::XML_APL::AddTCPv6Server(arMasterTest.PhysicalLayerList, "vtov6tunnel", "::", 20001);
 
 	XML_DNP3::AddVtoPort(arMasterTest.Master.VtoPorts, "vtotunnel", 0, true);
 }
@@ -56,9 +57,10 @@ void XML_TestSet::Configure(APLXML_STS::SlaveTestSet_t& arSlaveTest)
 	XML_DNP3::Configure(arSlaveTest.Slave);
 
 	xml::XML_APL::AddSerial(arSlaveTest.PhysicalLayerList, "serial", "COM1");
-	xml::XML_APL::AddTCPServer(arSlaveTest.PhysicalLayerList, "tcpserver", "0.0.0.0", 20000);
-
-	xml::XML_APL::AddTCPClient(arSlaveTest.PhysicalLayerList, "vtotunnel", "127.0.0.1", 22);
+	xml::XML_APL::AddTCPv4Server(arSlaveTest.PhysicalLayerList, "tcpserver", "0.0.0.0", 20000);
+	xml::XML_APL::AddTCPv4Client(arSlaveTest.PhysicalLayerList, "vtotunnel", "127.0.0.1", 22);
+	xml::XML_APL::AddTCPv6Server(arSlaveTest.PhysicalLayerList, "tcpv6server", "::", 20000);
+	xml::XML_APL::AddTCPv6Client(arSlaveTest.PhysicalLayerList, "vtov6tunnel", "::1", 22);
 
 	XML_DNP3::AddVtoPort(arSlaveTest.Slave.VtoPorts, "vtotunnel", 0, false);
 
@@ -68,5 +70,5 @@ void XML_TestSet::Configure(APLXML_STS::SlaveTestSet_t& arSlaveTest)
 	arSlaveTest.StartOnline = false;
 }
 
-
 }
+

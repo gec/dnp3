@@ -19,9 +19,9 @@
 #ifndef __TRANSPORT_INTEGRATION_STACK_H_
 #define __TRANSPORT_INTEGRATION_STACK_H_
 
-#include <DNP3/LinkLayerRouter.h>
-#include <DNP3/LinkLayer.h>
-#include <DNP3/TransportLayer.h>
+#include <opendnp3/DNP3/LinkLayerRouter.h>
+#include <opendnp3/DNP3/LinkLayer.h>
+#include <opendnp3/DNP3/TransportLayer.h>
 
 #include <APLTestTools/MockUpperLayer.h>
 

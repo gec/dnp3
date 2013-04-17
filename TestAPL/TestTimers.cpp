@@ -21,10 +21,10 @@
 #include <APLTestTools/TestHelpers.h>
 
 
-#include <APL/TimerSourceASIO.h>
-#include <APL/Threadable.h>
-#include <APL/Thread.h>
-#include <APL/Exception.h>
+#include <opendnp3/APL/TimerSourceASIO.h>
+#include <opendnp3/APL/Threadable.h>
+#include <opendnp3/APL/Thread.h>
+#include <opendnp3/APL/Exception.h>
 
 #include <map>
 #include <boost/bind.hpp>

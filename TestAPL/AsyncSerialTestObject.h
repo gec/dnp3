@@ -23,8 +23,8 @@
 #include <APLTestTools/AsyncTestObjectASIO.h>
 
 #include <APLTestTools/LogTester.h>
-#include <APL/PhysicalLayerAsyncSerial.h>
-#include <APL/LowerLayerToPhysAdapter.h>
+#include <opendnp3/APL/PhysicalLayerAsyncSerial.h>
+#include <opendnp3/APL/LowerLayerToPhysAdapter.h>
 #include <APLTestTools/MockUpperLayer.h>
 
 namespace apl

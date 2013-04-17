@@ -1,11 +1,11 @@
 #include "ControlTerminalExtension.h"
 
-#include <APL/FlexibleDataObserver.h>
-#include <APL/CommandInterfaces.h>
-#include <APL/CommandTypes.h>
-#include <APL/CommandResponseQueue.h>
-#include <APL/Util.h>
-#include <APL/Parsing.h>
+#include <opendnp3/APL/FlexibleDataObserver.h>
+#include <opendnp3/APL/CommandInterfaces.h>
+#include <opendnp3/APL/CommandTypes.h>
+#include <opendnp3/APL/CommandResponseQueue.h>
+#include <opendnp3/APL/Util.h>
+#include <opendnp3/APL/Parsing.h>
 
 #include <boost/bind.hpp>
 #include <sstream>

@@ -1,9 +1,9 @@
 #ifndef __LINE_READER_H_
 #define __LINE_READER_H_
 
-#include <APL/Uncopyable.h>
-#include <APL/PhysicalLayerMonitor.h>
-#include <APL/CopyableBuffer.h>
+#include <opendnp3/APL/Uncopyable.h>
+#include <opendnp3/APL/PhysicalLayerMonitor.h>
+#include <opendnp3/APL/CopyableBuffer.h>
 #include <string>
 
 namespace apl

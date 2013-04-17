@@ -31,8 +31,8 @@
 using namespace std;
 
 
-#include <APL/Util.h>
-#include <APL/Thread.h>
+#include <opendnp3/APL/Util.h>
+#include <opendnp3/APL/Thread.h>
 
 #include <vector>
 

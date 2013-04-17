@@ -19,9 +19,9 @@
 #ifndef __STARTUP_TEARDOWN_TEST_H_
 #define __STARTUP_TEARDOWN_TEST_H_
 
-#include <APL/Log.h>
-#include <APL/FlexibleDataObserver.h>
-#include <DNP3/AsyncStackManager.h>
+#include <opendnp3/APL/Log.h>
+#include <opendnp3/APL/FlexibleDataObserver.h>
+#include <opendnp3/DNP3/AsyncStackManager.h>
 
 
 namespace boost

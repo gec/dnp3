@@ -19,11 +19,11 @@
 #ifndef __COMPARING_DATA_OBSERVER_H_
 #define __COMPARING_DATA_OBSERVER_H_
 
-#include <APL/DataInterfaces.h>
-#include <APL/Loggable.h>
-#include <APL/Lock.h>
-#include <APL/FlexibleDataObserver.h>
-#include <APL/Logger.h>
+#include <opendnp3/APL/DataInterfaces.h>
+#include <opendnp3/APL/Loggable.h>
+#include <opendnp3/APL/Lock.h>
+#include <opendnp3/APL/FlexibleDataObserver.h>
+#include <opendnp3/APL/Logger.h>
 
 #include <map>
 

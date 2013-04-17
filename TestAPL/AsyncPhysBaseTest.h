@@ -19,7 +19,7 @@
 #ifndef __ASYNC_PHYS_BASE_TEST_H_
 #define __ASYNC_PHYS_BASE_TEST_H_
 
-#include <APL/LowerLayerToPhysAdapter.h>
+#include <opendnp3/APL/LowerLayerToPhysAdapter.h>
 
 #include <APLTestTools/LogTester.h>
 #include <APLTestTools/MockUpperLayer.h>

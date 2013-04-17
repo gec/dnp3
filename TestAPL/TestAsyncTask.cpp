@@ -19,12 +19,12 @@
 #include <boost/test/unit_test.hpp>
 
 
-#include <APL/AsyncTaskScheduler.h>
-#include <APL/AsyncTaskPeriodic.h>
-#include <APL/AsyncTaskNonPeriodic.h>
-#include <APL/AsyncTaskContinuous.h>
-#include <APL/AsyncTaskGroup.h>
-#include <APL/Exception.h>
+#include <opendnp3/APL/AsyncTaskScheduler.h>
+#include <opendnp3/APL/AsyncTaskPeriodic.h>
+#include <opendnp3/APL/AsyncTaskNonPeriodic.h>
+#include <opendnp3/APL/AsyncTaskContinuous.h>
+#include <opendnp3/APL/AsyncTaskGroup.h>
+#include <opendnp3/APL/Exception.h>
 
 #include <APLTestTools/MockTimerSource.h>
 
