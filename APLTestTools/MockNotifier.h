@@ -19,7 +19,7 @@
 #ifndef _MOCK_NOTIFIER_H_
 #define _MOCK_NOTIFIER_H_
 
-#include <APL/INotifier.h>
+#include <opendnp3/APL/INotifier.h>
 
 namespace apl
 {

@@ -20,8 +20,8 @@
 #define __PHYSICAL_LAYER_XML_FACTORY_H_
 
 #include <XMLBindings/APLXML_Base.h>
-#include <APL/PhysicalLayerFunctors.h>
-#include <APL/SerialTypes.h>
+#include <opendnp3/APL/PhysicalLayerFunctors.h>
+#include <opendnp3/APL/SerialTypes.h>
 
 namespace apl
 {
@@ -37,8 +37,10 @@ public:
 
 	/* These factories should take the regular configuration types */
 	static IPhysicalLayerAsyncFactory GetAsync(const APLXML_Base::Serial_t* apCfg);
-	static IPhysicalLayerAsyncFactory GetAsync(const APLXML_Base::TCPClient_t* apCfg);
-	static IPhysicalLayerAsyncFactory GetAsync(const APLXML_Base::TCPServer_t* apCfg);
+	static IPhysicalLayerAsyncFactory GetAsync(const APLXML_Base::TCPv4Client_t* apCfg);
+	static IPhysicalLayerAsyncFactory GetAsync(const APLXML_Base::TCPv4Server_t* apCfg);
+	static IPhysicalLayerAsyncFactory GetAsync(const APLXML_Base::TCPv6Client_t* apCfg);
+	static IPhysicalLayerAsyncFactory GetAsync(const APLXML_Base::TCPv6Server_t* apCfg);
 };
 
 int BaudToInt(APLXML_Base::BaudRateEnum aBaud);

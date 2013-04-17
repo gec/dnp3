@@ -72,20 +72,37 @@ enum StopBitsEnum {
 	StopBitsEnum FromString_StopBitsEnum(TiXmlNode* apParent, const char* aValue);
 	string ToString_StopBitsEnum(StopBitsEnum aValue);
 
-class TCPClient_t : public APLXML_Base::PhysicalLayerDescriptor_t{
+class TCPv4Client_t : public APLXML_Base::PhysicalLayerDescriptor_t{
 public:
 	void toXml(TiXmlNode* pParent, bool aCreateNode, bool aIgnoreValid);
 	void fromXml(TiXmlNode* pNode);
 	string Address;
 	int Port;
 };
-class TCPServer_t : public APLXML_Base::PhysicalLayerDescriptor_t{
+
+class TCPv4Server_t : public APLXML_Base::PhysicalLayerDescriptor_t{
 public:
 	void toXml(TiXmlNode* pParent, bool aCreateNode, bool aIgnoreValid);
 	void fromXml(TiXmlNode* pNode);
 	string Endpoint;
 	int Port;
 };
+
+class TCPv6Client_t : public APLXML_Base::PhysicalLayerDescriptor_t{
+public:
+	void toXml(TiXmlNode* pParent, bool aCreateNode, bool aIgnoreValid);
+	void fromXml(TiXmlNode* pNode);
+	string Address;
+	int Port;
+};
+class TCPv6Server_t : public APLXML_Base::PhysicalLayerDescriptor_t{
+public:
+	void toXml(TiXmlNode* pParent, bool aCreateNode, bool aIgnoreValid);
+	void fromXml(TiXmlNode* pNode);
+	string Endpoint;
+	int Port;
+};
+
 class Log_t : public IXMLDataBound {
 public:
 	void toXml(TiXmlNode* pParent, bool aCreateNode, bool aIgnoreValid);
@@ -110,12 +127,22 @@ namespace APLXML_Base{
 #endif
 #ifdef SWIG
 }
-%template(TCPClient_c) std::vector<APLXML_Base::TCPClient_t*>;
+%template(TCPv4Client_c) std::vector<APLXML_Base::TCPv4Client_t*>;
 namespace APLXML_Base{
 #endif
 #ifdef SWIG
 }
-%template(TCPServer_c) std::vector<APLXML_Base::TCPServer_t*>;
+%template(TCPv4Server_c) std::vector<APLXML_Base::TCPv4Server_t*>;
+namespace APLXML_Base{
+#endif
+#ifdef SWIG
+}
+%template(TCPv6Client_c) std::vector<APLXML_Base::TCPv6Client_t*>;
+namespace APLXML_Base{
+#endif
+#ifdef SWIG
+}
+%template(TCPv6Server_c) std::vector<APLXML_Base::TCPv6Server_t*>;
 namespace APLXML_Base{
 #endif
 class PhysicalLayerList_t : public IXMLDataBound {
@@ -125,15 +152,27 @@ public:
 	PhysicalLayerList_t();
 
 #ifdef SWIG
-%immutable TCPServerVector;
+%immutable TCPv4ServerVector;
 #endif
-	private: collectedType < TCPServer_t > TCPServer;
-	public: vector < TCPServer_t* >& TCPServerVector;
+	private: collectedType < TCPv4Server_t > TCPv4Server;
+	public: vector < TCPv4Server_t* >& TCPv4ServerVector;
 #ifdef SWIG
-%immutable TCPClientVector;
+%immutable TCPv4ClientVector;
 #endif
-	private: collectedType < TCPClient_t > TCPClient;
-	public: vector < TCPClient_t* >& TCPClientVector;
+	private: collectedType < TCPv4Client_t > TCPv4Client;
+	public: vector < TCPv4Client_t* >& TCPv4ClientVector;
+
+#ifdef SWIG
+%immutable TCPv6ServerVector;
+#endif
+	private: collectedType < TCPv6Server_t > TCPv6Server;
+	public: vector < TCPv6Server_t* >& TCPv6ServerVector;
+#ifdef SWIG
+%immutable TCPv6ClientVector;
+#endif
+	private: collectedType < TCPv6Client_t > TCPv6Client;
+	public: vector < TCPv6Client_t* >& TCPv6ClientVector;
+
 #ifdef SWIG
 %immutable SerialVector;
 #endif

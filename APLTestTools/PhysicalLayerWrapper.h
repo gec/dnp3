@@ -19,11 +19,11 @@
 #ifndef __PHYSICAL_LAYER_WRAPPER_H_
 #define __PHYSICAL_LAYER_WRAPPER_H_
 
-#include <APL/IPhysicalLayerAsync.h>
-#include <APL/Loggable.h>
-#include <APL/IHandlerAsync.h>
+#include <opendnp3/APL/IPhysicalLayerAsync.h>
+#include <opendnp3/APL/Loggable.h>
+#include <opendnp3/APL/IHandlerAsync.h>
 
-#include <APL/RandomDouble.h>
+#include <opendnp3/APL/RandomDouble.h>
 
 namespace apl
 {

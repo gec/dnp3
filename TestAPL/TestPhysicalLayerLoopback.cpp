@@ -19,8 +19,8 @@
 
 #include <boost/test/unit_test.hpp>
 
-#include <APL/Log.h>
-#include <APL/PhysLoopback.h>
+#include <opendnp3/APL/Log.h>
+#include <opendnp3/APL/PhysLoopback.h>
 #include <APLTestTools/MockTimerSource.h>
 #include <APLTestTools/MockPhysicalLayerAsync.h>
 #include <APLTestTools/TestHelpers.h>

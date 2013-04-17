@@ -19,7 +19,7 @@
 #ifndef __LOG_TESTER_H_
 #define __LOG_TESTER_H_
 
-#include <APL/Log.h>
+#include <opendnp3/APL/Log.h>
 
 namespace apl
 {

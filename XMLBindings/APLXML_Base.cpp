@@ -167,7 +167,7 @@ string ToString_StopBitsEnum(StopBitsEnum aValue) {
 	throw apl::Exception(LOCATION, oss.str());
 };
 
-void TCPClient_t :: fromXml(TiXmlNode* pNode){
+void TCPv4Client_t :: fromXml(TiXmlNode* pNode){
 	if(pNode == NULL)return;
 	XML_CHECK("TCPClient",pNode->Type() == TiXmlNode::ELEMENT);
 	TiXmlElement* pEm = pNode->ToElement();
@@ -177,7 +177,7 @@ void TCPClient_t :: fromXml(TiXmlNode* pNode){
 	Port = FromString_int(pEm, pEm->Attribute("Port"));
 	valid=true;
 };
-void TCPClient_t :: toXml(TiXmlNode* pParent, bool aCreateNode, bool aIgnoreValid){
+void TCPv4Client_t :: toXml(TiXmlNode* pParent, bool aCreateNode, bool aIgnoreValid){
 	if(!aIgnoreValid && !valid) return;
 	TiXmlElement * pEm;
 	if(aCreateNode){
@@ -191,7 +191,7 @@ void TCPClient_t :: toXml(TiXmlNode* pParent, bool aCreateNode, bool aIgnoreVali
 	pEm->SetAttribute("Port", ToString_int(Port));
 };
 
-void TCPServer_t :: fromXml(TiXmlNode* pNode){
+void TCPv4Server_t :: fromXml(TiXmlNode* pNode){
 	if(pNode == NULL)return;
 	XML_CHECK("TCPServer",pNode->Type() == TiXmlNode::ELEMENT);
 	TiXmlElement* pEm = pNode->ToElement();
@@ -201,11 +201,59 @@ void TCPServer_t :: fromXml(TiXmlNode* pNode){
 	Port = FromString_int(pEm, pEm->Attribute("Port"));
 	valid=true;
 };
-void TCPServer_t :: toXml(TiXmlNode* pParent, bool aCreateNode, bool aIgnoreValid){
+void TCPv4Server_t :: toXml(TiXmlNode* pParent, bool aCreateNode, bool aIgnoreValid){
 	if(!aIgnoreValid && !valid) return;
 	TiXmlElement * pEm;
 	if(aCreateNode){
 		pEm = new TiXmlElement("TCPServer");
+		pParent->LinkEndChild(pEm);
+	}else{
+		pEm = pParent->ToElement();
+	}
+	this->APLXML_Base::PhysicalLayerDescriptor_t::toXml(pEm, false, aIgnoreValid);
+	pEm->SetAttribute("Endpoint", ToString_string(Endpoint));
+	pEm->SetAttribute("Port", ToString_int(Port));
+};
+
+void TCPv6Client_t :: fromXml(TiXmlNode* pNode){
+	if(pNode == NULL)return;
+	XML_CHECK("TCPv6Client",pNode->Type() == TiXmlNode::ELEMENT);
+	TiXmlElement* pEm = pNode->ToElement();
+	XML_CHECK("TCPv6Client",pEm != 0);
+	this->APLXML_Base::PhysicalLayerDescriptor_t::fromXml(pNode);
+	Address = FromString_string(pEm, pEm->Attribute("Address"));
+	Port = FromString_int(pEm, pEm->Attribute("Port"));
+	valid=true;
+};
+void TCPv6Client_t :: toXml(TiXmlNode* pParent, bool aCreateNode, bool aIgnoreValid){
+	if(!aIgnoreValid && !valid) return;
+	TiXmlElement * pEm;
+	if(aCreateNode){
+		pEm = new TiXmlElement("TCPv6Client");
+		pParent->LinkEndChild(pEm);
+	}else{
+		pEm = pParent->ToElement();
+	}
+	this->APLXML_Base::PhysicalLayerDescriptor_t::toXml(pEm, false, aIgnoreValid);
+	pEm->SetAttribute("Address", ToString_string(Address));
+	pEm->SetAttribute("Port", ToString_int(Port));
+};
+
+void TCPv6Server_t :: fromXml(TiXmlNode* pNode){
+	if(pNode == NULL)return;
+	XML_CHECK("TCPv6Server",pNode->Type() == TiXmlNode::ELEMENT);
+	TiXmlElement* pEm = pNode->ToElement();
+	XML_CHECK("TCPv6Server",pEm != 0);
+	this->APLXML_Base::PhysicalLayerDescriptor_t::fromXml(pNode);
+	Endpoint = FromString_string(pEm, pEm->Attribute("Endpoint"));
+	Port = FromString_int(pEm, pEm->Attribute("Port"));
+	valid=true;
+};
+void TCPv6Server_t :: toXml(TiXmlNode* pParent, bool aCreateNode, bool aIgnoreValid){
+	if(!aIgnoreValid && !valid) return;
+	TiXmlElement * pEm;
+	if(aCreateNode){
+		pEm = new TiXmlElement("TCPv6Server");
 		pParent->LinkEndChild(pEm);
 	}else{
 		pEm = pParent->ToElement();
@@ -268,21 +316,25 @@ void Serial_t :: toXml(TiXmlNode* pParent, bool aCreateNode, bool aIgnoreValid){
 };
 
 PhysicalLayerList_t::PhysicalLayerList_t():
-		TCPServer("TCPServer"), TCPServerVector(TCPServer.collection),
-		TCPClient("TCPClient"), TCPClientVector(TCPClient.collection),
+		TCPv4Server("TCPServer"), TCPv4ServerVector(TCPv4Server.collection),
+		TCPv4Client("TCPClient"), TCPv4ClientVector(TCPv4Client.collection),
+		TCPv6Server("TCPv6Server"), TCPv6ServerVector(TCPv6Server.collection),
+		TCPv6Client("TCPv6Client"), TCPv6ClientVector(TCPv6Client.collection),
 		Serial("Serial"), SerialVector(Serial.collection){};
 void PhysicalLayerList_t :: fromXml(TiXmlNode* pNode){
 	if(pNode == NULL)return;
 	XML_CHECK("PhysicalLayerList",pNode->Type() == TiXmlNode::ELEMENT);
 	TiXmlElement* pEm = pNode->ToElement();
 	XML_CHECK("PhysicalLayerList",pEm != 0);
-	TCPServer.fromXml(pNode);
-	TCPClient.fromXml(pNode);
+	TCPv4Server.fromXml(pNode);
+	TCPv4Client.fromXml(pNode);
+	TCPv6Server.fromXml(pNode);
+	TCPv6Client.fromXml(pNode);
 	Serial.fromXml(pNode);
 	valid=true;
 };
 void PhysicalLayerList_t :: toXml(TiXmlNode* pParent, bool aCreateNode, bool aIgnoreValid){
-	if(TCPServer.size() == 0 && TCPClient.size() == 0 && Serial.size() == 0)return;
+	if(TCPv4Server.size() == 0 && TCPv4Client.size() == 0 && TCPv6Server.size() == 0 && TCPv6Client.size() == 0 && Serial.size() == 0)return;
 	if(!aIgnoreValid && !valid) return;
 	TiXmlElement * pEm;
 	if(aCreateNode){
@@ -291,8 +343,10 @@ void PhysicalLayerList_t :: toXml(TiXmlNode* pParent, bool aCreateNode, bool aIg
 	}else{
 		pEm = pParent->ToElement();
 	}
-	TCPServer.toXml(pEm, true, aIgnoreValid);
-	TCPClient.toXml(pEm, true, aIgnoreValid);
+	TCPv4Server.toXml(pEm, true, aIgnoreValid);
+	TCPv4Client.toXml(pEm, true, aIgnoreValid);
+	TCPv6Server.toXml(pEm, true, aIgnoreValid);
+	TCPv6Client.toXml(pEm, true, aIgnoreValid);
 	Serial.toXml(pEm, true, aIgnoreValid);
 };
 

@@ -18,7 +18,7 @@
 //
 #include "LogTester.h"
 
-#include <APL/LogToStdio.h>
+#include <opendnp3/APL/LogToStdio.h>
 
 namespace apl
 {

@@ -19,8 +19,8 @@
 #include <boost/test/unit_test.hpp>
 #include <APLTestTools/TestHelpers.h>
 
-#include <APL/Exception.h>
-#include <DNP3/DNPConstants.h>
+#include <opendnp3/APL/Exception.h>
+#include <opendnp3/DNP3/DNPConstants.h>
 #include <APLTestTools/BufferHelpers.h>
 
 #include "LinkLayerTest.h"

@@ -19,7 +19,7 @@
 #include <boost/test/unit_test.hpp>
 #include <APLTestTools/TestHelpers.h>
 
-#include <APL/Util.h>
+#include <opendnp3/APL/Util.h>
 #include <APLTestTools/BufferHelpers.h>
 
 using namespace std;

@@ -20,7 +20,7 @@
 #define __PHYSICAL_LAYER_MANAGER_XML_
 
 #include <vector>
-#include <APL/PhysicalLayerManager.h>
+#include <opendnp3/APL/PhysicalLayerManager.h>
 
 
 namespace APLXML_Base

@@ -20,8 +20,8 @@
 #ifndef __MOCK_PHYSICAL_LAYER_SOURCE_H_
 #define __MOCK_PHYSICAL_LAYER_SOURCE_H_
 
-#include <APL/IPhysicalLayerSource.h>
-#include <APL/PhysicalLayerInstance.h>
+#include <opendnp3/APL/IPhysicalLayerSource.h>
+#include <opendnp3/APL/PhysicalLayerInstance.h>
 
 #include <map>
 

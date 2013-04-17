@@ -18,7 +18,7 @@
 //
 #include "TransportLoopbackTestObject.h"
 
-#include <DNP3/LinkRoute.h>
+#include <opendnp3/DNP3/LinkRoute.h>
 
 #include <sstream>
 #include <boost/foreach.hpp>

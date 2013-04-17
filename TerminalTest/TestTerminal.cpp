@@ -1,9 +1,9 @@
 #define BOOST_TEST_MODULE terminal
 #include <boost/test/unit_test.hpp>
 
-#include <APL/Log.h>
-#include <APL/Thread.h>
-#include <APL/TimingTools.h>
+#include <opendnp3/APL/Log.h>
+#include <opendnp3/APL/Thread.h>
+#include <opendnp3/APL/TimingTools.h>
 
 #include <APLTestTools/TestHelpers.h>
 #include <APLTestTools/MockTimerSource.h>

@@ -28,9 +28,9 @@ class io_service;
 }
 
 
-#include <APL/PhysicalLayerAsyncTCPClient.h>
-#include <APL/PhysicalLayerAsyncTCPServer.h>
-#include <APL/ITimerSource.h>
+#include <opendnp3/APL/PhysicalLayerAsyncTCPv4Client.h>
+#include <opendnp3/APL/PhysicalLayerAsyncTCPv4Server.h>
+#include <opendnp3/APL/ITimerSource.h>
 
 #include "TransportIntegrationStack.h"
 
@@ -56,8 +56,8 @@ public:
 	bool BothLayersUp();
 
 public:
-	PhysicalLayerAsyncTCPClient mClient;
-	PhysicalLayerAsyncTCPServer mServer;
+	PhysicalLayerAsyncTCPv4Client mClient;
+	PhysicalLayerAsyncTCPv4Server mServer;
 
 	TransportIntegrationStack mClientStack;
 	TransportIntegrationStack mServerStack;

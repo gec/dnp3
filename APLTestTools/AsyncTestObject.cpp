@@ -19,7 +19,7 @@
 
 #include "AsyncTestObject.h"
 
-#include <APL/TimingTools.h>
+#include <opendnp3/APL/TimingTools.h>
 
 #include <boost/bind.hpp>
 

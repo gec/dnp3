@@ -1,8 +1,8 @@
 #include "DOTerminalExtension.h"
 
-#include <APL/Util.h>
-#include <APL/Exception.h>
-#include <APL/Parsing.h>
+#include <opendnp3/APL/Util.h>
+#include <opendnp3/APL/Exception.h>
+#include <opendnp3/APL/Parsing.h>
 
 #include <sstream>
 #include <boost/bind.hpp>

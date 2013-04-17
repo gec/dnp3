@@ -1,6 +1,6 @@
 #include "LineReader.h"
 
-#include <APL/IPhysicalLayerAsync.h>
+#include <opendnp3/APL/IPhysicalLayerAsync.h>
 
 using namespace std;
 

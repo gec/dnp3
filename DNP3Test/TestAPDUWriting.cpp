@@ -19,15 +19,15 @@
 #include <boost/test/unit_test.hpp>
 #include <APLTestTools/TestHelpers.h>
 
-#include <DNP3/APDU.h>
-#include <DNP3/ObjectHeader.h>
-#include <DNP3/ObjectWriteIterator.h>
-#include <DNP3/DNPConstants.h>
+#include <opendnp3/DNP3/APDU.h>
+#include <opendnp3/DNP3/ObjectHeader.h>
+#include <opendnp3/DNP3/ObjectWriteIterator.h>
+#include <opendnp3/DNP3/DNPConstants.h>
 
-#include <APL/DataTypes.h>
-#include <APL/QualityMasks.h>
-#include <APL/CommandTypes.h>
-#include <APL/ToHex.h>
+#include <opendnp3/APL/DataTypes.h>
+#include <opendnp3/APL/QualityMasks.h>
+#include <opendnp3/APL/CommandTypes.h>
+#include <opendnp3/APL/ToHex.h>
 #include <APLTestTools/BufferHelpers.h>
 
 #include <queue>

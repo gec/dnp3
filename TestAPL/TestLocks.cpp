@@ -19,10 +19,10 @@
 
 #include <boost/test/unit_test.hpp>
 #include <APLTestTools/TestHelpers.h>
-#include <APL/Lock.h>
-#include <APL/Threadable.h>
-#include <APL/Thread.h>
-#include <APL/EventLock.h>
+#include <opendnp3/APL/Lock.h>
+#include <opendnp3/APL/Threadable.h>
+#include <opendnp3/APL/Thread.h>
+#include <opendnp3/APL/EventLock.h>
 
 using namespace apl;
 

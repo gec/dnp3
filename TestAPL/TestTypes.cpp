@@ -19,7 +19,7 @@
 #define BOOST_TEST_MODULE apl
 #include <boost/test/unit_test.hpp>
 
-#include <APL/Types.h>
+#include <opendnp3/APL/Types.h>
 #include <limits>
 
 using namespace std;

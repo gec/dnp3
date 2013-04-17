@@ -19,8 +19,8 @@
 #include <boost/test/unit_test.hpp>
 #include <APLTestTools/TestHelpers.h>
 
-#include <APL/DataTypes.h>
-#include <APL/QualityMasks.h>
+#include <opendnp3/APL/DataTypes.h>
+#include <opendnp3/APL/QualityMasks.h>
 
 BOOST_AUTO_TEST_SUITE(QualityMasks)
 

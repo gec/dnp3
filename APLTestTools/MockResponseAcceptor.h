@@ -21,10 +21,10 @@
 
 
 #include <queue>
-#include <APL/CommandTypes.h>
-#include <APL/CommandInterfaces.h>
-#include <APL/Types.h>
-#include <APL/Lock.h>
+#include <opendnp3/APL/CommandTypes.h>
+#include <opendnp3/APL/CommandInterfaces.h>
+#include <opendnp3/APL/Types.h>
+#include <opendnp3/APL/Lock.h>
 
 namespace apl
 {

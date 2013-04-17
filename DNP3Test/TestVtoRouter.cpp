@@ -19,16 +19,16 @@
 
 #include <boost/test/unit_test.hpp>
 
-#include <APL/Log.h>
-#include <APL/ToHex.h>
+#include <opendnp3/APL/Log.h>
+#include <opendnp3/APL/ToHex.h>
 
 #include <APLTestTools/LogTester.h>
 #include <APLTestTools/MockPhysicalLayerAsync.h>
 #include <APLTestTools/MockTimerSource.h>
 #include <APLTestTools/TestHelpers.h>
 
-#include <DNP3/AlwaysOpeningVtoRouter.h>
-#include <DNP3/VtoRouterSettings.h>
+#include <opendnp3/DNP3/AlwaysOpeningVtoRouter.h>
+#include <opendnp3/DNP3/VtoRouterSettings.h>
 
 #include "ReadableVtoWriter.h"
 

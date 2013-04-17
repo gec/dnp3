@@ -24,7 +24,7 @@
 #include <boost/foreach.hpp>
 #include <iostream>
 
-#include <APL/Exception.h>
+#include <opendnp3/APL/Exception.h>
 
 namespace apl
 {

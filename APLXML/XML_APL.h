@@ -30,8 +30,10 @@ class XML_APL
 {
 public:
 
-	static APLXML_Base::TCPServer_t* AddTCPServer(APLXML_Base::PhysicalLayerList_t& arList, const std::string& arDevice, const std::string& arEndpoint, int aPort);
-	static APLXML_Base::TCPClient_t* AddTCPClient(APLXML_Base::PhysicalLayerList_t& arList, const std::string& arDevice, const std::string& arAdderss, int aPort);
+	static APLXML_Base::TCPv4Server_t* AddTCPv4Server(APLXML_Base::PhysicalLayerList_t& arList, const std::string& arDevice, const std::string& arEndpoint, int aPort);
+	static APLXML_Base::TCPv4Client_t* AddTCPv4Client(APLXML_Base::PhysicalLayerList_t& arList, const std::string& arDevice, const std::string& arAdderss, int aPort);
+	static APLXML_Base::TCPv6Server_t* AddTCPv6Server(APLXML_Base::PhysicalLayerList_t& arList, const std::string& arDevice, const std::string& arEndpoint, int aPort);
+	static APLXML_Base::TCPv6Client_t* AddTCPv6Client(APLXML_Base::PhysicalLayerList_t& arList, const std::string& arDevice, const std::string& arAdderss, int aPort);
 	static APLXML_Base::Serial_t* AddSerial(APLXML_Base::PhysicalLayerList_t& arList, const std::string& arName, const std::string& arDevice);
 
 };

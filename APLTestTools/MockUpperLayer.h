@@ -19,7 +19,7 @@
 #ifndef __MOCK_UPPER_LAYER_H_
 #define __MOCK_UPPER_LAYER_H_
 
-#include <APL/AsyncLayerInterfaces.h>
+#include <opendnp3/APL/AsyncLayerInterfaces.h>
 #include <boost/function.hpp>
 
 #include "BufferTestObject.h"

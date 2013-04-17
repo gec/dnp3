@@ -3,8 +3,8 @@
 
 #include "TerminalInterfaces.h"
 
-#include <APL/DataInterfaces.h>
-#include <APL/CommandResponseQueue.h>
+#include <opendnp3/APL/DataInterfaces.h>
+#include <opendnp3/APL/CommandResponseQueue.h>
 
 #include <string>
 

@@ -29,12 +29,12 @@ namespace DotNetTestSet
 
         private void stackBrowser1_OnTcpClientAdded(TcpSettings s)
         {
-            sm.AddTCPClient(s.name, s.level, s.timeout, s.address, s.port);                            
+            sm.AddTCPv4Client(s.name, s.level, s.timeout, s.address, s.port);                            
         }
 
         private void stackBrowser1_OnTcpServerAdded(TcpSettings s)
         {
-            sm.AddTCPServer(s.name, s.level, s.timeout, s.address, s.port);
+            sm.AddTCPv4Server(s.name, s.level, s.timeout, s.address, s.port);
         }
 
         private void stackBrowser1_OnSerialPortAdded(SerialSettings settings)

@@ -20,8 +20,8 @@
 #include "MockPhysicalLayerSource.h"
 #include "MockPhysicalLayerAsync.h"
 
-#include <APL/Logger.h>
-#include <APL/Exception.h>
+#include <opendnp3/APL/Logger.h>
+#include <opendnp3/APL/Exception.h>
 
 namespace apl
 {

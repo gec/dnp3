@@ -20,10 +20,10 @@
 #include <boost/bind.hpp>
 #include <APLTestTools/TestHelpers.h>
 
-#include <APL/Exception.h>
-#include <APL/ToHex.h>
+#include <opendnp3/APL/Exception.h>
+#include <opendnp3/APL/ToHex.h>
 
-#include <DNP3/LinkRoute.h>
+#include <opendnp3/DNP3/LinkRoute.h>
 
 #include "LinkLayerRouterTest.h"
 #include "MockFrameSink.h"

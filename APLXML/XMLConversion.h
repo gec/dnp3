@@ -19,7 +19,7 @@
 #ifndef __XML_CONVERSION_H_
 #define  __XML_CONVERSION_H_
 
-#include <APL/LogBase.h>
+#include <opendnp3/APL/LogBase.h>
 #include <XMLBindings/APLXML_Base.h>
 
 namespace apl

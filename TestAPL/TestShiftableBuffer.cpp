@@ -19,8 +19,8 @@
 #include <boost/test/unit_test.hpp>
 #include <APLTestTools/TestHelpers.h>
 
-#include <APL/ShiftableBuffer.h>
-#include <APL/Exception.h>
+#include <opendnp3/APL/ShiftableBuffer.h>
+#include <opendnp3/APL/Exception.h>
 
 using namespace apl;
 

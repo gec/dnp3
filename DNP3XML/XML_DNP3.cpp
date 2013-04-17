@@ -18,15 +18,15 @@
 //
 #include "XML_DNP3.h"
 
-#include <XMLBindings/APLXML_DNP.h>
 #include <XMLBindings/APLXML_Base.h>
+#include <XMLBindings/APLXML_DNP.h>
+
+#include <opendnp3/DNP3/AppConfig.h>
+#include <opendnp3/DNP3/DNPConstants.h>
+#include <opendnp3/DNP3/LinkConfig.h>
+#include <opendnp3/DNP3/MasterConfig.h>
 
 #include <boost/numeric/conversion/converter.hpp>
-
-#include <DNP3/DNPConstants.h>
-#include <DNP3/LinkConfig.h>
-#include <DNP3/AppConfig.h>
-#include <DNP3/MasterConfig.h>
 
 namespace apl
 {

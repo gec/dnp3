@@ -20,8 +20,8 @@
 
 #include "BufferHelpers.h"
 
-#include <APL/ToHex.h>
-#include <APL/Logger.h>
+#include <opendnp3/APL/ToHex.h>
+#include <opendnp3/APL/Logger.h>
 #include <memory>
 
 namespace apl

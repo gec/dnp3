@@ -21,7 +21,7 @@
 #ifndef _MOCK_NODE_SAVER_H_
 #define _MOCK_NODE_SAVER_H_
 
-#include <APL/INodeSaver.h>
+#include <opendnp3/APL/INodeSaver.h>
 
 namespace apl
 {

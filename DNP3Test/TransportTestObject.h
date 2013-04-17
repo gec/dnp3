@@ -19,14 +19,14 @@
 #ifndef __TRANSPORT_TEST_OBJECT_H_
 #define __TRANSPORT_TEST_OBJECT_H_
 
-#include <APL/Log.h>
+#include <opendnp3/APL/Log.h>
 
 #include <vector>
 #include <string>
 
 #include <APLTestTools/MockLowerLayer.h>
 #include <APLTestTools/MockUpperLayer.h>
-#include <DNP3/TransportLayer.h>
+#include <opendnp3/DNP3/TransportLayer.h>
 #include <APLTestTools/LogTester.h>
 
 namespace apl

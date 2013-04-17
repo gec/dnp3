@@ -19,7 +19,7 @@
 #include <boost/test/unit_test.hpp>
 #include <APLTestTools/TestHelpers.h>
 
-#include <APL/Parsing.h>
+#include <opendnp3/APL/Parsing.h>
 
 
 BOOST_AUTO_TEST_SUITE(Parsing)

@@ -19,8 +19,8 @@
 #include <boost/test/unit_test.hpp>
 #include <APLTestTools/TestHelpers.h>
 
-#include <DNP3/LinkFrame.h>
-#include <DNP3/DNPCrc.h>
+#include <opendnp3/DNP3/LinkFrame.h>
+#include <opendnp3/DNP3/DNPCrc.h>
 #include <APLTestTools/BufferHelpers.h>
 
 #include "DNPHelpers.h"

@@ -19,10 +19,10 @@
 
 #include <boost/test/unit_test.hpp>
 
-#include <APL/IPhysicalLayerAsync.h>
-#include <APL/Logger.h>
-#include <APL/Util.h>
-#include <APL/ToHex.h>
+#include <opendnp3/APL/IPhysicalLayerAsync.h>
+#include <opendnp3/APL/Logger.h>
+#include <opendnp3/APL/Util.h>
+#include <opendnp3/APL/ToHex.h>
 
 #include <iostream>
 #include <sstream>

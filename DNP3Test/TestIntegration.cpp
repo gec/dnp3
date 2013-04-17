@@ -18,8 +18,8 @@
 #include <boost/test/unit_test.hpp>
 #include <APLTestTools/TestHelpers.h>
 
-#include <APL/Log.h>
-#include <APL/LogToStdio.h>
+#include <opendnp3/APL/Log.h>
+#include <opendnp3/APL/LogToStdio.h>
 
 #include <boost/asio.hpp>
 

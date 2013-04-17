@@ -16,11 +16,11 @@
  */
 #include "VtoIntegrationTestBase.h"
 
-#include <APL/LogToStdio.h>
+#include <opendnp3/APL/LogToStdio.h>
 
-#include <DNP3/SlaveStackConfig.h>
-#include <DNP3/MasterStackConfig.h>
-#include <DNP3/VtoRouterSettings.h>
+#include <opendnp3/DNP3/SlaveStackConfig.h>
+#include <opendnp3/DNP3/MasterStackConfig.h>
+#include <opendnp3/DNP3/VtoRouterSettings.h>
 
 /** Platforms have different reserved port ranges */
 
@@ -73,9 +73,9 @@ VtoIntegrationTestBase::VtoIntegrationTestBase(
 	std::string clientSideOfStack = clientOnSlave ? "slave" : "master";
 	std::string serverSideOfStack = clientOnSlave ? "master" : "slave";
 
-	manager.AddTCPClient("vto-tcp-client", PhysLayerSettings(), "localhost", port + 10);
+	manager.AddTCPv4Client("vto-tcp-client", PhysLayerSettings(), "localhost", port + 10);
 	manager.StartVtoRouter("vto-tcp-client", clientSideOfStack, VtoRouterSettings(88, false, false, 1000));
-	manager.AddTCPServer("vto-tcp-server", PhysLayerSettings(), "localhost", port + 20);
+	manager.AddTCPv4Server("vto-tcp-server", PhysLayerSettings(), "localhost", port + 20);
 	manager.StartVtoRouter("vto-tcp-server", serverSideOfStack, VtoRouterSettings(88, true, false, 1000));
 }
 

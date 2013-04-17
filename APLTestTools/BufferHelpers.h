@@ -19,7 +19,7 @@
 #ifndef __BUFFER_HELPERS_H_
 #define __BUFFER_HELPERS_H_
 
-#include <APL/CopyableBuffer.h>
+#include <opendnp3/APL/CopyableBuffer.h>
 #include <string>
 
 namespace apl

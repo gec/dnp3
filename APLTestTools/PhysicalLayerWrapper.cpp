@@ -18,7 +18,7 @@
 //
 #include "PhysicalLayerWrapper.h"
 
-#include <APL/Logger.h>
+#include <opendnp3/APL/Logger.h>
 
 namespace apl
 {

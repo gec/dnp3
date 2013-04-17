@@ -3,9 +3,9 @@
 
 #include "TerminalInterfaces.h"
 
-#include <APL/DataInterfaces.h>
-#include <DNP3/DeviceTemplate.h>
-#include <APL/INotifier.h>
+#include <opendnp3/APL/DataInterfaces.h>
+#include <opendnp3/DNP3/DeviceTemplate.h>
+#include <opendnp3/APL/INotifier.h>
 
 #include <queue>
 #include <vector>

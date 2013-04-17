@@ -18,7 +18,7 @@
 //
 #include <boost/test/unit_test.hpp>
 
-#include <APL/Exception.h>
+#include <opendnp3/APL/Exception.h>
 #include <APLTestTools/TestHelpers.h>
 #include <APLTestTools/BufferHelpers.h>
 

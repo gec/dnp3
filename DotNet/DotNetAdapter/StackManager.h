@@ -10,20 +10,20 @@ namespace apl { namespace dnp {
 }}
 
 namespace DNP3
-{	
+{
 namespace Adapter
 {
 	public ref class StackManager
 	{
 		public:
 			StackManager();
-			
-			void AddTCPClient(System::String^ name, FilterLevel level, System::UInt64 retryMs, System::String^ address, System::UInt16 port);					
-			void AddTCPServer(System::String^ name, FilterLevel level, System::UInt64 retryMs, System::String^ endpoint, System::UInt16 port);
+
+			void AddTCPv4Client(System::String^ name, FilterLevel level, System::UInt64 retryMs, System::String^ address, System::UInt16 port);
+			void AddTCPv4Server(System::String^ name, FilterLevel level, System::UInt64 retryMs, System::String^ endpoint, System::UInt16 port);
 			void AddSerial(System::String^ name, FilterLevel level, System::UInt64 retryMs, SerialSettings^ settings);
-						
+
 			ICommandAcceptor^ AddMaster(	System::String^ portName,
-											System::String^ stackName,	                            
+											System::String^ stackName,
 											FilterLevel level,
 											IDataObserver^ publisher,
 											MasterStackConfig^ config);
@@ -31,7 +31,7 @@ namespace Adapter
 			IDataObserver^	 AddSlave(	System::String^ portName,
 										System::String^ stackName,
 										FilterLevel level,
-										ICommandAcceptor^ cmdAcceptor, 
+										ICommandAcceptor^ cmdAcceptor,
 										DNP3::Interface::SlaveStackConfig^ config);
 
 			void RemovePort(System::String^ portName);

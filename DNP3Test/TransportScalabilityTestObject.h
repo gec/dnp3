@@ -22,7 +22,7 @@
 #include "TransportStackPair.h"
 #include <APLTestTools/AsyncTestObjectASIO.h>
 
-#include <APL/TimerSourceASIO.h>
+#include <opendnp3/APL/TimerSourceASIO.h>
 #include <APLTestTools/LogTester.h>
 
 namespace apl

@@ -20,8 +20,8 @@
 #define __DATABASE_TEST_OBJECT_H_
 
 #include <queue>
-#include <DNP3/Database.h>
-#include <APL/Log.h>
+#include <opendnp3/DNP3/Database.h>
+#include <opendnp3/APL/Log.h>
 
 namespace apl
 {

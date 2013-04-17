@@ -19,7 +19,7 @@
 #ifndef __TEST_TYPEDEFS_H_
 #define __TEST_TYPEDEFS_H_
 
-#include <APL/Types.h>
+#include <opendnp3/APL/Types.h>
 #include <boost/function.hpp>
 
 namespace apl

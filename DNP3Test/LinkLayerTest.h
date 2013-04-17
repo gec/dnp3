@@ -23,8 +23,8 @@
 #include <APLTestTools/MockUpperLayer.h>
 #include <APLTestTools/MockTimerSource.h>
 
-#include <DNP3/LinkLayer.h>
-#include <DNP3/ILinkRouter.h>
+#include <opendnp3/DNP3/LinkLayer.h>
+#include <opendnp3/DNP3/ILinkRouter.h>
 
 namespace apl
 {

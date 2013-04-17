@@ -19,7 +19,7 @@
 #include <boost/test/unit_test.hpp>
 #include <APLTestTools/TestHelpers.h>
 
-#include <APL/CommandQueue.h>
+#include <opendnp3/APL/CommandQueue.h>
 #include <limits>
 
 using namespace apl;

@@ -19,8 +19,8 @@
 #ifndef __MOCK_COMMAND_ACCEPTOR_H_
 #define __MOCK_COMMAND_ACCEPTOR_H_
 
-#include <APL/CommandInterfaces.h>
-#include <APL/Exception.h>
+#include <opendnp3/APL/CommandInterfaces.h>
+#include <opendnp3/APL/Exception.h>
 #include <queue>
 
 namespace apl

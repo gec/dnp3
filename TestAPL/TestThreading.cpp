@@ -18,15 +18,15 @@
 //
 #include <boost/test/unit_test.hpp>
 #include <APLTestTools/TestHelpers.h>
-#include <APL/Lock.h>
-#include <APL/Thread.h>
+#include <opendnp3/APL/Lock.h>
+#include <opendnp3/APL/Thread.h>
 #include <vector>
 
 using namespace std;
 
-#include <APL/Exception.h>
-#include <APL/Util.h>
-#include <APL/Log.h>
+#include <opendnp3/APL/Exception.h>
+#include <opendnp3/APL/Util.h>
+#include <opendnp3/APL/Log.h>
 using namespace apl;
 
 

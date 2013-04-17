@@ -24,8 +24,8 @@
 #include <APLTestTools/TestHelpers.h>
 
 #include <APLTestTools/BufferHelpers.h>
-#include <APL/ProtocolUtil.h>
-#include <APL/Exception.h>
+#include <opendnp3/APL/ProtocolUtil.h>
+#include <opendnp3/APL/Exception.h>
 
 
 #include <boost/foreach.hpp>

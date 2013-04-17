@@ -21,8 +21,8 @@
 
 #include <signal.h>
 
-#include <APL/Log.h>
-#include <APL/Lock.h>
+#include <opendnp3/APL/Log.h>
+#include <opendnp3/APL/Lock.h>
 
 using namespace std;
 using namespace apl;
@@ -111,9 +111,9 @@ int main(int argc, char* argv[])
 	// stacks, as well as their physical layers.
 	AsyncStackManager mgr(log.GetLogger(LOG_LEVEL, "dnp"));
 
-	// Connect via a TCPClient socket to a slave.  The server will
+	// Connect via a TCPv4Client socket to a slave.  The server will
 	// wait 3000 ms in between failed bind calls.
-	mgr.AddTCPClient(
+	mgr.AddTCPv4Client(
 		"tcpclient",
 		PhysLayerSettings(LOG_LEVEL, 3000),
 		remote_ip.c_str(),

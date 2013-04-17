@@ -17,8 +17,8 @@
 
 #include <boost/test/unit_test.hpp>
 
-#include <APL/PhysicalLayerMonitor.h>
-#include <APL/CopyableBuffer.h>
+#include <opendnp3/APL/PhysicalLayerMonitor.h>
+#include <opendnp3/APL/CopyableBuffer.h>
 
 #include <queue>
 

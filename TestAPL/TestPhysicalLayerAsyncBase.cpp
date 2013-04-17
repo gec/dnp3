@@ -21,7 +21,7 @@
 
 #include "AsyncPhysBaseTest.h"
 
-#include <APL/Exception.h>
+#include <opendnp3/APL/Exception.h>
 
 using namespace apl;
 

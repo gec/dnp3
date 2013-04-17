@@ -25,9 +25,9 @@ A manual method is included that gets around the problem as well.
 
 #include <boost/test/unit_test.hpp>
 #include <APLTestTools/TestHelpers.h>
-#include <APL/Types.h>
+#include <opendnp3/APL/Types.h>
 #include "math.h"
-#include <APL/Util.h>
+#include <opendnp3/APL/Util.h>
 #include <boost/numeric/conversion/converter.hpp>
 
 #include <iostream>

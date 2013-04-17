@@ -26,16 +26,16 @@
 
 #include <boost/numeric/conversion/converter.hpp>
 
-#include <DNP3/DNPConstants.h>
-#include <DNP3/LinkConfig.h>
-#include <DNP3/AppConfig.h>
-#include <DNP3/VtoConfig.h>
-#include <DNP3/MasterConfig.h>
-#include <DNP3/SlaveConfig.h>
-#include <DNP3/DeviceTemplate.h>
-#include <DNP3/MasterStackConfig.h>
-#include <DNP3/SlaveStackConfig.h>
-#include <DNP3/AsyncStackManager.h>
+#include <opendnp3/DNP3/AppConfig.h>
+#include <opendnp3/DNP3/AsyncStackManager.h>
+#include <opendnp3/DNP3/DNPConstants.h>
+#include <opendnp3/DNP3/DeviceTemplate.h>
+#include <opendnp3/DNP3/LinkConfig.h>
+#include <opendnp3/DNP3/MasterConfig.h>
+#include <opendnp3/DNP3/MasterStackConfig.h>
+#include <opendnp3/DNP3/SlaveConfig.h>
+#include <opendnp3/DNP3/SlaveStackConfig.h>
+#include <opendnp3/DNP3/VtoConfig.h>
 
 using namespace APLXML_Base;
 
@@ -46,16 +46,25 @@ namespace dnp
 
 bool XmlToConfig::Configure(const APLXML_Base::PhysicalLayerList_t& arList, FilterLevel aLevel, AsyncStackManager& arMgr)
 {
-
-	for (size_t i = 0; i < arList.TCPClientVector.size(); i++ ) {
-		TCPClient_t* pCfg = arList.TCPClientVector[i];
+	for (size_t i = 0; i < arList.TCPv4ClientVector.size(); i++ ) {
+		TCPv4Client_t* pCfg = arList.TCPv4ClientVector[i];
 		PhysLayerSettings s(aLevel, pCfg->OpenRetryMS);
-		arMgr.AddTCPClient(pCfg->Name, s, pCfg->Address, pCfg->Port);
+		arMgr.AddTCPv4Client(pCfg->Name, s, pCfg->Address, pCfg->Port);
 	}
-	for (size_t i = 0; i < arList.TCPServerVector.size(); i++ ) {
-		TCPServer_t* pCfg = arList.TCPServerVector[i];
+	for (size_t i = 0; i < arList.TCPv4ServerVector.size(); i++ ) {
+		TCPv4Server_t* pCfg = arList.TCPv4ServerVector[i];
 		PhysLayerSettings s(aLevel, pCfg->OpenRetryMS);
-		arMgr.AddTCPServer(pCfg->Name, s, pCfg->Endpoint, pCfg->Port);
+		arMgr.AddTCPv4Server(pCfg->Name, s, pCfg->Endpoint, pCfg->Port);
+	}
+	for (size_t i = 0; i < arList.TCPv6ClientVector.size(); i++ ) {
+		TCPv6Client_t* pCfg = arList.TCPv6ClientVector[i];
+		PhysLayerSettings s(aLevel, pCfg->OpenRetryMS);
+		arMgr.AddTCPv6Client(pCfg->Name, s, pCfg->Address, pCfg->Port);
+	}
+	for (size_t i = 0; i < arList.TCPv6ServerVector.size(); i++ ) {
+		TCPv6Server_t* pCfg = arList.TCPv6ServerVector[i];
+		PhysLayerSettings s(aLevel, pCfg->OpenRetryMS);
+		arMgr.AddTCPv6Server(pCfg->Name, s, pCfg->Endpoint, pCfg->Port);
 	}
 	for (size_t i = 0; i < arList.SerialVector.size(); i++ ) {
 		Serial_t* pCfg = arList.SerialVector[i];
@@ -117,7 +126,7 @@ AppConfig XmlToConfig::Convert(const APLXML_DNP::AppLayer_t& arCfg)
 MasterConfig XmlToConfig::Convert(const APLXML_DNP::Master_t& arCfg)
 {
 	MasterConfig cfg;
-	cfg.AllowTimeSync = true;
+	cfg.AllowTimeSync = arCfg.MasterSettings.AllowTimeSync;
 	cfg.DoUnsolOnStartup = arCfg.Unsol.DoTask;
 	cfg.EnableUnsol = arCfg.Unsol.Enable;
 	cfg.FragSize = arCfg.Stack.AppLayer.MaxFragSize;
@@ -213,7 +222,7 @@ DeviceTemplate XmlToConfig::Convert(const APLXML_DNP::DeviceTemplate_t& arCfg, b
 	return t;
 }
 
-CommandModes ConvertMode(const std::string& arMode)
+CommandModes XmlToConfig::ConvertMode(const std::string& arMode)
 {
 	if(arMode == "SBO") return CM_SBO_ONLY;
 	if(arMode == "DO_ONLY") return CM_DO_ONLY;

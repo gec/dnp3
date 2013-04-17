@@ -1,8 +1,8 @@
 #include "ControlResponseTE.h"
 
-#include <APL/Logger.h>
-#include <APL/Exception.h>
-#include <APL/Parsing.h>
+#include <opendnp3/APL/Logger.h>
+#include <opendnp3/APL/Exception.h>
+#include <opendnp3/APL/Parsing.h>
 
 namespace apl
 {

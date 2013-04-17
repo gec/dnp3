@@ -18,8 +18,8 @@
 #ifndef __READABLE_VTO_WRITER_H_
 #define __READABLE_VTO_WRITER_H_
 
-#include <DNP3/VtoWriter.h>
-#include <DNP3/IVtoEventAcceptor.h>
+#include <opendnp3/DNP3/VtoWriter.h>
+#include <opendnp3/DNP3/IVtoEventAcceptor.h>
 
 namespace apl
 {

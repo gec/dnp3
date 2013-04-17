@@ -19,10 +19,10 @@
 #include <boost/test/unit_test.hpp>
 #include <APLTestTools/TestHelpers.h>
 
-#include <APL/Exception.h>
-#include <APL/RandomizedBuffer.h>
-#include <DNP3/SlaveEventBuffer.h>
-#include <DNP3/VtoWriter.h>
+#include <opendnp3/APL/Exception.h>
+#include <opendnp3/APL/RandomizedBuffer.h>
+#include <opendnp3/DNP3/SlaveEventBuffer.h>
+#include <opendnp3/DNP3/VtoWriter.h>
 #include <limits>
 
 using namespace std;

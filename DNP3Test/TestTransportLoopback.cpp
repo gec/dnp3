@@ -23,14 +23,14 @@
 #include <boost/test/unit_test.hpp>
 #include <APLTestTools/TestHelpers.h>
 
-#include <APL/Log.h>
+#include <opendnp3/APL/Log.h>
 #include <APLTestTools/BufferHelpers.h>
-#include <APL/ProtocolUtil.h>
-#include <APL/Exception.h>
+#include <opendnp3/APL/ProtocolUtil.h>
+#include <opendnp3/APL/Exception.h>
 
 #include <boost/bind.hpp>
 #include <APLTestTools/LoopbackPhysicalLayerAsync.h>
-#include <APL/PhysicalLayerAsyncSerial.h>
+#include <opendnp3/APL/PhysicalLayerAsyncSerial.h>
 
 using namespace std;
 using namespace apl;

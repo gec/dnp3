@@ -19,10 +19,10 @@
 
 #include <boost/test/unit_test.hpp>
 #include <APLTestTools/TestHelpers.h>
-#include <APL/Log.h>
-#include <APL/LogToFile.h>
+#include <opendnp3/APL/Log.h>
+#include <opendnp3/APL/LogToFile.h>
 #include <APLTestTools/LogTester.h>
-#include <APL/Exception.h>
+#include <opendnp3/APL/Exception.h>
 #include <boost/shared_ptr.hpp>
 #include <iostream>
 #include <vector>

@@ -19,10 +19,10 @@
 
 #include <boost/test/unit_test.hpp>
 
-#include <APL/Log.h>
-#include <APL/Exception.h>
-#include <APL/PhysicalLayerMonitor.h>
-#include <APL/PhysicalLayerMonitorStates.h>
+#include <opendnp3/APL/Log.h>
+#include <opendnp3/APL/Exception.h>
+#include <opendnp3/APL/PhysicalLayerMonitor.h>
+#include <opendnp3/APL/PhysicalLayerMonitorStates.h>
 #include <APLTestTools/MockTimerSource.h>
 #include <APLTestTools/MockPhysicalLayerAsync.h>
 #include <APLTestTools/TestHelpers.h>

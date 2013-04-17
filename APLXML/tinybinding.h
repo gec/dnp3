@@ -21,10 +21,10 @@
 
 #include <tinyxml/tinyxml.h>
 
-#include <APL/Configure.h>
-#include <APL/Exception.h>
-#include <APL/Uncopyable.h>
-#include <APL/Parsing.h>
+#include <opendnp3/APL/Configure.h>
+#include <opendnp3/APL/Exception.h>
+#include <opendnp3/APL/Uncopyable.h>
+#include <opendnp3/APL/Parsing.h>
 
 #include <string>
 #include <sstream>

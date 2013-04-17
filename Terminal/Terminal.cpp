@@ -1,11 +1,11 @@
 #include "Terminal.h"
 
-#include <APL/Exception.h>
-#include <APL/Thread.h>
-#include <APL/Types.h>
-#include <APL/IPhysicalLayerAsync.h>
-#include <APL/Util.h>
-#include <APL/Logger.h>
+#include <opendnp3/APL/Exception.h>
+#include <opendnp3/APL/Thread.h>
+#include <opendnp3/APL/Types.h>
+#include <opendnp3/APL/IPhysicalLayerAsync.h>
+#include <opendnp3/APL/Util.h>
+#include <opendnp3/APL/Logger.h>
 
 #include <sstream>
 #include <vector>

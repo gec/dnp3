@@ -83,7 +83,7 @@ class DNP3BindingTest extends FunSuite with ShouldMatchers {
       (1 to num_port).foreach { port =>
 
         val s = new PhysLayerSettings(FilterLevel.LEV_WARNING, 1000)
-        sm.AddTCPClient(port.toString, s, "127.0.0.1", startPort)
+        sm.AddTCPv4Client(port.toString, s, "127.0.0.1", startPort)
 
         (1 to num_stack).foreach { stack =>
           val name = "port-" + port + "-stack" + stack
@@ -128,8 +128,8 @@ class DNP3BindingTest extends FunSuite with ShouldMatchers {
       (port_start to port_end).foreach { port =>
         val client = "client-" + port
         val server = "server-" + port
-        sm.AddTCPClient(client, s, "127.0.0.1", port)
-        sm.AddTCPServer(server, s, "0.0.0.0", port)
+        sm.AddTCPv4Client(client, s, "127.0.0.1", port)
+        sm.AddTCPv4Server(server, s, "0.0.0.0", port)
 
         master.getMaster.setMpObserver(stateObserver.getObserver(server))
         names ::= server

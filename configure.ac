@@ -103,6 +103,8 @@ if test "$want_java" = yes; then
   want_swig="yes"
   if test "x$ac_java_path" != "x"; then
     CPPFLAGS="$CPPFLAGS -I$ac_java_path"
+  else
+    CPPFLAGS="$CPPFLAGS -I/usr/lib/jvm/default-java/include"
   fi
   AC_CHECK_HEADERS([jni.h]	,,AC_MSG_ERROR(missing header))
   AM_PROG_GCJ

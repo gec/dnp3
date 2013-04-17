@@ -25,9 +25,9 @@
 #include <boost/function.hpp>
 #include <boost/bind.hpp>
 
-#include <APL/Exception.h>
-#include <APL/Types.h>
-#include <APL/ITimerSource.h>
+#include <opendnp3/APL/Exception.h>
+#include <opendnp3/APL/Types.h>
+#include <opendnp3/APL/ITimerSource.h>
 
 namespace apl
 {
