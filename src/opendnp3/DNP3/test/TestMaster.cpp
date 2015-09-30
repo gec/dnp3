@@ -405,6 +405,7 @@ BOOST_AUTO_TEST_CASE(ControlExecutionSelectLayerDown)
 	BOOST_REQUIRE_EQUAL(cr.mResult, CS_HARDWARE_ERROR);
 }
 
+
 BOOST_AUTO_TEST_CASE(ControlExecutionSelectErrorResponse)
 {
 	MasterConfig master_cfg;
@@ -469,6 +470,86 @@ BOOST_AUTO_TEST_CASE(ControlExecutionOperateLayerDown)
 	CommandResponse cr;
 	BOOST_REQUIRE(rspQueue.WaitForResponse(cr, 7, 0));
 	BOOST_REQUIRE_EQUAL(cr.mResult, CS_HARDWARE_ERROR);
+}
+
+BOOST_AUTO_TEST_CASE(ControlExecutionOperateLayerDownTwice)
+{
+	MasterConfig master_cfg;
+	MasterTestObject t(master_cfg);
+	t.master.OnLowerLayerUp();
+	CommandResponseQueue rspQueue;
+
+	TestForIntegrityPoll(t);
+	BOOST_REQUIRE_EQUAL(t.app.NumAPDU(), 0);
+	t.master.OnLowerLayerDown();
+
+	{
+		BOOST_REQUIRE_EQUAL(t.app.NumAPDU(), 0); // check that the master sends no more packets
+
+		BinaryOutput bo(CC_PULSE); bo.mStatus = CS_SUCCESS;
+		t.master.GetCmdAcceptor()->AcceptCommand(bo, 1, 7, &rspQueue);
+		BOOST_REQUIRE(t.mts.DispatchOne());
+
+		CommandResponse cr;
+		BOOST_REQUIRE(rspQueue.WaitForResponse(cr, 7, 0));
+		BOOST_REQUIRE_EQUAL(cr.mResult, CS_HARDWARE_ERROR);
+	}
+
+	{
+		BOOST_REQUIRE_EQUAL(t.app.NumAPDU(), 0); // check that the master sends no more packets
+
+		BinaryOutput bo(CC_PULSE); bo.mStatus = CS_SUCCESS;
+		t.master.GetCmdAcceptor()->AcceptCommand(bo, 1, 7, &rspQueue);
+		BOOST_REQUIRE(t.mts.DispatchOne());
+
+		CommandResponse cr;
+		BOOST_REQUIRE(rspQueue.WaitForResponse(cr, 7, 0));
+		BOOST_REQUIRE_EQUAL(cr.mResult, CS_HARDWARE_ERROR);
+	}
+}
+
+BOOST_AUTO_TEST_CASE(ControlExecutionOperateLayerDownThenWork)
+{
+	MasterConfig master_cfg;
+	MasterTestObject t(master_cfg);
+	t.master.OnLowerLayerUp();
+	CommandResponseQueue rspQueue;
+
+	TestForIntegrityPoll(t);
+	BOOST_REQUIRE_EQUAL(t.app.NumAPDU(), 0);
+	t.master.OnLowerLayerDown();
+
+	{
+		BinaryOutput bo(CC_PULSE); bo.mStatus = CS_SUCCESS;
+		t.master.GetCmdAcceptor()->AcceptCommand(bo, 1, 7, &rspQueue);
+		BOOST_REQUIRE(t.mts.DispatchOne());
+		CommandResponse cr;
+		BOOST_REQUIRE(rspQueue.WaitForResponse(cr, 7, 0));
+		BOOST_REQUIRE_EQUAL(cr.mResult, CS_HARDWARE_ERROR);
+	}
+
+	t.master.OnLowerLayerUp();
+
+	TestForIntegrityPoll(t);
+	BOOST_REQUIRE_EQUAL(t.app.NumAPDU(), 0);
+
+	{
+		BinaryOutput bo(CC_PULSE); bo.mStatus = CS_SUCCESS;
+		t.master.GetCmdAcceptor()->AcceptCommand(bo, 1, 7, &rspQueue);
+		BOOST_REQUIRE(t.mts.DispatchOne());
+
+		// Group 12 Var1, 1 byte count/index, index = 1, time on/off = 1000, CS_SUCCESS
+		std::string crob = "0C 01 17 01 01 01 01 64 00 00 00 64 00 00 00 00";
+
+		BOOST_REQUIRE_EQUAL(t.Read(), "C0 03 " + crob); // SELECT
+		t.RespondToMaster("C0 81 00 00 " + crob);
+		BOOST_REQUIRE_EQUAL(t.Read(), "C0 04 " + crob); // OPERATE
+		t.RespondToMaster("C0 81 00 00 " + crob);
+
+		CommandResponse cr;
+		BOOST_REQUIRE(rspQueue.WaitForResponse(cr, 7, 0));
+		BOOST_REQUIRE_EQUAL(cr.mResult, CS_SUCCESS);
+	}
 }
 
 BOOST_AUTO_TEST_CASE(DeferredControlExecution)
