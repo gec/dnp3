@@ -46,8 +46,8 @@ public:
 	CommandQueue() : mpNotifier(NULL) {}
 
 	//Implement the ICommandAcceptor interface
-	void AcceptCommand(const apl::BinaryOutput& arType, size_t aIndex, int aSequence, IResponseAcceptor* apRspAcceptor, bool aDirectOperate = false);
-	void AcceptCommand(const apl::Setpoint& arType, size_t aIndex, int aSequence, IResponseAcceptor* apRspAcceptor, bool aDirectOperate = false);
+	void AcceptCommand(const apl::BinaryOutput& arType, size_t aIndex, int aSequence, IResponseAcceptor* apRspAcceptor, bool aDirectOperate);
+	void AcceptCommand(const apl::Setpoint& arType, size_t aIndex, int aSequence, IResponseAcceptor* apRspAcceptor, bool aDirectOperate);
 
 	void SetNotifier(INotifier* apNotifier);
 

@@ -218,7 +218,7 @@ CommandStatus DNPCommandMaster::Operate(std::map<size_t, CommandInfo<T> >& aMap,
 		}
 
 		info.mIsSelected = false;
-		info.mpAcceptor->AcceptCommand(arType.cmd, info.mRemoteIndex, aSequence, this);
+		info.mpAcceptor->AcceptCommand(arType.cmd, info.mRemoteIndex, aSequence, this, false);
 		return CS_SUCCESS;
 	}
 }
@@ -245,7 +245,7 @@ CommandStatus DNPCommandMaster::DirectOperate(std::map<size_t, CommandInfo<T> >&
 			return CS_NOT_SUPPORTED;
 
 		info.mIsSelected = false;
-		info.mpAcceptor->AcceptCommand(arType.cmd, info.mRemoteIndex, aSequence, this);
+		info.mpAcceptor->AcceptCommand(arType.cmd, info.mRemoteIndex, aSequence, this, true);
 		return CS_SUCCESS;
 	}
 }
