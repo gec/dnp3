@@ -16,7 +16,7 @@ CommandResponder :: CommandResponder(Logger* apLogger, bool aLinkStatuses, IData
 
 }
 
-void CommandResponder :: AcceptCommand(const BinaryOutput& ctrl, size_t i, int aSequence, IResponseAcceptor* apRspAcceptor)
+void CommandResponder :: AcceptCommand(const BinaryOutput& ctrl, size_t i, int aSequence, IResponseAcceptor* apRspAcceptor, bool aDirectOperate)
 {
 	CriticalSection c(&mLock);
 	CommandResponse cr;
@@ -24,7 +24,7 @@ void CommandResponder :: AcceptCommand(const BinaryOutput& ctrl, size_t i, int a
 	apRspAcceptor->AcceptResponse(cr, aSequence);
 }
 
-void CommandResponder :: AcceptCommand(const Setpoint& ctrl, size_t i, int aSequence, IResponseAcceptor* apRspAcceptor)
+void CommandResponder :: AcceptCommand(const Setpoint& ctrl, size_t i, int aSequence, IResponseAcceptor* apRspAcceptor, bool aDirectOperate)
 {
 	CriticalSection c(&mLock);
 	CommandResponse cr;

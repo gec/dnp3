@@ -33,7 +33,7 @@ ControlTaskBase::ControlTaskBase(Logger* apLogger) :
 	mState(INVALID)
 {}
 
-bool ControlTaskBase::GetSelectBit()
+/*bool ControlTaskBase::GetSelectBit()
 {
 	switch(mState) {
 	case(SELECT): return true;
@@ -41,6 +41,18 @@ bool ControlTaskBase::GetSelectBit()
 	default:
 		throw InvalidStateException(LOCATION, "INVALID");
 	}
+}*/
+
+
+FunctionCodes ControlTaskBase::GetFunctionCodeForState() 
+{
+	switch(mState) {
+	case(SELECT): return FC_SELECT;
+	case(OPERATE): return FC_OPERATE;
+	case(DIRECT_OPERATE): return FC_DIRECT_OPERATE;
+	default:
+		throw InvalidStateException(LOCATION, "INVALID");
+	} 
 }
 
 void ControlTaskBase::Respond(CommandStatus aStatus)

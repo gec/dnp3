@@ -374,6 +374,33 @@ BOOST_AUTO_TEST_CASE(ControlExecution)
 	BOOST_REQUIRE_EQUAL(cr.mResult, CS_SUCCESS);
 }
 
+BOOST_AUTO_TEST_CASE(ControlExecutionDirectOperate)
+{
+	MasterConfig master_cfg;
+	MasterTestObject t(master_cfg);
+	t.master.OnLowerLayerUp();
+
+	TestForIntegrityPoll(t);
+	BOOST_REQUIRE_EQUAL(t.app.NumAPDU(), 0); // check that the master sends no more packets
+
+	BinaryOutput bo(CC_PULSE); bo.mStatus = CS_SUCCESS;
+	CommandResponseQueue mRspQueue;
+	t.master.GetCmdAcceptor()->AcceptCommand(bo, 1, 7, &mRspQueue, true);
+	BOOST_REQUIRE(t.mts.DispatchOne());
+
+	// Group 12 Var1, 1 byte count/index, index = 1, time on/off = 1000, CS_SUCCESS
+	std::string crob = "0C 01 17 01 01 01 01 64 00 00 00 64 00 00 00 00";
+
+	BOOST_REQUIRE_EQUAL(t.Read(), "C0 05 " + crob); // DIRECT OPERATE
+	t.RespondToMaster("C0 81 00 00 " + crob);
+
+	BOOST_REQUIRE_EQUAL(t.app.NumAPDU(), 0); //nore more packets
+
+	CommandResponse cr;
+	BOOST_REQUIRE(mRspQueue.WaitForResponse(cr, 7, 0));
+	BOOST_REQUIRE_EQUAL(cr.mResult, CS_SUCCESS);
+}
+
 BOOST_AUTO_TEST_CASE(ControlExecutionSelectFailure)
 {
 	MasterConfig master_cfg;

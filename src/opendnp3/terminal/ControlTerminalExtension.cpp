@@ -22,14 +22,14 @@ void ControlTerminalExtension::_BindToTerminal(ITerminal* apTerminal)
 	CommandNode cmd;
 
 	cmd.mName = "issue bo";
-	cmd.mUsage  = "issue bo <index> lon|loff\r\n";
-	cmd.mUsage += "       issue bo <index> pon|pclose|ptrip [<on time>] [<off time>] [<count>]";
+	cmd.mUsage  = "issue bo <index> lon|loff [sbo|do] \r\n";
+	cmd.mUsage += "       issue bo <index> pon|pclose|ptrip [sbo|do] [<on time>] [<off time>] [<count>] ";
 	cmd.mDesc = "Issues a binary output command. ";
 	cmd.mHandler = boost::bind(&ControlTerminalExtension::HandleIssueBO, this, _1);
 	apTerminal->BindCommand(cmd, "issue bo");
 
 	cmd.mName = "issue st";
-	cmd.mUsage = "issue st <index> <integer|double>";
+	cmd.mUsage = "issue st <index> <integer|double> [sbo|do]";
 	cmd.mDesc = "Issues a setpoint request. If the value contains a \'.\', it is treated as a double.";
 	cmd.mHandler = boost::bind(&ControlTerminalExtension::HandleIssueST, this, _1);
 	apTerminal->BindCommand(cmd, "issue st");
@@ -50,6 +50,13 @@ void ControlTerminalExtension::WaitForResponse()
 	}
 }
 
+bool ParseIsDirectOperate(const std::string& arString) 
+{
+	std::string lower(arString);
+	toLowerCase(lower);
+	if ( lower.compare("do") == 0 ) return true;
+	else return false;
+}
 
 retcode ControlTerminalExtension::HandleIssueST(std::vector<std::string>& arArgs)
 {
@@ -70,7 +77,13 @@ retcode ControlTerminalExtension::HandleIssueST(std::vector<std::string>& arArgs
 		st.SetValue(dValue);
 	}
 
-	mpCmdAcceptor->AcceptCommand(st, static_cast<size_t>(index), ++mSequence, &mRspQueue);
+	bool isDirectOperate = false;
+	if(arArgs.size() > 2) 
+	{
+		isDirectOperate = ParseIsDirectOperate(arArgs[2]);
+	}
+
+	mpCmdAcceptor->AcceptCommand(st, static_cast<size_t>(index), ++mSequence, &mRspQueue, isDirectOperate);
 	WaitForResponse();
 	return SUCCESS;
 }
@@ -96,18 +109,25 @@ retcode ControlTerminalExtension::HandleIssueBO(std::vector<std::string>& arArgs
 	if(!Parsing::Get(arArgs[0], index)) return BAD_ARGUMENTS;
 
 	b.mRawCode = static_cast<boost::uint8_t>(ParseControlCode(arArgs[1]));
+
+	bool isDirectOperate = false;
+	if(arArgs.size() > 2) 
+	{
+		isDirectOperate = ParseIsDirectOperate(arArgs[2]);
+	}
+
 	switch(b.mRawCode) {
 	case(CC_PULSE):
 	case(CC_PULSE_CLOSE):
 	case(CC_PULSE_TRIP):
 		switch(arArgs.size()) {
+		case(6):
+			if(!Parsing::Get(arArgs[5], b.mCount)) return BAD_ARGUMENTS;
 		case(5):
-			if(!Parsing::Get(arArgs[4], b.mCount)) return BAD_ARGUMENTS;
+			if(!Parsing::Get(arArgs[4], b.mOffTimeMS)) return BAD_ARGUMENTS;
 		case(4):
-			if(!Parsing::Get(arArgs[3], b.mOffTimeMS)) return BAD_ARGUMENTS;
+			if(!Parsing::Get(arArgs[3], b.mOnTimeMS)) return BAD_ARGUMENTS;
 		case(3):
-			if(!Parsing::Get(arArgs[2], b.mOnTimeMS)) return BAD_ARGUMENTS;
-		case(2):
 			break;
 		default:
 			return BAD_ARGUMENTS;
@@ -115,13 +135,13 @@ retcode ControlTerminalExtension::HandleIssueBO(std::vector<std::string>& arArgs
 		break;
 	case(CC_LATCH_ON):
 	case(CC_LATCH_OFF):
-		if(arArgs.size() > 2) return BAD_ARGUMENTS;
+		if(arArgs.size() > 3) return BAD_ARGUMENTS;
 		break;
 	default:
 		return BAD_ARGUMENTS;
 	}
 
-	mpCmdAcceptor->AcceptCommand(b, index, ++mSequence, &mRspQueue);
+	mpCmdAcceptor->AcceptCommand(b, index, ++mSequence, &mRspQueue, isDirectOperate);
 	WaitForResponse();
 	return SUCCESS;
 }
