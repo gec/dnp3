@@ -44,7 +44,7 @@ void DoControlSelect(MasterTestObject& t, CommandResponseQueue& q)
 	BOOST_REQUIRE_EQUAL(t.app.NumAPDU(), 0); // check that the master sends no more packets
 
 	BinaryOutput bo(CC_PULSE); bo.mStatus = CS_SUCCESS;
-	t.master.GetCmdAcceptor()->AcceptCommand(bo, 1, 7, &q);
+	t.master.GetCmdAcceptor()->AcceptCommand(bo, 1, 7, &q, false);
 	BOOST_REQUIRE(t.mts.DispatchOne());
 
 	// Group 12 Var1, 1 byte count/index, index = 1, time on/off = 1000, CS_SUCCESS
@@ -59,7 +59,7 @@ void DoControlSelectOperate(MasterTestObject& t, CommandResponseQueue& q)
 	BOOST_REQUIRE_EQUAL(t.app.NumAPDU(), 0); // check that the master sends no more packets
 
 	BinaryOutput bo(CC_PULSE); bo.mStatus = CS_SUCCESS;
-	t.master.GetCmdAcceptor()->AcceptCommand(bo, 1, 7, &q);
+	t.master.GetCmdAcceptor()->AcceptCommand(bo, 1, 7, &q, false);
 	BOOST_REQUIRE(t.mts.DispatchOne());
 
 	// Group 12 Var1, 1 byte count/index, index = 1, time on/off = 1000, CS_SUCCESS
@@ -82,7 +82,7 @@ void TestSetpointExecution(const std::string& setpointhex, T aValue)
 
 	Setpoint st(aValue); st.mStatus = CS_SUCCESS;
 	CommandResponseQueue mRspQueue;
-	t.master.GetCmdAcceptor()->AcceptCommand(st, 1, 7, &mRspQueue);
+	t.master.GetCmdAcceptor()->AcceptCommand(st, 1, 7, &mRspQueue, false);
 	BOOST_REQUIRE(t.mts.DispatchOne());
 
 	BOOST_REQUIRE_EQUAL(t.Read(), "C0 03 " + setpointhex); // SELECT
@@ -338,7 +338,7 @@ BOOST_AUTO_TEST_CASE(ControlExecutionClosedState)
 
 	BinaryOutput bo(CC_PULSE);
 	CommandResponseQueue mRspQueue;
-	pAcceptor->AcceptCommand(bo, 1, 7, &mRspQueue);
+	pAcceptor->AcceptCommand(bo, 1, 7, &mRspQueue, false);
 	BOOST_REQUIRE(t.mts.DispatchOne());
 	CommandResponse cr;
 	BOOST_REQUIRE(mRspQueue.WaitForResponse(cr, 7, 0));
@@ -356,7 +356,7 @@ BOOST_AUTO_TEST_CASE(ControlExecution)
 
 	BinaryOutput bo(CC_PULSE); bo.mStatus = CS_SUCCESS;
 	CommandResponseQueue mRspQueue;
-	t.master.GetCmdAcceptor()->AcceptCommand(bo, 1, 7, &mRspQueue);
+	t.master.GetCmdAcceptor()->AcceptCommand(bo, 1, 7, &mRspQueue, false);
 	BOOST_REQUIRE(t.mts.DispatchOne());
 
 	// Group 12 Var1, 1 byte count/index, index = 1, time on/off = 1000, CS_SUCCESS
@@ -365,6 +365,33 @@ BOOST_AUTO_TEST_CASE(ControlExecution)
 	BOOST_REQUIRE_EQUAL(t.Read(), "C0 03 " + crob); // SELECT
 	t.RespondToMaster("C0 81 00 00 " + crob);
 	BOOST_REQUIRE_EQUAL(t.Read(), "C0 04 " + crob); // OPERATE
+	t.RespondToMaster("C0 81 00 00 " + crob);
+
+	BOOST_REQUIRE_EQUAL(t.app.NumAPDU(), 0); //nore more packets
+
+	CommandResponse cr;
+	BOOST_REQUIRE(mRspQueue.WaitForResponse(cr, 7, 0));
+	BOOST_REQUIRE_EQUAL(cr.mResult, CS_SUCCESS);
+}
+
+BOOST_AUTO_TEST_CASE(ControlExecutionDirectOperate)
+{
+	MasterConfig master_cfg;
+	MasterTestObject t(master_cfg);
+	t.master.OnLowerLayerUp();
+
+	TestForIntegrityPoll(t);
+	BOOST_REQUIRE_EQUAL(t.app.NumAPDU(), 0); // check that the master sends no more packets
+
+	BinaryOutput bo(CC_PULSE); bo.mStatus = CS_SUCCESS;
+	CommandResponseQueue mRspQueue;
+	t.master.GetCmdAcceptor()->AcceptCommand(bo, 1, 7, &mRspQueue, true);
+	BOOST_REQUIRE(t.mts.DispatchOne());
+
+	// Group 12 Var1, 1 byte count/index, index = 1, time on/off = 1000, CS_SUCCESS
+	std::string crob = "0C 01 17 01 01 01 01 64 00 00 00 64 00 00 00 00";
+
+	BOOST_REQUIRE_EQUAL(t.Read(), "C0 05 " + crob); // DIRECT OPERATE
 	t.RespondToMaster("C0 81 00 00 " + crob);
 
 	BOOST_REQUIRE_EQUAL(t.app.NumAPDU(), 0); //nore more packets
@@ -487,7 +514,7 @@ BOOST_AUTO_TEST_CASE(ControlExecutionOperateLayerDownTwice)
 		BOOST_REQUIRE_EQUAL(t.app.NumAPDU(), 0); // check that the master sends no more packets
 
 		BinaryOutput bo(CC_PULSE); bo.mStatus = CS_SUCCESS;
-		t.master.GetCmdAcceptor()->AcceptCommand(bo, 1, 7, &rspQueue);
+		t.master.GetCmdAcceptor()->AcceptCommand(bo, 1, 7, &rspQueue, false);
 		BOOST_REQUIRE(t.mts.DispatchOne());
 
 		CommandResponse cr;
@@ -499,7 +526,7 @@ BOOST_AUTO_TEST_CASE(ControlExecutionOperateLayerDownTwice)
 		BOOST_REQUIRE_EQUAL(t.app.NumAPDU(), 0); // check that the master sends no more packets
 
 		BinaryOutput bo(CC_PULSE); bo.mStatus = CS_SUCCESS;
-		t.master.GetCmdAcceptor()->AcceptCommand(bo, 1, 7, &rspQueue);
+		t.master.GetCmdAcceptor()->AcceptCommand(bo, 1, 7, &rspQueue, false);
 		BOOST_REQUIRE(t.mts.DispatchOne());
 
 		CommandResponse cr;
@@ -521,7 +548,7 @@ BOOST_AUTO_TEST_CASE(ControlExecutionOperateLayerDownThenWork)
 
 	{
 		BinaryOutput bo(CC_PULSE); bo.mStatus = CS_SUCCESS;
-		t.master.GetCmdAcceptor()->AcceptCommand(bo, 1, 7, &rspQueue);
+		t.master.GetCmdAcceptor()->AcceptCommand(bo, 1, 7, &rspQueue, false);
 		BOOST_REQUIRE(t.mts.DispatchOne());
 		CommandResponse cr;
 		BOOST_REQUIRE(rspQueue.WaitForResponse(cr, 7, 0));
@@ -535,7 +562,7 @@ BOOST_AUTO_TEST_CASE(ControlExecutionOperateLayerDownThenWork)
 
 	{
 		BinaryOutput bo(CC_PULSE); bo.mStatus = CS_SUCCESS;
-		t.master.GetCmdAcceptor()->AcceptCommand(bo, 1, 7, &rspQueue);
+		t.master.GetCmdAcceptor()->AcceptCommand(bo, 1, 7, &rspQueue, false);
 		BOOST_REQUIRE(t.mts.DispatchOne());
 
 		// Group 12 Var1, 1 byte count/index, index = 1, time on/off = 1000, CS_SUCCESS
@@ -564,7 +591,7 @@ BOOST_AUTO_TEST_CASE(DeferredControlExecution)
 	//issue a command while the master is waiting for a response from the slave
 	BinaryOutput bo(CC_PULSE); bo.mStatus = CS_SUCCESS;
 	CommandResponseQueue mRspQueue;
-	t.master.GetCmdAcceptor()->AcceptCommand(bo, 1, 7, &mRspQueue);
+	t.master.GetCmdAcceptor()->AcceptCommand(bo, 1, 7, &mRspQueue, false);
 	BOOST_REQUIRE(t.mts.DispatchOne());
 	CommandResponse cr;
 	BOOST_REQUIRE_FALSE(mRspQueue.WaitForResponse(cr, 7, 0));

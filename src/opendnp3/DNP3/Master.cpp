@@ -158,14 +158,14 @@ void Master::ProcessCommand(ITask* apTask)
 		case(apl::CT_BINARY_OUTPUT): {
 				apl::BinaryOutput cmd;
 				mCommandQueue.Read(cmd, info);
-				mExecuteBO.Set(cmd, info, true);
+				mExecuteBO.Set(cmd, info);
 				mpState->StartTask(this, apTask, &mExecuteBO);
 			}
 			break;
 		case(apl::CT_SETPOINT): {
 				apl::Setpoint cmd;
 				mCommandQueue.Read(cmd, info);
-				mExecuteSP.Set(cmd, info, true);
+				mExecuteSP.Set(cmd, info);
 				mpState->StartTask(this, apTask, &mExecuteSP);
 			}
 			break;

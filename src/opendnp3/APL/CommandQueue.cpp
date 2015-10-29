@@ -44,12 +44,12 @@ void CommandQueue::Read(T& arType, CommandData& arData, std::queue<T>& arQueue)
 }
 
 template <typename T>
-void CommandQueue::AcceptCommand(const T& arType, size_t aIndex, std::queue<T>& arQueue, int aSequence, IResponseAcceptor* apRspAcceptor)
+void CommandQueue::AcceptCommand(const T& arType, size_t aIndex, std::queue<T>& arQueue, int aSequence, IResponseAcceptor* apRspAcceptor, bool aDirectOperate)
 {
 	{
 		apl::CriticalSection cs(&mLock);
 		arQueue.push(arType);
-		mTypeQueue.push(CommandData(arType.GetType(), aIndex, aSequence, apRspAcceptor));
+		mTypeQueue.push(CommandData(arType.GetType(), aIndex, aSequence, apRspAcceptor, aDirectOperate));
 	}
 	if(mpNotifier != NULL) mpNotifier->Notify();
 }
@@ -89,13 +89,13 @@ bool CommandQueue::ExecuteCommand(ICommandHandler* apHandler)
 	return true;
 }
 
-void CommandQueue::AcceptCommand(const apl::BinaryOutput& arType, size_t aIndex, int aSequence, IResponseAcceptor* apRspAcceptor)
+void CommandQueue::AcceptCommand(const apl::BinaryOutput& arType, size_t aIndex, int aSequence, IResponseAcceptor* apRspAcceptor, bool aDirectOperate)
 {
-	AcceptCommand<apl::BinaryOutput>(arType, aIndex, mBinaryQueue, aSequence, apRspAcceptor);
+	AcceptCommand<apl::BinaryOutput>(arType, aIndex, mBinaryQueue, aSequence, apRspAcceptor, aDirectOperate);
 }
-void CommandQueue::AcceptCommand(const apl::Setpoint& arType, size_t aIndex, int aSequence, IResponseAcceptor* apRspAcceptor)
+void CommandQueue::AcceptCommand(const apl::Setpoint& arType, size_t aIndex, int aSequence, IResponseAcceptor* apRspAcceptor, bool aDirectOperate)
 {
-	AcceptCommand<apl::Setpoint>(arType, aIndex, mSetpointQueue, aSequence, apRspAcceptor);
+	AcceptCommand<apl::Setpoint>(arType, aIndex, mSetpointQueue, aSequence, apRspAcceptor, aDirectOperate);
 }
 
 void CommandQueue::SetNotifier(INotifier* apNotifier)

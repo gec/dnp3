@@ -24,10 +24,10 @@ class InstantCommandResponder(status: CommandStatus) extends ICommandAcceptor {
 
   private val response = new CommandResponse(status)
 
-  final override def AcceptCommand(obj: BinaryOutput, index: Long, seq: Int, accept: IResponseAcceptor) =
+  final override def AcceptCommand(obj: BinaryOutput, index: Long, seq: Int, accept: IResponseAcceptor, isDirectOperate: Boolean) =
     accept.AcceptResponse(response, seq)
 
-  final override def AcceptCommand(obj: Setpoint, index: Long, seq: Int, accept: IResponseAcceptor) =
+  final override def AcceptCommand(obj: Setpoint, index: Long, seq: Int, accept: IResponseAcceptor, isDirectOperate: Boolean) =
     accept.AcceptResponse(response, seq)
 
 }

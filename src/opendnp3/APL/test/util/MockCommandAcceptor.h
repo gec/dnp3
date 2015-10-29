@@ -30,12 +30,12 @@ class MockCommandAcceptor : public ICommandAcceptor
 {
 public:
 
-	void AcceptCommand(const BinaryOutput& aBo, size_t, int aSequence, IResponseAcceptor* apRspAcceptor) {
+	void AcceptCommand(const BinaryOutput& aBo, size_t, int aSequence, IResponseAcceptor* apRspAcceptor, bool aDirectOperate) {
 		mBinaryOutputs.push(aBo);
 		this->AcceptCommand(aSequence, apRspAcceptor);
 	}
 
-	void AcceptCommand(const Setpoint& aSt, size_t, int aSequence, IResponseAcceptor* apRspAcceptor) {
+	void AcceptCommand(const Setpoint& aSt, size_t, int aSequence, IResponseAcceptor* apRspAcceptor, bool aDirectOperate) {
 		mSetpoints.push(aSt);
 		this->AcceptCommand(aSequence, apRspAcceptor);
 	}

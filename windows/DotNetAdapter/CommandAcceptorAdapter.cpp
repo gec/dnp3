@@ -67,7 +67,7 @@ IFuture<CommandStatus>^ CommandAcceptorAdapter::AcceptCommand(BinaryOutput^ comm
 	int seq = mpRouter->RegisterFuture(future);
 	apl::BinaryOutput cmd = Conversions::convertBO(command);
 	
-	mpProxy->AcceptCommand(cmd, index, seq, mpRouter);
+	mpProxy->AcceptCommand(cmd, index, seq, mpRouter, false);
 
 	return future;
 }
@@ -79,7 +79,7 @@ IFuture<CommandStatus>^ CommandAcceptorAdapter::AcceptCommand(Setpoint^ command,
 	int seq = mpRouter->RegisterFuture(future);
 	apl::Setpoint cmd = Conversions::convertSP(command);
 	
-	mpProxy->AcceptCommand(cmd, index, seq, mpRouter);
+	mpProxy->AcceptCommand(cmd, index, seq, mpRouter, false);
 
 	return future;
 }

@@ -19,8 +19,8 @@ public:
 
 	CommandResponder(Logger* apLogger, bool aLinkStatuses = false, IDataObserver* apObs = NULL);
 
-	void AcceptCommand(const BinaryOutput&, size_t, int aSequence, IResponseAcceptor* apRspAcceptor);
-	void AcceptCommand(const Setpoint&, size_t, int aSequence, IResponseAcceptor* apRspAcceptor);
+	void AcceptCommand(const BinaryOutput&, size_t, int aSequence, IResponseAcceptor* apRspAcceptor, bool aDirectOperate);
+	void AcceptCommand(const Setpoint&, size_t, int aSequence, IResponseAcceptor* apRspAcceptor, bool aDirectOperate);
 
 	CommandStatus HandleControl(const BinaryOutput& aControl, size_t aIndex);
 	CommandStatus HandleControl(const Setpoint& aControl, size_t aIndex);

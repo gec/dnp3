@@ -49,6 +49,7 @@ protected:
 	enum State {
 		SELECT,
 		OPERATE,
+		DIRECT_OPERATE,
 		INVALID
 	};
 
@@ -60,7 +61,9 @@ protected:
 	template <class T>
 	static CommandStatus ValidateCommandResponse(const APDU& arAPDU, CommandObject<T>* apObj, const CopyableBuffer& arData, size_t aIndex);
 
-	bool GetSelectBit();
+	//bool GetSelectBit();
+
+	FunctionCodes GetFunctionCodeForState();
 
 	// override from base class
 	void OnFailure();
@@ -84,10 +87,10 @@ public:
 
 	virtual ~ControlTask() {}
 
-	void Set(const T& arCommand, const CommandData& arData, bool aIsSBO) {
+	void Set(const T& arCommand, const CommandData& arData) {
 		mCommand = arCommand;
 		mData = arData;
-		mState = aIsSBO ? SELECT : OPERATE;
+		mState = arData.mDirectOperate ? DIRECT_OPERATE : SELECT;
 	}
 
 	void ConfigureRequest(APDU& arAPDU);
@@ -131,7 +134,7 @@ template <class T>
 void ControlTask<T>::ConfigureRequest(APDU& arAPDU)
 {
 	CommandObject<T>* pObj = this->GetObject(mCommand);
-	arAPDU.Set(this->GetSelectBit() ? FC_SELECT : FC_OPERATE, true, true, false, false);
+	arAPDU.Set(this->GetFunctionCodeForState(), true, true, false, false);
 	IndexedWriteIterator i = arAPDU.WriteIndexed(pObj, 1, mData.mIndex);
 	i.SetIndex(mData.mIndex);
 	pObj->Write(*i, mCommand);

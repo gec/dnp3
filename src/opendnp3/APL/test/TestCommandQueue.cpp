@@ -36,7 +36,7 @@ BOOST_AUTO_TEST_CASE(SimpleWriteAndRead)
 	BinaryOutput bo;
 	bo.mRawCode = CC_LATCH_ON;
 
-	cq.AcceptCommand(bo, 3, 4, NULL);
+	cq.AcceptCommand(bo, 3, 4, NULL, false);
 
 	BOOST_REQUIRE_EQUAL(cq.Next(), CT_BINARY_OUTPUT);
 
@@ -59,7 +59,7 @@ BOOST_AUTO_TEST_CASE(ExecuteCommand)
 	MockCommandHandler mh;
 	MockResponseAcceptor mr;
 
-	cq.AcceptCommand(BinaryOutput(CC_PULSE), 0, 0, &mr);
+	cq.AcceptCommand(BinaryOutput(CC_PULSE), 0, 0, &mr, false);
 	BOOST_REQUIRE_EQUAL(cq.Size(), 1);
 	cq.ExecuteCommand(&mh);
 	BOOST_REQUIRE_EQUAL(cq.Size(), 0);
@@ -67,7 +67,7 @@ BOOST_AUTO_TEST_CASE(ExecuteCommand)
 	BOOST_REQUIRE_EQUAL(mh.num_sp, 0);
 	BOOST_REQUIRE_EQUAL(mr.NumResponses(), 1);
 
-	cq.AcceptCommand(Setpoint(0), 0, 0, &mr);
+	cq.AcceptCommand(Setpoint(0), 0, 0, &mr, false);
 	BOOST_REQUIRE_EQUAL(cq.Size(), 1);
 	cq.ExecuteCommand(&mh);
 	BOOST_REQUIRE_EQUAL(cq.Size(), 0);
@@ -89,11 +89,11 @@ BOOST_AUTO_TEST_CASE(OrderMaintained)
 			BinaryOutput bo;
 			bo.mRawCode = (i % 2 == 0) ? CC_LATCH_ON : CC_LATCH_OFF;
 			bo.mCount = (boost::uint8_t)i % 255;
-			cq.AcceptCommand(bo, i, seq, NULL);
+			cq.AcceptCommand(bo, i, seq, NULL, false);
 		} else {
 			Setpoint st;
 			st.SetValue(static_cast<boost::int32_t>(i));
-			cq.AcceptCommand(st, i, seq, NULL);
+			cq.AcceptCommand(st, i, seq, NULL, false);
 		}
 	}
 	for(size_t i = 0; i < testLength; i++) {

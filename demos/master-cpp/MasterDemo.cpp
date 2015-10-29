@@ -95,7 +95,8 @@ void MasterDemoBase::OnDataUpdate()
 				sp,    // Setpoint instance
 				index, // point index
 				index, // sequence value
-				this   // IResponseAcceptor*
+				this,   // IResponseAcceptor*
+				false 	// Select before operate
 			);
 		}
 		LOG_BLOCK(LEV_INFO,

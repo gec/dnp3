@@ -28,8 +28,8 @@
 namespace apl
 {
 struct CommandData {
-	CommandData(apl::CommandTypes aType, size_t aIndex, int aSequence, IResponseAcceptor* apRspAcceptor) :
-		mType(aType), mIndex(aIndex), mSequence(aSequence), mpRspAcceptor(apRspAcceptor) {}
+	CommandData(apl::CommandTypes aType, size_t aIndex, int aSequence, IResponseAcceptor* apRspAcceptor, bool aDirectOperate) :
+		mType(aType), mIndex(aIndex), mSequence(aSequence), mpRspAcceptor(apRspAcceptor), mDirectOperate(aDirectOperate) {}
 
 	CommandData() {}
 
@@ -37,6 +37,7 @@ struct CommandData {
 	size_t mIndex;
 	int mSequence;
 	IResponseAcceptor* mpRspAcceptor;
+	bool mDirectOperate;
 };
 
 class CommandQueue : public ICommandAcceptor, public ICommandSource
@@ -45,8 +46,8 @@ public:
 	CommandQueue() : mpNotifier(NULL) {}
 
 	//Implement the ICommandAcceptor interface
-	void AcceptCommand(const apl::BinaryOutput& arType, size_t aIndex, int aSequence, IResponseAcceptor* apRspAcceptor);
-	void AcceptCommand(const apl::Setpoint& arType, size_t aIndex, int aSequence, IResponseAcceptor* apRspAcceptor);
+	void AcceptCommand(const apl::BinaryOutput& arType, size_t aIndex, int aSequence, IResponseAcceptor* apRspAcceptor, bool aDirectOperate);
+	void AcceptCommand(const apl::Setpoint& arType, size_t aIndex, int aSequence, IResponseAcceptor* apRspAcceptor, bool aDirectOperate);
 
 	void SetNotifier(INotifier* apNotifier);
 
@@ -80,7 +81,7 @@ protected:
 	void Read(T& arType, CommandData& arData, std::queue<T>& arQueue);
 
 	template <typename T>
-	void AcceptCommand(const T& arType, size_t aIndex, std::queue<T>& arQueue, int aSequence, IResponseAcceptor* apRspAcceptor);
+	void AcceptCommand(const T& arType, size_t aIndex, std::queue<T>& arQueue, int aSequence, IResponseAcceptor* apRspAcceptor, bool aDirectOperate);
 };
 
 }
